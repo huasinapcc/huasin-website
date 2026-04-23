@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>華昕藝心心理諮商所｜陪你同行</title>
+  <meta name="description" content="華昕藝心心理諮商所位於台北市南港區，鄰近捷運南港展覽館站。大台北地區少數深度結合心理諮商與藝術治療的專業機構，13位持照心理師陪伴你的成長旅程。">
+  <meta name="keywords" content="心理諮商,藝術治療,台北心理諮商,南港心理諮商所,個別諮商,伴侶諮商,親子諮商,線上諮商">
+  <link rel="canonical" href="https://visionary-melba-2c3e31.netlify.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:site_name" content="華昕藝心心理諮商所">
+  <meta property="og:url" content="https://visionary-melba-2c3e31.netlify.app/">
+  <meta property="og:title" content="華昕藝心心理諮商所｜陪你同行">
+  <meta property="og:description" content="台北市南港區心理諮商所，大台北地區少數深度結合心理諮商與藝術治療的專業機構，13位持照心理師陪你同行。">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="華昕藝心心理諮商所｜陪你同行">
+  <meta name="twitter:description" content="台北市南港區心理諮商所，大台北地區少數深度結合心理諮商與藝術治療的專業機構，13位持照心理師陪你同行。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="nav-dropdown.css">
+  <style>
+    :root {
+      --blue: #7BB8C8;
+      --mint: #A8D5C2;
+      --sand: #F5F0EA;
+      --dark: #2C4A5A;
+      --white: #FAFAFA;
+      --lb: #E8F4F8;
+      --lm: #EAF7F2;
+      --muted: #6B8A98;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(250, 250, 250, .93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #E0EEF3;
+      padding: 0 56px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .logo {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: var(--dark)
+    }
+
+    .logo em {
+      font-style: normal;
+      color: var(--blue)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color .2s
+    }
+
+    .nav-links a:hover {
+      color: var(--blue)
+    }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      transition: all .3s
+    }
+
+    .nav-cta:hover {
+      background: var(--dark)
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 56px 80px;
+      gap: 60px;
+      background: linear-gradient(150deg, #fafafa 0%, #F0F8FB 55%, #EBF6F1 100%);
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(123, 184, 200, .14);
+      top: -150px;
+      right: -150px;
+      animation: spin 40s linear infinite
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 213, 194, .18);
+      bottom: 40px;
+      right: 120px;
+      animation: spin 25s linear infinite reverse
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .hero-l {
+      position: relative;
+      z-index: 1;
+      animation: up .9s ease both
+    }
+
+    .hero-r {
+      position: relative;
+      z-index: 1;
+      animation: up .9s .2s ease both
+    }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(24px) }
+      to { opacity: 1; transform: none }
+    }
+
+    /* FOOTER & CTA STYLES */
+    footer { background: var(--dark); color: #fff; padding: 80px 56px 40px }
+    .fg { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px }
+    .fb h3 { font-family: 'Noto Serif TC', serif; font-size: 18px; letter-spacing: 3px; margin-bottom: 15px }
+    .fb p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 2.2; margin-bottom: 24px }
+    .socs { display: flex; gap: 12px }
+    .soc { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; transition: background 0.3s }
+    .soc:hover { background: var(--blue) }
+    .soc svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 1.5; display: block; margin: auto }
+    .fc h4 { font-size: 11px; letter-spacing: 4px; color: var(--mint); margin-bottom: 20px }
+    .fc ul { list-style: none }
+    .fc li { margin-bottom: 10px }
+    .fc a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 14px; transition: color 0.2s }
+    .fc a:hover { color: #fff }
+    .fbot { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.2) }
+    .cta { padding: 100px 56px; background: linear-gradient(135deg, var(--blue), var(--mint)); text-align: center; color: #fff }
+    .cta h2 { font-family: 'Noto Serif TC', serif; font-size: 34px; letter-spacing: 5px; margin-bottom: 20px }
+    .cta p { font-size: 16px; opacity: 0.9; margin-bottom: 36px }
+    .cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap }
+    .btn-w { background: #fff; color: var(--dark); padding: 14px 44px; border-radius: 40px; text-decoration: none; font-size: 15px; letter-spacing: 2.5px; font-weight: 500; transition: all .3s }
+    .btn-o-white { border: 1.5px solid #fff; color: #fff; padding: 13px 38px; border-radius: 40px; text-decoration: none; font-size: 15px; letter-spacing: 2.5px; transition: all .3s }
+
+    @media(max-width:1000px) {
+      .fg { grid-template-columns: 1fr; gap: 40px }
+      footer { padding: 60px 24px }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(168, 213, 194, .25);
+      color: var(--dark);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 28px
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--mint);
+      border-radius: 50%
+    }
+
+    .h1 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(46px, 6vw, 74px);
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: 10px;
+      color: var(--dark);
+      margin-bottom: 8px
+    }
+
+    .h1 em {
+      font-style: normal;
+      color: var(--blue)
+    }
+
+    .hsub {
+      font-size: 15px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      font-weight: 300;
+      margin-bottom: 24px
+    }
+
+    .hdesc {
+      font-size: 14.5px;
+      line-height: 2.1;
+      color: var(--dark);
+      opacity: .7;
+      max-width: 440px;
+      margin-bottom: 38px;
+      letter-spacing: .5px
+    }
+
+    .hbtns {
+      display: flex;
+      gap: 14px
+    }
+
+    .btn-d {
+      background: var(--dark);
+      color: #fff;
+      padding: 13px 34px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      transition: all .3s
+    }
+
+    .btn-d:hover {
+      background: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(123, 184, 200, .4)
+    }
+
+    .btn-o {
+      border: 1.5px solid var(--blue);
+      color: var(--blue);
+      padding: 13px 34px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      transition: all .3s
+    }
+
+    .btn-o:hover {
+      background: var(--lb);
+      transform: translateY(-2px)
+    }
+
+    /* hero cards */
+    .hero-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .ic {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 4px 18px rgba(44, 74, 90, .07);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: transform .3s
+    }
+
+    .ic:hover {
+      transform: translateY(-3px)
+    }
+
+    .ic-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: var(--lb);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .ic-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .ic-text strong {
+      display: block;
+      font-size: 13.5px;
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin-bottom: 3px
+    }
+
+    .ic-text span {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .hl-strip {
+      background: linear-gradient(135deg, var(--blue), var(--mint));
+      border-radius: 16px;
+      padding: 22px 24px;
+      color: #fff
+    }
+
+    .hl-strip strong {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 17px;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 5px
+    }
+
+    .hl-strip span {
+      font-size: 12.5px;
+      opacity: .85;
+      letter-spacing: 1px
+    }
+
+    /* BRAND */
+    .brand {
+      padding: 100px 56px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden
+    }
+
+    .brand-wm {
+      position: absolute;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 220px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .025);
+      top: -30px;
+      right: -40px;
+      letter-spacing: 20px;
+      pointer-events: none;
+      white-space: nowrap
+    }
+
+    .sec-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--mint);
+      margin-bottom: 14px;
+      display: block
+    }
+
+    .brand-hd {
+      text-align: center;
+      margin-bottom: 60px
+    }
+
+    .brand-hd .sec-label {
+      color: rgba(168, 213, 194, .7)
+    }
+
+    .brand-hd h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 5px
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      max-width: 860px;
+      margin: 0 auto
+    }
+
+    .bc {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .06);
+      padding: 44px 26px;
+      text-align: center;
+      transition: all .35s;
+      cursor: default
+    }
+
+    .bc:hover {
+      background: rgba(123, 184, 200, .18);
+      transform: translateY(-5px)
+    }
+
+    .bchar {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--blue);
+      display: block;
+      margin-bottom: 16px
+    }
+
+    .bc h3 {
+      color: #fff;
+      font-size: 13.5px;
+      letter-spacing: 2px;
+      margin-bottom: 8px
+    }
+
+    .bc p {
+      color: rgba(255, 255, 255, .45);
+      font-size: 12px;
+      line-height: 1.9;
+      letter-spacing: .5px
+    }
+
+    /* SERVICES */
+    .svc-sec {
+      padding: 100px 56px;
+      background: var(--sand)
+    }
+
+    .sec-hd {
+      margin-bottom: 50px
+    }
+
+    .sec-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: 3px;
+      line-height: 1.4
+    }
+
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px
+    }
+
+    .sc {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 28px;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .sc::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--blue);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .35s
+    }
+
+    .sc:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(44, 74, 90, .1)
+    }
+
+    .sc:hover::after {
+      transform: scaleY(1)
+    }
+
+    .sc-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: var(--lb);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .sc-icon svg {
+      width: 21px;
+      height: 21px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .sc h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 17px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: var(--dark)
+    }
+
+    .sc p {
+      font-size: 13px;
+      line-height: 2;
+      color: var(--muted);
+      letter-spacing: .5px
+    }
+
+    .sc-lnk {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--blue);
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: gap .2s
+    }
+
+    .sc-lnk:hover {
+      gap: 10px
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 100px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      background: #fff
+    }
+
+    .av {
+      position: relative
+    }
+
+    .av-art {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(145deg, var(--lb) 0%, var(--lm) 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .av-art svg {
+      width: 68%;
+      height: 68%;
+      opacity: .38
+    }
+
+    .av-art::before {
+      content: '藝術治療';
+      position: absolute;
+      bottom: 26px;
+      left: 26px;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--dark);
+      opacity: .35
+    }
+
+    .ab-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--dark);
+      color: #fff;
+      border-radius: 16px;
+      padding: 16px 22px;
+      box-shadow: 0 8px 28px rgba(44, 74, 90, .2)
+    }
+
+    .ab-badge strong {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 22px;
+      color: var(--mint);
+      display: block
+    }
+
+    .ab-badge span {
+      font-size: 11px;
+      letter-spacing: 2px;
+      opacity: .55
+    }
+
+    .at .sec-label {
+      margin-bottom: 8px
+    }
+
+    .at .sec-title {
+      margin-bottom: 22px
+    }
+
+    .at p {
+      font-size: 14.5px;
+      line-height: 2.3;
+      color: var(--muted);
+      margin-bottom: 16px;
+      letter-spacing: .5px
+    }
+
+    .at p strong {
+      color: var(--dark);
+      font-weight: 500
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 26px
+    }
+
+    .tag {
+      background: var(--lm);
+      color: var(--dark);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      letter-spacing: 1px
+    }
+
+    /* TEAM SECTION V3 */
+    .team {
+      padding: 120px 56px;
+      background: var(--lb);
+      position: relative;
+      overflow: hidden
+    }
+
+    .team::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1' fill='%237BB8C8' fill-opacity='0.1'/%3E%3C/svg%3E");
+      opacity: .3
+    }
+
+    .team-hd {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 60px;
+      position: relative
+    }
+
+    .team-hd .sec-title {
+      font-size: 32px;
+      letter-spacing: 6px
+    }
+
+    .team-hd a {
+      font-size: 14px;
+      color: var(--blue);
+      text-decoration: none;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .3s
+    }
+
+    .team-hd a:hover {
+      gap: 12px;
+      opacity: .8
+    }
+
+    .team-grid-home {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      margin-top: 20px;
+      position: relative
+    }
+
+    .tm-card {
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: all .5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      display: block;
+      box-shadow: 0 10px 30px rgba(44, 74, 90, 0.05);
+      opacity: 0;
+      transform: translateY(20px)
+    }
+
+    .tm-card.on {
+      opacity: 1;
+      transform: none
+    }
+
+    .tm-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(44, 74, 90, 0.12);
+      border-color: var(--blue)
+    }
+
+    .tm-photo-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: var(--sand)
+    }
+
+    .tm-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .8s
+    }
+
+    .tm-card:hover .tm-photo {
+      transform: scale(1.08)
+    }
+
+    .tm-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--lb), var(--lm));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--blue)
+    }
+
+    .tm-info {
+      padding: 24px 20px;
+      text-align: center
+    }
+
+    .tm-info strong {
+      display: block;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: var(--dark);
+      margin-bottom: 6px
+    }
+
+    .tm-info span {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      line-height: 1.6;
+      display: block
+    }
+
+    .team-loading {
+      text-align: center;
+      padding: 80px;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 2px
+    }
+
+    @media(max-width:1100px) {
+      .team-grid-home {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+
+    @media(max-width:768px) {
+      .team {
+        padding: 80px 24px
+      }
+
+      .team-hd {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px
+      }
+
+      .team-grid-home {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px
+      }
+
+      .tm-info {
+        padding: 16px 12px
+      }
+
+      .tm-info strong {
+        font-size: 16px
+      }
+    }
+
+    /* NEWS */
+    .news {
+      padding: 100px 56px;
+      background: var(--white)
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 46px
+    }
+
+    .nc {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid #EEF5F8;
+      transition: all .3s;
+      display: block
+    }
+
+    .nc:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(44, 74, 90, .09)
+    }
+
+    .nc-top {
+      padding: 26px 26px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .ndot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--mint);
+      flex-shrink: 0
+    }
+
+    .ntype {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--muted)
+    }
+
+    .nc-body {
+      padding: 14px 26px 26px
+    }
+
+    .nc-body h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 15px;
+      line-height: 1.7;
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin-bottom: 9px
+    }
+
+    .nc-body p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.9;
+      letter-spacing: .3px
+    }
+
+    .ndiv {
+      width: 30px;
+      height: 1px;
+      background: var(--blue);
+      margin: 13px 0
+    }
+
+    /* CTA */
+    .cta {
+      padding: 88px 56px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--blue), var(--mint));
+      position: relative;
+      overflow: hidden
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='%23ffffff' fill-opacity='0.07'/%3E%3C/svg%3E")
+    }
+
+    .cta h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 34px;
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 5px;
+      margin-bottom: 12px;
+      position: relative
+    }
+
+    .cta p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .82);
+      letter-spacing: 2px;
+      margin-bottom: 34px;
+      position: relative
+    }
+
+    .btn-w {
+      background: #fff;
+      color: var(--dark);
+      padding: 14px 44px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      transition: all .3s;
+      display: inline-block;
+      position: relative;
+      font-weight: 500
+    }
+
+    .btn-w:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .15)
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2
+    }
+
+    .btn-o-white {
+      border: 1.5px solid #fff;
+      color: #fff;
+      padding: 14px 34px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      transition: all .3s
+    }
+
+    .btn-o-white:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-3px)
+    }
+
+    /* MAP */
+    .map-sec {
+      padding: 0 56px 80px;
+      background: var(--sand)
+    }
+
+    .map-wrap {
+      width: 100%;
+      height: 450px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(44, 74, 90, .1);
+      border: 1px solid #fff
+    }
+
+    .map-wrap iframe {
+      border: 0;
+      width: 100%;
+      height: 100%;
+      filter: grayscale(0.1) contrast(1.05)
+    }
+
+    @media(max-width:900px) {
+      .map-sec {
+        padding: 0 24px 60px
+      }
+
+      .map-wrap {
+        height: 350px
+      }
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 100px 56px;
+      background: var(--sand);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px
+    }
+
+    .cl .sec-label {
+      margin-bottom: 8px
+    }
+
+    .cl .sec-title {
+      margin-bottom: 6px
+    }
+
+    .cl>p {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      margin-bottom: 36px
+    }
+
+    .citems {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .ci {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 17px 18px;
+      transition: background .2s
+    }
+
+    .ci:hover {
+      background: var(--lb)
+    }
+
+    .ci-ic {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--lb);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .ci-ic svg {
+      width: 17px;
+      height: 17px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .ci-t strong {
+      display: block;
+      font-size: 11.5px;
+      letter-spacing: 2px;
+      color: var(--dark);
+      margin-bottom: 2px
+    }
+
+    .ci-t span {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .hcard {
+      background: var(--dark);
+      border-radius: 20px;
+      padding: 34px;
+      color: #fff;
+      margin-bottom: 18px
+    }
+
+    .hcard h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 15px;
+      letter-spacing: 3px;
+      color: var(--mint);
+      margin-bottom: 22px
+    }
+
+    .hr {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      font-size: 13.5px
+    }
+
+    .hr:last-child {
+      border-bottom: none;
+      padding-bottom: 0
+    }
+
+    .hr .day {
+      color: rgba(255, 255, 255, .5);
+      letter-spacing: 1px
+    }
+
+    .hr .time {
+      color: #fff
+    }
+
+    .note {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 22px;
+      border-left: 3px solid var(--mint)
+    }
+
+    .note p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+      letter-spacing: .5px
+    }
+
+    .note strong {
+      color: var(--dark)
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #fff;
+      padding: 60px 56px 32px
+    }
+
+    .fg {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 48px
+    }
+
+    .fb h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 18px;
+      letter-spacing: 3px;
+      margin-bottom: 10px
+    }
+
+    .fb p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .42);
+      line-height: 2;
+      letter-spacing: .5px;
+      margin-bottom: 22px
+    }
+
+    .socs {
+      display: flex;
+      gap: 9px
+    }
+
+    .soc {
+      width: 33px;
+      height: 33px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background .2s
+    }
+
+    .soc:hover {
+      background: var(--blue)
+    }
+
+    .soc svg {
+      width: 15px;
+      height: 15px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .fc h4 {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--mint);
+      margin-bottom: 16px
+    }
+
+    .fc ul {
+      list-style: none
+    }
+
+    .fc li {
+      margin-bottom: 9px
+    }
+
+    .fc a {
+      color: rgba(255, 255, 255, .42);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: .5px;
+      transition: color .2s
+    }
+
+    .fc a:hover {
+      color: #fff
+    }
+
+    .fbot {
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between
+    }
+
+    .fbot p {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, .26);
+      letter-spacing: .5px
+    }
+
+    /* REVEAL */
+    .r {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+
+    .r.on {
+      opacity: 1;
+      transform: none
+    }
+
+    .d1 {
+      transition-delay: .1s
+    }
+
+    .d2 {
+      transition-delay: .2s
+    }
+
+    .d3 {
+      transition-delay: .3s
+    }
+
+    .d4 {
+      transition-delay: .4s
+    }
+
+    @media(max-width:900px) {
+      nav {
+        padding: 0 20px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 100px 24px 60px;
+        gap: 36px
+      }
+
+      .brand-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .svc-grid,
+      .about,
+      .contact {
+        grid-template-columns: 1fr
+      }
+
+      .about,
+      .contact {
+        padding: 60px 24px;
+        gap: 40px
+      }
+
+      .svc-sec,
+      .news,
+      .team,
+      .brand,
+      .cta {
+        padding: 60px 24px
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr
+      }
+
+      .team-row {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .fg {
+        grid-template-columns: 1fr;
+        gap: 30px
+      }
+
+      footer {
+        padding: 46px 24px 24px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">華昕<em>藝心</em></div>
+    <ul class="nav-links">
+      <li><a href="index.html">關於我們</a></li>
+      <li><a href="services.html">服務項目</a></li>
+      <li class="has-dropdown">
+        <a href="team.html">專業團隊</a>
+        <div class="dropdown-menu" id="navTherapistDropdown"></div>
+      </li>
+      <li><a href="news.html">最新消息</a></li>
+      <li><a href="faq.html">常見問答</a></li>
+      <li><a href="transportation.html">交通方式</a></li>
+      <li><a href="resources/index.html">資源連結</a></li>
+    </ul>
+    <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="nav-cta">立即預約</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-l">
+      <div class="eyebrow">台北市南港區｜心理諮商 × 藝術治療</div>
+      <h1 class="h1">陪　你<br><em>同　行</em></h1>
+      <p class="hsub">華昕藝心心理諮商所</p>
+      <p class="hdesc">我們融合心理學與藝術的力量，在安全溫暖的空間裡，陪伴你探索內在、調適情緒，找到屬於自己的療癒之路。</p>
+      <div class="hbtns">
+        <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="btn-d">預約諮商</a>
+        <a href="#svc" class="btn-o">了解服務</a>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="hero-cards">
+        <div class="ic">
+          <div class="ic-icon"><svg viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg></div>
+          <div class="ic-text"><strong>13 位專業心理師</strong><span>諮商心理師、臨床心理師、藝術治療師<br>各領域資深專家</span></div>
+        </div>
+        <div class="ic">
+          <div class="ic-icon"><svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg></div>
+          <div class="ic-text"><strong>南港展覽館 5 號出口</strong><span>研究院路一段 99 號，步行 5 分鐘<br>太陽大帝大樓 A 棟 2 樓</span></div>
+        </div>
+        <div class="ic">
+          <div class="ic-icon"><svg viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg></div>
+          <div class="ic-text"><strong>全時段預約制</strong><span>週一至五 13:00–21:00<br>週六至日 09:00–17:00</span></div>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4p6Z-Jabapa1vSg0zb54u0E60v0p4l_j0zs0Sx2UQxjA-tw/viewform" class="hl-strip" target="_blank" style="text-decoration:none;cursor:pointer;">
+          <strong>補助方案｜政府補助方案，讓諮商不受費用限制</strong>
+          <span>115青壯方案、勞工方案、國軍方案、原住民方案</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND -->
+  <section class="brand">
+    <div class="brand-wm">華昕藝心</div>
+    <div class="brand-hd r"><span class="sec-label">OUR NAME · 所名由來</span>
+      <h2>每個字，都是一份承諾</h2>
+    </div>
+    <div class="brand-grid">
+      <div class="bc r"><span class="bchar">華</span>
+        <h3>繁盛綻放</h3>
+        <p>象徵心理健康的蓬勃與綻放，如花繁盛的生命力</p>
+      </div>
+      <div class="bc r d1"><span class="bchar">昕</span>
+        <h3>希望曙光</h3>
+        <p>代表每一天的希望與新開始，迎向清晨的第一道光</p>
+      </div>
+      <div class="bc r d2"><span class="bchar">藝</span>
+        <h3>創造療癒</h3>
+        <p>體現創造力與藝術治療的力量，以藝術為橋梁</p>
+      </div>
+      <div class="bc r d3"><span class="bchar">心</span>
+        <h3>深刻關懷</h3>
+        <p>對每位來訪者心靈的深刻陪伴，你的心是我們的核心</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="svc-sec" id="svc">
+    <div class="sec-hd r"><span class="sec-label">SERVICES · 服務項目</span>
+      <h2 class="sec-title">找到適合你的支持方式</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="sc r">
+        <div class="sc-icon"><svg viewBox="0 0 24 24">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg></div>
+        <h3>個別諮商</h3>
+        <p>一對一的專業陪伴，在安全的空間裡探索情緒、調適壓力，找到屬於自己的內在力量。</p>
+        <a href="services.html" class="sc-lnk">了解更多 →</a>
+      </div>
+      <div class="sc r d1">
+        <div class="sc-icon"><svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg></div>
+        <h3>伴侶／婚姻諮商</h3>
+        <p>協助伴侶改善溝通模式、修復關係裂痕，在衝突中找到理解與深度連結的橋樑。</p>
+        <a href="services.html" class="sc-lnk">了解更多 →</a>
+      </div>
+      <div class="sc r d2">
+        <div class="sc-icon"><svg viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg></div>
+        <h3>親子諮商／親職諮詢</h3>
+        <p>支持親子關係深化，協助父母理解孩子的情緒世界與各階段發展需求。</p>
+        <a href="services.html" class="sc-lnk">了解更多 →</a>
+      </div>
+      <div class="sc r">
+        <div class="sc-icon"><svg viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+            <line x1="8" y1="21" x2="16" y2="21" />
+            <line x1="12" y1="17" x2="12" y2="21" />
+          </svg></div>
+        <h3>線上遠距諮商</h3>
+        <p>突破地域限制，讓專業的心理支持無論你身在何處都能即時陪伴在身邊。</p>
+        <a href="services.html" class="sc-lnk">了解更多 →</a>
+      </div>
+      <div class="sc r d1">
+        <div class="sc-icon"><svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg></div>
+        <h3>團體諮商／工作坊</h3>
+        <p>藝術治療團體、演講與工作坊，在共同經驗中找到共鳴、相互支持與成長。</p>
+        <a href="services.html" class="sc-lnk">了解更多 →</a>
+      </div>
+      <div class="sc r d2">
+        <div class="sc-icon"><svg viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+          </svg></div>
+        <h3>企業合作方案</h3>
+        <p>為企業員工提供專業的心理健康支持，協助建立更健康、更有韌性的職場文化。</p>
+        <a href="services.html" class="sc-lnk">了解更多 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="av r">
+      <div class="av-art">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2C4A5A"
+          stroke-linecap="round">
+          <circle cx="100" cy="100" r="72" stroke-width=".7" opacity=".3" />
+          <circle cx="100" cy="100" r="50" stroke-width=".5" opacity=".22" />
+          <circle cx="100" cy="100" r="28" stroke-width=".5" opacity=".18" />
+          <path d="M55 82 Q78 62 100 76 Q122 90 145 68" stroke-width="2" opacity=".45" />
+          <path d="M52 112 Q82 96 106 117 Q128 133 152 112" stroke-width="2" opacity=".38" />
+          <path d="M60 142 Q88 126 112 142 Q136 158 158 136" stroke-width="1.5" opacity=".3" />
+          <circle cx="78" cy="86" r="3.5" fill="#7BB8C8" stroke="none" opacity=".55" />
+          <circle cx="116" cy="76" r="2.5" fill="#A8D5C2" stroke="none" opacity=".6" />
+          <circle cx="138" cy="112" r="3" fill="#7BB8C8" stroke="none" opacity=".48" />
+          <circle cx="72" cy="122" r="2" fill="#A8D5C2" stroke="none" opacity=".5" />
+          <path d="M88 52 Q100 38 112 52 Q100 63 88 52Z" fill="#A8D5C2" stroke="none" opacity=".28" />
+          <path d="M132 88 Q148 78 151 94 Q137 100 132 88Z" fill="#7BB8C8" stroke="none" opacity=".22" />
+          <path d="M50 140 Q58 130 66 140 Q58 148 50 140Z" fill="#A8D5C2" stroke="none" opacity=".25" />
+        </svg>
+      </div>
+      <div class="ab-badge"><strong>藝術治療</strong><span>大台北地區少數專業機構</span></div>
+    </div>
+    <div class="at r d1">
+      <span class="sec-label">ABOUT · 關於我們</span>
+      <h2 class="sec-title">心理諮商<br>與藝術治療<br>的深度結合</h2>
+      <p>華昕藝心位於<strong>台北市南港區</strong>，鄰近捷運南港展覽館站。我們是台灣少數將心理諮商與藝術治療深度結合的機構，更是大台北地區少數專業提供藝術治療的心理諮商所。</p>
+      <p>我們相信，<strong>藝術能夠幫助來訪者更直觀地表達情感</strong>、釋放壓力，在心理諮商的陪伴下找到內在力量。</p>
+      <div class="tags">
+        <span class="tag">藝術治療</span><span class="tag">個別諮商</span><span class="tag">伴侶諮商</span>
+        <span class="tag">兒童青少年</span><span class="tag">115青壯方案</span><span class="tag">公費諮商</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team">
+    <div class="team-hd r">
+      <div><span class="sec-label">TEAM · 專業團隊</span>
+        <h2 class="sec-title" style="font-size:26px">與你同行的心理師們</h2>
+      </div>
+      <a href="team.html">認識完整團隊 →</a>
+    </div>
+    <div id="homeTeamLoading" class="team-loading">載入中…</div>
+    <div class="team-grid-home" id="homeTeamGrid" style="display:none"></div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="news">
+    <div class="sec-hd r"><span class="sec-label">NEWS · 最新消息</span>
+      <h2 class="sec-title">好文與最新動態</h2>
+    </div>
+    <div class="news-grid" id="homeNewsGrid"></div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>找到適合您的陪伴了嗎？</h2>
+    <p>如果您不確定哪位心理師最適合您的需求，歡迎與小助手聊聊，讓我們為您推薦。</p>
+    <div class="cta-btns">
+      <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="btn-w">立即預約諮商</a>
+      <a href="https://lin.ee/nOmKPpP" class="btn-o-white">不確定找誰？由我們為您推薦</a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="cl r">
+      <span class="sec-label">CONTACT · 聯絡我們</span>
+      <h2 class="sec-title">來找我們</h2>
+      <p>全時段預約制，期待與你相遇</p>
+      <div class="citems">
+        <div class="ci">
+          <div class="ci-ic"><svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg></div>
+          <div class="ci-t"><strong>地址</strong><span>115 台北市南港區研究院路一段 99 號 2 樓 103 室<br>太陽大帝大樓 A 棟，南港展覽館 5 號出口步行 5
+              分鐘</span></div>
+        </div>
+        <div class="ci">
+          <div class="ci-ic"><svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg></div>
+          <div class="ci-t"><strong>電話</strong><span>02-6605-7103</span></div>
+        </div>
+        <div class="ci">
+          <div class="ci-ic"><svg viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg></div>
+          <div class="ci-t"><strong>信箱</strong><span>huasin.apcc@gmail.com</span></div>
+        </div>
+        <div class="ci">
+          <div class="ci-ic"><svg viewBox="0 0 24 24">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg></div>
+          <div class="ci-t"><strong>LINE@</strong><span>@huasin</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="r d1">
+      <div class="hcard">
+        <h3>營業時間</h3>
+        <div class="hr"><span class="day">週一 ～ 週五</span><span class="time">13:00 – 21:00</span></div>
+        <div class="hr"><span class="day">週六</span><span class="time">09:00 – 17:00</span></div>
+        <div class="hr"><span class="day">週日</span><span class="time">13:00 – 17:00</span></div>
+      </div>
+      <div class="note">
+        <p><strong>全時段預約制</strong>，請提前透過線上表單或 LINE 預約。初次諮商建議提早 10 分鐘抵達，讓自己有時間安頓心情。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-sec">
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.733!2d121.611!3d25.043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x231b44d20deb14aa!2z6I-v5pic6Jed5b-D5b-D55CG6諮商所!5e0!3m2!1szh-TW!2stw!4v1713800000000!5m2!1szh-TW!2stw"
+        allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="fg">
+      <div class="fb">
+        <h3>華昕藝心心理諮商所</h3>
+        <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間<br>北市衛心字第XY01120039號</p>
+        <div class="socs">
+          <a href="https://lin.ee/nOmKPpP" class="soc"><svg viewBox="0 0 24 24">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg></a>
+          <a href="https://www.facebook.com/huasin.apcc" class="soc"><svg viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg></a>
+          <a href="https://www.instagram.com/huasin.apcc/" class="soc"><svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg></a>
+        </div>
+      </div>
+      <div class="fc">
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="service-individual.html">個別諮商</a></li>
+          <li><a href="service-couples.html">伴侶婚姻諮商</a></li>
+          <li><a href="service-parenting.html">親子諮商</a></li>
+          <li><a href="service-online.html">線上遠距諮商</a></li>
+          <li><a href="service-group.html">團體諮商／工作坊</a></li>
+          <li><a href="service-eap.html">企業合作方案</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="https://forms.gle/ZJu7T7U1CWNZDshq8">預約諮商</a></li>
+          <li><a href="team.html">專業團隊</a></li>
+          <li><a href="#">115青壯方案</a></li>
+          <li><a href="faq.html">常見問答</a></li>
+          <li><a href="transportation.html">交通方式</a></li>
+          <li><a href="resources/index.html">資源連結</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+      <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('on'); }), { threshold: 0.01 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+    const SHEET_ID = '1o0di_U7q_NKiDuwkHEnUqlX2QQNxAeXR1TKpAJl0WAQ';
+
+    // Load featured articles from Sheets
+    const ARTICLES_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=articles`;
+    const CATEGORY_COLORS = { '最新消息': 'var(--mint)', '心理衛教文章': 'var(--blue)', '活動': '#C5A8D5', '自我探索': '#F0B8A0' };
+
+    fetch(ARTICLES_URL)
+      .then(r => r.text())
+      .then(text => {
+        const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
+        const cols = json.table.cols.map(c => c.label.toLowerCase().replace(/\s|\t/g, '').trim());
+        const articles = (json.table.rows || [])
+          .map(row => {
+            const obj = {};
+            cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
+            return obj;
+          })
+          .filter(a => String(a.active).toUpperCase() === 'TRUE' && String(a.is_featured).toUpperCase() === 'TRUE');
+
+        const grid = document.getElementById('homeNewsGrid');
+        if (!grid || articles.length === 0) return;
+
+        grid.innerHTML = articles.slice(0, 3).map((a, i) => {
+          const color = CATEGORY_COLORS[a.category] || 'var(--mint)';
+          const excerpt = a.summary || (a['content\t'] || a.content || '').replace(/#+\s*/g, '').slice(0, 60) + '…';
+          return `<a href="article.html?id=${a.id}" class="nc r${i > 0 ? ' d' + i : ''}">
+            <div class="nc-top">
+              <div class="ndot" style="background:${color}"></div><span class="ntype">${a.category}</span>
+            </div>
+            <div class="nc-body">
+              <div class="ndiv"></div>
+              <h3>${a.title}</h3>
+              <p>${excerpt}</p>
+            </div>
+          </a>`;
+        }).join('');
+
+        grid.querySelectorAll('.r').forEach(el => obs.observe(el));
+      })
+      .catch(() => {});
+
+    // Load team from Sheets
+    const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=therapists`;
+
+    function driveThumb(url) {
+      if (!url) return '';
+      const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w200` : url;
+    }
+
+    fetch(SHEET_URL)
+      .then(r => r.text())
+      .then(text => {
+        const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
+        const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
+        const therapists = (json.table.rows || [])
+          .map(row => {
+            const obj = {};
+            cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
+            return obj;
+          })
+          .filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name);
+
+        const grid = document.getElementById('homeTeamGrid');
+        grid.innerHTML = therapists.map((t, i) => {
+          const photo = driveThumb(t.photo_url);
+          const showPlaceholder = `this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex'`;
+          const tryDrive = photo ? `if(!this._triedDrive){this._triedDrive=true;this.src='${photo}'}else{${showPlaceholder}}` : showPlaceholder;
+          const photoHtml = `<img src="images/therapists/${t.id}.avif" alt="${t.name}" class="tm-photo" onerror="if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${tryDrive}}">`;
+          const placeholder = `<div class="tm-photo-placeholder" style="display:none">${t.name.charAt(0)}</div>`;
+          return `<a href="therapist.html?id=${t.id}" class="tm-card r" style="transition-delay: ${i * 0.1}s">
+          <div class="tm-photo-wrap">
+            ${photoHtml}${placeholder}
+          </div>
+          <div class="tm-info">
+            <strong>${t.name}</strong>
+            <span>${t.title}</span>
+          </div>
+        </a>`;
+        }).join('');
+
+        document.getElementById('homeTeamLoading').style.display = 'none';
+        grid.style.display = 'grid';
+        // Re-observe new cards
+        grid.querySelectorAll('.r').forEach(el => obs.observe(el));
+      })
+      .catch(() => {
+        document.getElementById('homeTeamLoading').textContent = '';
+      });
+  </script>
+  <script src="nav-dropdown.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "華昕藝心心理諮商所",
+  "alternateName": "Huasin Art-Mind Counseling Center",
+  "url": "https://visionary-melba-2c3e31.netlify.app/",
+  "description": "台北市南港區心理諮商所，大台北地區少數深度結合心理諮商與藝術治療的專業機構，13位持照心理師。",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "研究院路一段99號2樓103室",
+    "addressLocality": "南港區",
+    "addressRegion": "台北市",
+    "postalCode": "115",
+    "addressCountry": "TW"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 25.0549,
+    "longitude": 121.6057
+  },
+  "medicalSpecialty": ["心理諮商", "藝術治療", "伴侶諮商", "親子諮商"],
+  "hasMap": "https://maps.google.com/?q=台北市南港區研究院路一段99號",
+  "sameAs": []
+}
+</script>
+</body>
+
+</html>

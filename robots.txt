@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://visionary-melba-2c3e31.netlify.app/sitemap.xml

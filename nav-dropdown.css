@@ -1,0 +1,177 @@
+/* 
+  Nav Dropdown CSS 
+  High-end minimalist style matching V3/V5 aesthetics
+*/
+.nav-links li { position: relative; }
+
+.has-dropdown > a {
+  display: flex !important;
+  align-items: center;
+}
+
+.has-dropdown > a::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: 8px;
+  margin-top: -3px;
+  opacity: 0.4;
+  transition: transform 0.3s ease;
+}
+
+.has-dropdown:hover > a::after {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+  opacity: 0.8;
+}
+
+/* Dropdown Menu Box */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(15px);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  min-width: 220px;
+  border-radius: 18px;
+  box-shadow: 0 15px 50px rgba(44, 74, 90, 0.15);
+  border: 1px solid rgba(224, 238, 243, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 12px 0;
+  z-index: 2000;
+  margin-top: 8px;
+}
+
+.has-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Dropdown Links */
+.dropdown-menu a {
+  display: block !important;
+  padding: 8px 24px !important;
+  font-size: 14px !important;
+  color: #2C4A5A !important; /* var(--dark) */
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+  white-space: nowrap !important;
+  text-align: left;
+  letter-spacing: 1.5px !important;
+  border-radius: 0 !important;
+}
+
+.dropdown-menu a:hover {
+  background: #E8F4F8 !important; /* var(--lb) */
+  color: #7BB8C8 !important; /* var(--blue) */
+  padding-left: 30px !important;
+}
+
+/* Scrollable for many therapists */
+.dropdown-menu-inner {
+  max-height: 500px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(123, 184, 200, 0.5) transparent;
+}
+
+.dropdown-menu-inner::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dropdown-menu-inner::-webkit-scrollbar-thumb {
+  background: rgba(123, 184, 200, 0.5);
+  border-radius: 10px;
+}
+
+/* ── Hamburger Button ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1100;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #2C4A5A;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile Overlay Menu ── */
+@media (max-width: 900px) {
+  .dropdown-menu { display: none !important; }
+  .has-dropdown > a::after { display: none !important; }
+
+  .nav-hamburger { display: flex; }
+
+  /* Hide desktop nav links */
+  nav .nav-links {
+    display: none !important;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 72px);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+    gap: 0 !important;
+    overflow-y: auto;
+    z-index: 1050;
+  }
+
+  nav .nav-links.mobile-open {
+    display: flex !important;
+  }
+
+  nav .nav-links li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(44, 74, 90, 0.06);
+  }
+
+  nav .nav-links li a {
+    display: block !important;
+    padding: 18px 24px !important;
+    font-size: 16px !important;
+    letter-spacing: 3px !important;
+  }
+
+  /* Hide CTA in desktop nav on mobile (it's usually inside nav) */
+  nav .nav-cta { display: none !important; }
+}

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全台免費心理諮商｜華昕藝心心理諮商所</title>
+  <meta name="description" content="整理全台各縣市衛生局提供的免費心理諮商資源，包含預約方式與聯絡電話。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../nav-dropdown.css">
+  <style>
+    :root{--blue:#7BB8C8;--mint:#A8D5C2;--sand:#F5F0EA;--dark:#2C4A5A;--white:#FAFAFA;--lb:#E8F4F8;--lm:#EAF7F2;--muted:#6B8A98}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans TC',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden}
+    nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,250,250,.93);backdrop-filter:blur(14px);border-bottom:1px solid #E0EEF3;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Noto Serif TC',serif;font-size:17px;font-weight:500;letter-spacing:3px;color:var(--dark);text-decoration:none}
+    .logo em{font-style:normal;color:var(--blue)}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--dark);font-size:14px;letter-spacing:1px;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--blue)}
+    .nav-cta{background:var(--blue);color:#fff;padding:9px 22px;border-radius:30px;font-size:13px;letter-spacing:1.5px;text-decoration:none;transition:all .3s}
+    .nav-cta:hover{background:var(--dark)}
+
+    .hero{padding:140px 56px 72px;background:var(--dark);position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 60%,rgba(168,213,194,.06) 0%,transparent 60%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1}
+    .bc{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:2px;margin-bottom:20px}
+    .bc a{color:rgba(255,255,255,.35);text-decoration:none}
+    .bc a:hover{color:var(--mint)}
+    .hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(28px,4vw,44px);font-weight:300;letter-spacing:6px;color:#fff;margin-bottom:16px;line-height:1.4}
+    .hero-desc{font-size:15px;line-height:2.1;color:rgba(255,255,255,.5);letter-spacing:.5px;max-width:560px}
+
+    .subnav{background:#fff;border-bottom:1px solid #EEF5F8;padding:0 56px;position:sticky;top:68px;z-index:90;display:flex;gap:0;overflow-x:auto}
+    .subnav-link{padding:16px 20px;font-size:13px;letter-spacing:1px;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;text-decoration:none;transition:all .25s;display:flex;align-items:center;gap:6px}
+    .subnav-link:hover{color:var(--dark)}
+    .subnav-link.active{color:var(--blue);border-bottom-color:var(--blue)}
+    .subnav-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+    /* VIEW TOGGLE */
+    .view-bar{background:var(--sand);padding:16px 56px;border-bottom:1px solid rgba(44,74,90,.06);display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .view-label{font-size:12px;color:var(--muted);letter-spacing:2px}
+    .view-btns{display:flex;gap:0;border:1px solid rgba(44,74,90,.15);border-radius:10px;overflow:hidden;background:#fff}
+    .view-btn{padding:8px 16px;font-size:12.5px;color:var(--muted);letter-spacing:1px;cursor:pointer;border:none;background:none;font-family:'Noto Sans TC',sans-serif;transition:all .2s;display:flex;align-items:center;gap:6px}
+    .view-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .view-btn.active{background:var(--blue);color:#fff}
+    .view-btn:not(.active):hover{background:var(--lb);color:var(--dark)}
+
+    /* MAP VIEW */
+    .map-view{display:flex;min-height:calc(100vh - 200px)}
+    .map-view.hidden{display:none}
+    .map-col{width:420px;flex-shrink:0;background:var(--sand);padding:40px 32px;display:flex;flex-direction:column;align-items:center;position:sticky;top:136px;height:calc(100vh - 136px);overflow:hidden}
+    .map-hint{font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:20px;text-align:center}
+    .taiwan-svg{width:100%;max-width:340px;cursor:pointer}
+
+    /* SVG County Styles */
+    .taiwan-svg .county{cursor:pointer}
+    .taiwan-svg .county path{fill:#D8EEF4;stroke:#fff;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;transition:fill .2s}
+    .taiwan-svg .county:hover path{fill:var(--blue)}
+    .taiwan-svg .county.active path{fill:var(--dark)}
+    .taiwan-svg .county text{font-family:'Noto Sans TC',sans-serif;font-size:34px;fill:#fff;pointer-events:none;text-anchor:middle;dominant-baseline:middle;letter-spacing:2px;opacity:0;transition:opacity .2s}
+    .taiwan-svg .county:hover text,.taiwan-svg .county.active text{opacity:1}
+
+    /* INFO PANEL */
+    .info-col{flex:1;padding:48px 56px;overflow-y:auto}
+    .info-default{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--muted)}
+    .info-default svg{width:48px;height:48px;stroke:rgba(44,74,90,.15);fill:none;stroke-width:1;margin-bottom:20px}
+    .info-default p{font-size:14px;letter-spacing:1px;line-height:2}
+    .info-panel{display:none}
+    .info-panel.show{display:block;animation:fadeIn .3s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .ip-region{font-size:11px;letter-spacing:4px;color:var(--blue);margin-bottom:8px;font-weight:500}
+    .ip-name{font-family:'Noto Serif TC',serif;font-size:28px;font-weight:300;letter-spacing:4px;color:var(--dark);margin-bottom:6px}
+    .ip-badge{display:inline-block;background:var(--lm);color:#3a7a5c;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:1.5px;margin-bottom:28px}
+    .ip-badge.partial{background:#FFF8E6;color:#8a6a00}
+    .ip-section{margin-bottom:20px}
+    .ip-section-label{font-size:11px;letter-spacing:3px;color:var(--muted);margin-bottom:10px;font-weight:500}
+    .ip-info{background:var(--sand);border-radius:14px;padding:16px 20px;font-size:13.5px;color:var(--dark);line-height:2;letter-spacing:.3px}
+    .ip-info ul{padding-left:16px;list-style:disc}
+    .ip-info li{margin-bottom:4px}
+    .ip-contact{display:flex;flex-direction:column;gap:10px}
+    .ip-contact-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #EEF5F8;border-radius:12px;padding:14px 18px;transition:all .25s}
+    .ip-contact-row:hover{border-color:var(--blue);background:var(--lb)}
+    .ip-contact-icon{width:36px;height:36px;border-radius:10px;background:var(--lb);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ip-contact-icon svg{width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .ip-contact-text{font-size:13.5px;color:var(--dark);letter-spacing:.5px}
+    .ip-contact-text a{color:var(--blue);text-decoration:none;font-weight:500}
+    .ip-contact-text a:hover{text-decoration:underline}
+
+    /* LIST VIEW */
+    .list-view{padding:52px 56px 100px;max-width:1200px;margin:0 auto}
+    .list-view.hidden{display:none}
+    .resources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .rc{background:#fff;border-radius:20px;border:1px solid #EEF5F8;padding:24px 22px;transition:all .3s;display:flex;flex-direction:column;gap:14px}
+    .rc:hover{box-shadow:0 8px 28px rgba(44,74,90,.08);border-color:rgba(123,184,200,.3);transform:translateY(-2px)}
+    .rc.hidden{display:none}
+    .rc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .rc-name{font-family:'Noto Serif TC',serif;font-size:14.5px;letter-spacing:2px;color:var(--dark);line-height:1.5}
+    .rc-free{display:inline-block;background:var(--lm);color:#3a7a5c;font-size:10.5px;padding:3px 9px;border-radius:20px;letter-spacing:1px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+    .rc-info{font-size:12.5px;color:var(--muted);line-height:1.9;letter-spacing:.3px}
+    .rc-info ul{padding-left:14px;list-style:disc}
+    .rc-info li{margin-bottom:3px}
+    .rc-divider{height:1px;background:#EEF5F8}
+    .rc-contact{font-size:13px;color:var(--dark);line-height:2;letter-spacing:.3px}
+    .rc-contact a{color:var(--blue);text-decoration:none;font-weight:500}
+    .rc-contact a:hover{text-decoration:underline}
+    .rc-phone{font-family:'Noto Serif TC',serif;font-size:16px;color:var(--blue);letter-spacing:1.5px}
+    .rc-phone a{color:inherit;text-decoration:none}
+    .rc-phone a:hover{color:var(--dark)}
+
+    footer{background:var(--dark);color:#fff;padding:56px 56px 28px}
+    .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;margin-bottom:44px}
+    .fb h3{font-family:'Noto Serif TC',serif;font-size:17px;letter-spacing:3px;margin-bottom:10px}
+    .fb p{font-size:12.5px;color:rgba(255,255,255,.4);line-height:2;letter-spacing:.5px;margin-bottom:20px}
+    .socs{display:flex;gap:9px}
+    .soc{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+    .soc:hover{background:var(--blue)}
+    .soc svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .fc h4{font-size:10.5px;letter-spacing:3px;color:var(--mint);margin-bottom:14px}
+    .fc ul{list-style:none}
+    .fc li{margin-bottom:8px}
+    .fc a{color:rgba(255,255,255,.4);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .2s}
+    .fc a:hover{color:#fff}
+    .fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .fbot p{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.5px}
+
+    @media(max-width:1100px){.resources-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:900px){
+      nav{padding:0 20px}
+      .nav-links{display:none}
+      .hero{padding:110px 24px 56px}
+      .subnav{padding:0 16px}
+      .view-bar{padding:12px 24px}
+      .map-view{flex-direction:column}
+      .map-col{width:100%;height:auto;position:static;padding:28px 24px}
+      .taiwan-svg{max-width:180px}
+      .info-col{padding:28px 24px}
+      .list-view{padding:40px 24px 60px}
+      .resources-grid{grid-template-columns:1fr}
+      footer{padding:44px 24px 24px}
+      .fg{grid-template-columns:1fr;gap:28px}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../index.html" class="logo">華昕<em>藝心</em></a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">關於我們</a></li>
+      <li><a href="../../services.html">服務項目</a></li>
+      <li class="has-dropdown">
+        <a href="../../team.html">專業團隊</a>
+        <div class="dropdown-menu" id="navTherapistDropdown"></div>
+      </li>
+      <li><a href="../../news.html">最新消息</a></li>
+      <li><a href="../../faq.html">常見問答</a></li>
+      <li><a href="../index.html" class="active">資源連結</a></li>
+      <li><a href="../../transportation.html">交通方式</a></li>
+    </ul>
+    <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="nav-cta">立即預約</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="bc"><a href="../../index.html">首頁</a> &nbsp;/&nbsp; <a href="../index.html">資源連結</a> &nbsp;/&nbsp; 全台免費心理諮商</div>
+      <h1>全台各縣市衛生局<br>免費心理諮商資源</h1>
+      <p class="hero-desc">整理各縣市衛生局提供的免費或低費心理諮商服務，費用不是阻礙你尋求支持的理由。</p>
+    </div>
+  </section>
+
+  <div class="subnav">
+    <a href="../index.html" class="subnav-link">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>資源總覽
+    </a>
+    <a href="../immediate-support/" class="subnav-link">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.42-1.42a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>即時資源
+    </a>
+    <a href="../mood-thermometer/" class="subnav-link">
+      <svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>心情溫度計
+    </a>
+    <a href="index.html" class="subnav-link active">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>全台免費諮商
+    </a>
+  </div>
+
+  <div class="view-bar">
+    <span class="view-label">共 17 個縣市資源</span>
+    <div class="view-btns">
+      <button class="view-btn active" id="btnMap" onclick="switchView('map')">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>地圖
+      </button>
+      <button class="view-btn" id="btnList" onclick="switchView('list')">
+        <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>列表
+      </button>
+    </div>
+  </div>
+
+  <!-- MAP VIEW -->
+  <div class="map-view" id="mapView">
+    <div class="map-col">
+      <p class="map-hint">點擊縣市查看諮商資源</p>
+      <svg class="taiwan-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+        <text font-family="Noto Sans TC,sans-serif" font-size="22" fill="rgba(44,74,90,.15)" x="300" y="600" text-anchor="middle" letter-spacing="2" pointer-events="none">台灣海峽</text>
+        <g class="county" data-county="金門縣" onclick="showCounty('金門縣')">
+          <path d="M181.2 423.5l0 0.1-1.1-0.4-0.3-0.4 0.2-0.4 0.4-0.8-1.3-0.9-0.2-0.3-0.1-0.1-2.5-1.9-1.8-1.9-2.7 1-1.3 1.6 0.2 0.7-0.1 0.6-0.3 0.2-0.3-0.1-0.4 2.4-5 5.9-11.4-4.1 0.2 1-0.2 1-0.3 0.1 1.1 1.1-0.4 8.2-3.3 2.6 2.5 2.7-1.4-0.6-1.9-0.2-1.7-0.7-0.9-1.5 0.3-0.6 1.6-1.9 0.5-1 0.1-1.4 0-1.8-0.6-3.1-1.2-3-0.2-1.6 1.1-0.6 5.5-2.7 7.2 4.7 5-0.6 0.8-6.3 1.7-3.9 5.3-1.1 5.2 4.7 2 5.3z m0.2 10.5l0.3-2.1 0.3 0-0.2 1.7-0.4 0.4z m0.9-5l-1-3 0.1-0.7 0.3-0.4 0.8 2.4-0.2 1.7z"/>
+          <text x="153.8" y="425">金門縣</text>
+        </g>
+        <g class="county" data-county="澎湖縣" onclick="showCounty('澎湖縣')">
+          <path d="M409.7 611.6l0.9 2.9-0.4 2.2-1.4-1.4-1.9-1.3-2-0.4-2.8 1.6-2.1 0.3-1 0.5-0.5 1.1-0.8 2.9-0.5 0.9-3.4 2-3.4 0.5-3.5-1.4-3.5-3.5 0.9-1.8 1.9 2.3 2.9 0.6 3.1-0.8 2.6-2.1-1.8-0.7-1.4-0.8-1.1-1.2-1-1.6-0.4 0.7 0 0.2-0.2 0.2-0.7 0.4-0.2-2.9 0.2-2.9 1.3 0 1.5 0.4 5.3-3.4 3.4-1.1-0.9 3.2-0.4 0.9 2.9-0.9 2.2 0.3 1.6-0.2 1.2-1.9 3.4 6.2z m-35.8-6.2l2.3-7.5 2.3-2.2 3 2.6-1.8 1.1-1.2 2.6-2 6.1-0.1 1.6 0.5 1.4-0.2 1-2.2 0.3-1.6 0.1-1.1 0.2-0.9 0.4-0.9 0.8-2.7 0 0.5-1.5 0.9-0.9 1.3-0.5 1.8-0.1 1.6-0.6 0.4-1.5 0.1-3.4z m18.1-5l-0.6-2.5-1.5-2.1-3.1-3.1 4-3 2.4 1.3 2.3 2 1 2.1-1.8 1.7 0.7 2.5-1 1.7-1.6 0.5-0.8-1.1z"/>
+          <text x="396" y="612">澎湖縣</text>
+        </g>
+        <g class="county" data-county="桃園市" onclick="showCounty('桃園市')">
+          <path d="M657.2 325.1l6.4-10.3 5-5.9 5.2-4.4 13.2-4.4 3.1-1.9 2.7-2.4 3.3-1.8 6.4-2.3 14.5-2.6 3 3.3 4.6 2.2 3.4 2.2 2.3 2.1 2.9 0.7 3.1 1.6 3.7 5.4 0.3 2.9-0.7 3-2.4 2.5-9.4 2.8-2.7 2.9 0.2 4.5-0.8 4.1 0.8 3.7 3.8 3.7 0.8 3.7-1 4.8 3.7 2.1 5.3-0.3 3.7 1.4 6 8.9-1 3.8-2.3 2.7 0.6 3.7 1 4.1 6.4 6 1.8 4-2.2 0.6-3.9 2.8 2.3 9-1.6 2.7-2.5 1-2.3-0.5-2.9 1.1-0.3 1.1-3.5-1.5-5.2-3-2.9-2.1-4-0.7-4.5-2.6-3.7-2.9-0.4-3.1 3.3-4.7 1.4-5.6-1.2-5.2-0.2-3.6-2.5-1.9-3.1-1.6-1.9-3.3-2.4-2.5-2.8 0.2-2.8-0.5-2.2-2.2-3-2.2-4.8-1.5-2.4-2.7 0.8-4.2-2.6-3-4.9-1.6-3-1.4-3.1-0.9-3.6-1.4-2.9-6.3-3.3-2.2-9.8 0.7-2.3-0.8z"/>
+          <text x="703.6" y="320.4">桃園市</text>
+        </g>
+        <g class="county" data-county="新竹縣" onclick="showCounty('新竹縣')">
+          <path d="M657.2 325.1l2.3 0.8 9.8-0.7 3.3 2.2 2.9 6.3 3.6 1.4 3.1 0.9 3 1.4 4.9 1.6 2.6 3-0.8 4.2 2.4 2.7 4.8 1.5 3 2.2 2.2 2.2 2.8 0.5 2.8-0.2 2.4 2.5 1.9 3.3 3.1 1.6 2.5 1.9 0.2 3.6 1.2 5.2-1.4 5.6-3.3 4.7 0.4 3.1 3.7 2.9 4.5 2.6 4 0.7 2.9 2.1 5.2 3 3.5 1.5-1.7 4.7-1 3.4 0.4 3.2-2.7 4.2-10.1 10.2-3.1 7.5-2-0.5-7.7 0.7-0.5 0.4-0.5-3.5-3.3-5.6-2.3-2.4-1-3.1-3.6-2.9-9.1 2.3-3.4-0.4-4.9 0.4-5.5 1.5-3-0.7 0.7-3.7 0.9-3.3-0.7-2.9-0.7-2.1 0.7-2.3 0.5-2.4 0.3-2.8-0.6-3.8-2.7-2.4-8.8-4.2-4.3-3.2-2.8-3.2-3.2-8 1.8-2.2 1.6-4.1 2.5-3.1 4.2-1.7 3.7-0.6 1.7-1 0.7-2.7-1.3-2.6-2.8-2.8-3.9-2-10.9-3.5-6-2.6 0.1-0.1 1.1-1.6 0.4-2.7 0.6-2.1 1.5-2.1 1.9-1.6 1.8-0.6-0.1-0.9 0.5-2.1 1.6-4.4 1.5-2.3z"/>
+          <text x="720" y="378">新竹縣</text>
+        </g>
+        <g class="county" data-county="新竹市" onclick="showCounty('新竹市')">
+          <path d="M646.3 345.6l6 2.6 10.9 3.5 3.9 2 2.8 2.8 1.3 2.6-0.7 2.7-1.7 1-3.7 0.6-4.2 1.7-2.5 3.1-1.6 4.1-1.8 2.2-0.2 0.2-3.3 0.8-3.1-1.3-2-2.7-3-1.9-5-1.9 0.8-3 4-8.2 1.6-2.1 0.5-1.2 0-1.2-0.5-1.3-0.8-1.6 1.1-2.2 1.2-1.3z"/>
+          <text x="645" y="362">新竹市</text>
+        </g>
+        <g class="county" data-county="苗栗縣" onclick="showCounty('苗栗縣')">
+          <path d="M655 374.5l3.2 8 2.8 3.2 4.3 3.2 8.8 4.2 2.7 2.4 0.6 3.8-0.3 2.8-0.5 2.4-0.7 2.3 0.7 2.1 0.7 2.9-0.9 3.3-0.7 3.7 3 0.7 5.5-1.5 4.9-0.4 3.4 0.4 9.1-2.3 3.6 2.9 1 3.1 2.3 2.4 3.3 5.6 0.5 3.5-2.7 1.9-1.3 4-3.5 1.5-3.9-0.1-3 2.2-3.3 3.1-4.2 2.4-8.4 6.6-4.9 2-6.4 3.5-3.9-1.6-3.6-4-4.4-1.7-7.1-0.6-4 2.4-0.6 5.3-3.7 2-8.8 0.5-8.4-4.8-4.7-0.9-5.3-2.6-10.9-8-4.5-3.9-3.4-3.6-6.6-10.3 5.2-5.8 1.3-2.9 0.7-4.8 1.5-4 4.3-7.5 1.2-4.5 1.1-2 4.8-1.4 1.4-1.5 0.8-1.9 1-1.8 3-3.2 3.4-2.4 4-1.1 5.2 1-0.7-3.9 1.9-2.7 2.7-2.7 1.3-4.2 0.6-1.3 2.6-1.3 0.3-0.9 5 1.9 3 1.9 2 2.7 3.1 1.3 3.3-0.8 0.2-0.2z"/>
+          <text x="640.8" y="418.8">苗栗縣</text>
+        </g>
+        <g class="county" data-county="台中市" onclick="showCounty('台中市')">
+          <path d="M712.3 433.2l0.5-0.4 7.7-0.7 2 0.5 2.6 0.8-0.5 4 1.1 2.6 3.5 0.8 3.2 1.9 2.7 1.8 2.8-0.4 3.4-1.7 3.6 0 4.2 3.4-3.4 3.5-0.3 3-1.7 4.5-5.4 3.4-2.2 3.6-0.9 3.7-2.2 2.7-2.5 1.3-0.9 1.4-2 1.5-9.6-0.9-3.4-0.8-3.4 0.2-8 3.2-4.5 0.7-4.4 0.2-6.4 3.3-3.2 0.6-3.6 2.1-5.7 5.5-3.6 1.4-4.8-0.1-3.4 2.8-1.9 3.9-2.5 0.7-6.4-4.8-2.2 1.4-4.2 5.5-4.3 0.2-7.3-1.1-4.6 2.2-2.7 6.1-5.4 10.4-3.6 3.4-3 0.5-13-1.8-3-0.1-0.1-1-3.9-2.6-3.1-0.5-0.9-2.5 0-2.8-1.4-2.9-2.3-3.6-3.2-2.6-8.5-2.5-3.3-3.9-0.7-5.5-1.9-4.6-2.9-2.5-4.2-1.3 0.5-0.6 0.5-2.4 2.4-1.9 1.6-4.7 1.9-8.8 6.7-11.7 2.1-7.1 2.4-4 9.6-10.6 6.6 10.3 3.4 3.6 4.5 3.9 10.9 8 5.3 2.6 4.7 0.9 8.4 4.8 8.8-0.5 3.7-2 0.6-5.3 4-2.4 7.1 0.6 4.4 1.7 3.6 4 3.9 1.6 6.4-3.5 4.9-2 8.4-6.6 4.2-2.4 3.3-3.1 3-2.2 3.9 0.1 3.5-1.5 1.3-4 2.7-1.9z"/>
+          <text x="620" y="482">台中市</text>
+        </g>
+        <g class="county" data-county="彰化縣" onclick="showCounty('彰化縣')">
+          <path d="M563.1 480.3l4.2 1.3 2.9 2.5 1.9 4.6 0.7 5.5 3.3 3.9 8.5 2.5 3.2 2.6 2.3 3.6 1.4 2.9 0 2.8 0.9 2.5 3.1 0.5 3.9 2.6 0.1 1 0 2.6-3.1 1.1-0.9 2.1 0.4 2.9-1.4 3.3-1.2 3.9-0.1 4.1-0.8 4.7-0.7 9.7 1.5 4.5 2.6 2.4 2.8 1 4.1 2.1-0.7 2.5-2.8 1.1-1.8 1.7-1.7 1.1-0.7 0.5-8.7-1.7-4.2 0.1-8.7-4.4-14.2-1.6-8.4-3.2-4.8-1.3-5.4-0.3-15.9 1.9-5.5-3.2 0.6-1 1.1-5.1 0.9-2.1 5.1-4.9 1.5-2.1 1.9-5.6 3-5.6 4.2-11.6 1.9-3.3 2.2-2.2 1.8-1.2 1.5-0.8 1.2-1 0.4-2.2 0.9-2 3.7-2.9 0.8-2.2 0.4-7.2 0.7-2 1.9-1.9 8.2-9.5z"/>
+          <text x="565" y="530">彰化縣</text>
+        </g>
+        <g class="county" data-county="雲林縣" onclick="showCounty('雲林縣')">
+          <path d="M519.2 556.7l5.5 3.2 15.9-1.9 5.4 0.3 4.8 1.3 8.4 3.2 14.2 1.6 8.7 4.4 4.2-0.1 8.7 1.7 0.7-0.5 1.4 5.2-1.5 3.4-0.7 5.2 0.7 5.5-1.3 3.7-0.7 4.2 2.8 3.4 4.2 1.8 4.9-1.5 6-0.6 1.9 2.5-0.4 0-0.3 3.6 0 2.5-2.8 0.9-8.4 1.7-4.6 0.5-1.7-2.9-3.4-2.4-6 1.7-2.7 0.4-9.1-3.3-3.6-4.2-3.8-3.4-4.9 0.3-9.1 1.7-5.2 1.4-11.8 6.8-2.7 2.7-3.2 1.7-5 4.1-3.9 0.6-1.4 2.2-1.3 3.5-2.8 2.3-4.4-0.1-6-3.3-7.6 0.8-0.1 0.1-0.7 0 3.4-3.7-0.2-11.8 0.5-8.9 2-7 3.2-5.6 0.9-7.2 1.7-6.3 0.9-2.2 4.4-5.8 0.7-2 0.6-1.1 4-3.1 0.6-1.2z"/>
+          <text x="542.6" y="581.1">雲林縣</text>
+        </g>
+        <g class="county" data-county="嘉義縣" onclick="showCounty('嘉義縣')">
+          <path d="M496.5 622.6l0.7 0 0.1-0.1 7.6-0.8 6 3.3 4.4 0.1 2.8-2.3 1.3-3.5 1.4-2.2 3.9-0.6 5-4.1 3.2-1.7 2.7-2.7 11.8-6.8 5.2-1.4 9.1-1.7 4.9-0.3 3.8 3.4 3.6 4.2 9.1 3.3 2.7-0.4 6-1.7 3.4 2.4 1.7 2.9 4.6-0.5 8.4-1.7 2.8-0.9 0-2.5 0.3-3.6 0.4 0 4.4 0.5 4.8 1.9 3 0.8 3.7 2.1-0.3 3.8-2.1 3.7 0.9 3.4 1.9 4.7 0.3 4.2 0.8 2.8 5.5 1 18.4 0.1 0.6 0.2-13.3 6.8-6.1 4.8-2.5 4.9-3.1 3.7-5.5 3.1-5.8 4.4-3.2 3.8-8.9 5.3-4.2 0.4-4.9-0.5-2.6 2.6-0.1 3.5 1 3.3 0.7 4.8-6-0.7-2.7-0.8-3.6 0.5-3.8 1.7-2.7 0-3.3-2.5-1.1-3.3 1.2-10.3-0.7-5.4-7.1-7.3-1.3-3.6-1.5-3.1-2.9-1.7-5.1-1.7-6.1 0.3-11 2.1-5.6 2.5-4.4 3.3-3.4 3.4-4.8 3.7-4.1 2.6-1.8 3.6-4.5 2-5.3-1.3-6.3-1-3.8-1.4 2.8-0.2 2.3-1 1 0.3-0.6-2.3-1.6 1.2-1.3-0.4-1.8-0.1 0-2.3 1.8-4.1 2.6-0.2 3.9 0-2.6-7.5-3.1-5.8 1.4-2.6 0-1.4-2.2-1.1 0.3-1.2 1.3-1.5 0.6-1.9 3-3.8-6.2 0.4-0.2-6.3z"/>
+          <text x="610" y="648">嘉義縣</text>
+        </g>
+        <g class="county" data-county="嘉義市" onclick="showCounty('嘉義市')">
+          <path d="M559.2 638.1l-5.3-1.2-5.1-3.3-4.4-1.7-0.6-4.1 2.7-2.9 6.7-1.2 5.7-0.5 4 1.5 3 1.6 1.7 2.9 1.9 4.9-2.2 1.6-3.2 0.4-4.9 2z"/>
+          <text x="556.7" y="632">嘉義市</text>
+        </g>
+        <g class="county" data-county="台南市" onclick="showCounty('台南市')">
+          <path d="M495.1 664.4l3.8 1.4 6.3 1 5.3 1.3 4.5-2 1.8-3.6 4.1-2.6 4.8-3.7 3.4-3.4 4.4-3.3 5.6-2.5 11-2.1 6.1-0.3 5.1 1.7 2.9 1.7 1.5 3.1 1.3 3.6 7.1 7.3 0.7 5.4-1.2 10.3 1.1 3.3 3.3 2.5 2.7 0 3.8-1.7 3.6-0.5 2.7 0.8 6 0.7-1.6 4.8-7.5 10.9-7.2 12.2-4.7 6-5.4 5.3-4.6 3.9-4.5 4.6-3.8 5.1-2.1 3.7-1.7 4-4.6 3.2-4.6 1.9-2.6 1.8-3 1.1-6.1-0.7-5.9 0.6-11.3-1.6-3.5-1.8-2.8-6.2-0.1-0.3-4.5 2.6-0.7-4.5-1.3-2.6-2.8-2.8 3.5-2.5 1.9-4.3-0.8-3.8-4.6-0.7-0.8 1.4-0.8 2.4-1.3 1.9-2.4-0.1-0.9-1.6 0.3-5-0.5-1.8-3-1.3-1.6 1.5-1.4 2.1-1.9 0.5-2.1-1.8-0.6-2.5 0.5-2.4 0.9-1.7 2.1-1.1 2.7-0.4 2.2-0.7 0.7-2.2-1-1.1-6.7-1.7 0-1.4 5.6 0-0.5-1.9-3.1-2.7-2-2.3 0.5-2.9 1.8-1 1.9-0.7 1-1.8-0.6-2.8-1-2.3 0.7-2.2 1-2.6 1.6-1.9-0.3-1.7 0.3-1.6 2.4-6.5 1.2-1.2 1.8-0.5-2.7-1.8 1.2-2.9z"/>
+          <text x="515" y="700">台南市</text>
+        </g>
+        <g class="county" data-county="高雄市" onclick="showCounty('高雄市')">
+          <path d="M596.8 682.8l-0.7-4.8-1-3.3 0.1-3.5 2.6-2.6 4.9 0.5 4.2-0.4 8.9-5.3 3.2-3.8 5.8-4.4 5.5-3.1 3.1-3.7 2.5-4.9 6.1-4.8 13.3-6.8 3.2 0.7 4.2 1.6 3 4.2 0.5 1.5 1.4 4.2-2.2 3.5-4 1.8-1 2.3 0.7 2.9 4 2.6 4.6 3.7 2 5.5 0.2 1.8-11.2 2.8-4.7 2.9-2.9 2.8-5.6 3.7-0.6 4.1 1.6 4.3-1.9 3.5-5.3 2.9-0.7 5 1.6 7.1-2.2 9.5 0 8.1-3.1 4.2-6.2 5.3-1.7 7 1 5.9 2.2 3.3 4.4 4.6 0.9 3.5-2.8 0.4-3.8-0.7-3.1 0.2-6.1 4.8-4.3-4-5.4-6.4-5.2 1.3-4.8 4.3-9.4-4.8-6.8 3.2-4.6 5.1-5.7 2.1-12.9-0.8-1.3 3.5-0.9 5.2-1.9 5.7 0.4 5-0.1 6.9-4 15.3-0.2 5.1 2 5.4 0.3 5.9-5.8 14.8-1.9-0.8-1.1 0-1.4 0.5-1.5 0.1-9.4-7.4-8.8-12.4 9.2 11.1-1-5.2-1.6-2.9-1.2-2.3-3.8-4.4-6.5-6-2.5-3.1-1.2-3.4 1.6-3.3 0.8-3-1.1-4.1-1.9-4.1-3.6-5.5-3.3-7.4-0.7-3.3 0-2.1 1.1-2.6 0.3-1.7-0.4-0.9-1-0.7-0.9-0.9-0.4-1.7-2.1-3.5-0.5-1.4-1.6-9.9 4.5-2.6 0.1 0.3 2.8 6.2 3.5 1.8 11.3 1.6 5.9-0.6 6.1 0.7 3-1.1 2.6-1.8 4.6-1.9 4.6-3.2 1.7-4 2.1-3.7 3.8-5.1 4.5-4.6 4.6-3.9 5.4-5.3 4.7-6 7.2-12.2 7.5-10.9 1.6-4.8z"/>
+          <text x="615" y="724">高雄市</text>
+        </g>
+        <g class="county" data-county="屏東縣" onclick="showCounty('屏東縣')">
+          <path d="M551.1 836.2l5.8-14.8-0.3-5.9-2-5.4 0.2-5.1 4-15.3 0.1-6.9-0.4-5 1.9-5.7 0.9-5.2 1.3-3.5 12.9 0.8 5.7-2.1 4.6-5.1 6.8-3.2 9.4 4.8 4.8-4.3 5.2-1.3 5.4 6.4 4.3 4 6.1-4.8 3.1-0.2 3.8 0.7 2.5 4.7 0.5 3.5 3.9 1 4 2.6-2 9.9-0.1 3.8-1.5 3.5-7 3-3.5 2-5.5 1.2-3.9 3.2-1.7 4.7-2.6 4.8-2.2 5.4-0.6 10.6 0.9 4.7 1.4 4.4 0.8 5.1 0 3.8 1.9 3.7 3.3 4-1.8 2.7-3.8 2.3-1.5 2.8-0.4 3.3 2 2.8 2.4 1.2 2.3 3.2-0.1 4.1 0.4 4.4 2.3 4.3 3.3 3.5 7.4 3.4 3.2-0.3 0.6 37.2-1.1 5.3-1.8 4.3-2.4 1.8-2.9 2.7 0.1 6 1 6.6-0.2 4.2-3.3-4.9-4.9-3.7-5.7-2.5-5.7-1.4-0.2 4.7-1.7 1.7-2.4-0.6-2.7-2.2-0.1-1.7 0.9-5-4-6.7-0.3-1.8 0-1.4 0.3-2.4 0-7.7 0.4-2.3 1.8-2.5 0.4-2.2-14.4-37.2-1.1-2.1-4-4.9-3.2-7.1-1.4-2.1-5.9-4.6-2.3-1.3-0.8-0.3-0.8-0.6-0.7-2.6-0.5-1-3.1-2.1-7.3-3.4-3.2-2.3-3.5-3-1.6-1-0.2-0.1z"/>
+          <text x="580" y="820">屏東縣</text>
+        </g>
+        <g class="county" data-county="台東縣" onclick="showCounty('台東縣')">
+          <path d="M634.7 759.1l2.8-0.4-0.9-3.5-4.4-4.6-2.2-3.3-1-5.9 1.7-7 6.2-5.3 3.1-4.2 0-8.1 2.2-9.5-1.6-7.1 0.7-5 5.3-2.9 1.9-3.5-1.6-4.3 0.6-4.1 5.6-3.7 2.9-2.8 4.7-2.9 11.2-2.8 0.8 5.3 3.7 5.9 5.6 2 4.4 2.1 3.6 3.4 4.5 0.7 4.1 1.1 6.6 11.5 8.5 7 5.9 0.8 4.7-2.7 0.6-4.4 0-4.9 2.2-4.3 3.5-9.6 2.6-5.5 1.8-6.1 1.9-4.8 2.5-3.7 2.6-5-0.4-4.9-1.3-5 2.8-3.9 7.8-3.8 2.5 0.8-3.3 19-1.6 3.5-5.1 6.8-1.9 3.5-1.5 4.4-1 8.3 0.1 7.3-0.8 6.9-3.5 7.2-1.5 1.6-3.4 2.5-1.5 1.6-0.8 1.6-1.2 4.2-3.5 6.1-2.1 9.4-1.5 4.2-7.4 10.7-0.9 2-10 8.4-2.4 2.8-0.4 1.9 0.5 4.5-0.1 2-0.9 2.3-1.6 2.6-3.4 4.3-3.4 3.2-11.6 7.8-7.8 8.5-1.9 1-1.5 2-3.8 9.7-1.8 3.6-5.8 7.3-2.4 4.3-1.3 8.8-3.5 12.1-6.9 12.1-1 4.1-1.2 11.6 0.2 10.5-3.2 0.3-7.4-3.4-3.3-3.5-2.3-4.3-0.4-4.4 0.1-4.1-2.3-3.2-2.4-1.2-2-2.8 0.4-3.3 1.5-2.8 3.8-2.3 1.8-2.7-3.3-4-1.9-3.7 0-3.8-0.8-5.1-1.4-4.4-0.9-4.7 0.6-10.6 2.2-5.4 2.6-4.8 1.7-4.7 3.9-3.2 5.5-1.2 3.5-2 7-3 1.5-3.5 0.1-3.8 2-9.9-4-2.6-3.9-1-0.5-3.5-2.5-4.7z"/>
+          <text x="672" y="740">台東縣</text>
+        </g>
+        <g class="county" data-county="花蓮縣" onclick="showCounty('花蓮縣')">
+          <path d="M727.6 474.4l2-1.5 0.9-1.4 2.5-1.3 2.2-2.7 0.9-3.7 2.2-3.6 5.4-3.4 1.7-4.5 0.3-3 3.4-3.5 1.8 1.5 4.7 2.2 10.8 2.8 6 2.3 4.7 0 3.5-3.3 1.7-4.3 2.7-0.6 13.4 7.9 8 1.3 0.8 0 0.5 0.5 0.6 1.1 0.5 1.1 0.2 0.7-1 1.7-4.2 4.1-4.6 6.3-3.3 2.7-1 1.4 0.5 1.5-0.6 1.1-4.9 3.6-1.8 1.8-2 4.3-2 8.8-5.4 7.8-1.1 3.2 0.2 3.4 1.3 3.8 1.1 1.6 0.9 0.7 0.6 1 0.1 2.3-0.8 2.7-2.7 4.1-0.5 2.5-0.3 4.6-2.3 11.7-4.6 12.4-5.8 28.8-3.4 7.1-8 46.2-2.5-0.8-7.8 3.8-2.8 3.9 1.3 5 0.4 4.9-2.6 5-2.5 3.7-1.9 4.8-1.8 6.1-2.6 5.5-3.5 9.6-2.2 4.3 0 4.9-0.6 4.4-4.7 2.7-5.9-0.8-8.5-7-6.6-11.5-4.1-1.1-4.5-0.7-3.6-3.4-4.4-2.1-5.6-2-3.7-5.9-0.8-5.3-0.2-1.8-2-5.5-4.6-3.7-4-2.6-0.7-2.9 1-2.3 4-1.8 2.2-3.5-1.4-4.2 4.3-2.5 2.2-2.1-1.2-4.4 1.1-1.9 1.1-3 3.7-2.7 5.4-1.2 5.3-0.2 3.8-3.4 1-6.2 2.8-3.7 5.5-2 3.3-2.3 1.1-3.6 2.3-9.1 0.9-6-0.7-5.2-0.8-3.9-2.3-2.9-1.5-2.9 4.1-6.8 0.1-2.7 1.8-5.1 2.8-6.1 2.2-6.3 1.1-7.2 0.5-5.4-1.3-3.2-1.5-2.4 1.7-5.5 3.7-7.7 5.8-7.6 0.1-2.7-1-3.3-3.8-2.4-2-2.2-0.2-7.2 2.7-2.1 4.7-1.6 3.8-1.7-0.2-2.6-1-4.5z"/>
+          <text x="748" y="565">花蓮縣</text>
+        </g>
+        <g class="county" data-county="宜蘭縣" onclick="showCounty('宜蘭縣')">
+          <path d="M740.7 399.4l0.3-1.1 2.9-1.1 2.3 0.5 2.5-1 1.6-2.7-2.3-9 3.9-2.8 2.2-0.6 4.2-1.2 3.5-1.3 2.7-2.4 3.6-2.5 4.8-2.3 2.8-2-0.3-1.4-0.7-2.3-0.1-3 1.4-3.6 3.4-2.9 2.7-1.6 9.4-3.8 9.7-5.9 4.5-1.3 3.6-2.6 2.3-3.7 2.3-2.9 2.7-1.4 2.5-0.9 3.3-2.1 1.2-2.8-1.8-2.5 1-2.2 8.1-1.6 2.6-1.8 6-3.2 4.3-0.9 2.4 1.4 0.6 0.8-8.6 4.3-4 3.4-13.5 16.4-2.1 3.5-1.7 4.8-1.1 5.6-0.4 5.5 0.2 5.3 2.4 11.2-0.2 2.9-1 2.8 0.2 5.8 2.4 4.5 4.7 2.9 5.5 1.1 0 1.2-2.3-0.2-2.2 0.2-1.9 0.6-1.3 1 1.9 3.6 0.9 4.7-0.6 4.1-4.3 2.4-0.3 1.8 0.6 2.1 1.2 2 0.4 2-1.8 1.7-4.5 2.6-5 5.8-0.2 2.3 0.3 5-0.8 2-1 1.6-0.6 2.3-0.3 4.6-0.4 1.2-0.7 0.9-0.4 1 0.7 1.2 0.2 0.2-0.8 0-8-1.3-13.4-7.9-2.7 0.6-1.7 4.3-3.5 3.3-4.7 0-6-2.3-10.8-2.8-4.7-2.2-1.8-1.5-4.2-3.4-3.6 0-3.4 1.7-2.8 0.4-2.7-1.8-3.2-1.9-3.5-0.8-1.1-2.6 0.5-4-2.6-0.8 3.1-7.5 10.1-10.2 2.7-4.2-0.4-3.2 1-3.4 1.7-4.7z"/>
+          <text x="790" y="408">宜蘭縣</text>
+        </g>
+        <g class="county" data-county="新北市" onclick="showCounty('新北市')">
+          <path d="M754.1 381.6l-1.8-4-6.4-6-1-4.1-0.6-3.7 2.3-2.7 1-3.8-6-8.9-3.7-1.4-5.3 0.3-3.7-2.1 1-4.8-0.8-3.7-3.8-3.7-0.8-3.7 0.8-4.1-0.2-4.5 2.7-2.9 9.4-2.8 2.4-2.5 0.7-3-0.3-2.9-3.7-5.4-3.1-1.6-2.9-0.7-2.3-2.1-3.4-2.2-4.6-2.2-3-3.3 8.1-1.5 3.4-1.3 4.5-3.7 1.3-0.7 1.6-0.3 2.2 0 2.6 0.8 1.3 1.9 0.9 2 1.1 1.1 2.5-1-2.6-4.1-4.2-4.2-2.2-1.4 0.7-1.9 1.3-1.1 1.3-0.7 0.6-0.6 1.5-3.8 2.3-4.2 4.7-4.3 7-3.5 7.9-1.8 7.8 0.9 3.2 2.5 7.3 10.1 2.5 5.4 0.9-0.3 1.9-0.6 2.3-0.2 1.5 0.4-0.1 0.7-0.7 0.9-0.7 1.3 0 1.5 0.8 0.9 1.6 1.2-3.1 2.1-5.2 2.3-2.3 1.5 0.4 2.1 2.1 2.7 1.2 2.5 2.1 2.5 2.6 2.5 2.2 1.6 7.6 3.1 3.7 0.5 2.9-1.1 1.8-1.3 0.3-1.8-2.7-2.8-0.1-2.2 0.2-8.6 24.9 6.1 2.4 1.5-1.2 2.6-0.3 2.1 0.5 3.8 1.7 6.2 1.9 3 1.6 0.7 5-0.8 2.6 0.3 3 0.8 2.7 1.3 1.5 1.9-6.3 3.1-0.6-0.8-2.4-1.4-4.3 0.9-6 3.2-2.6 1.8-8.1 1.6-1 2.2 1.8 2.5-1.2 2.8-3.3 2.1-2.5 0.9-2.7 1.4-2.3 2.9-2.3 3.7-3.6 2.6-4.5 1.3-9.7 5.9-9.4 3.8-2.7 1.6-3.4 2.9-1.4 3.6 0.1 3 0.7 2.3 0.3 1.4-2.8 2-4.8 2.3-3.6 2.5-2.7 2.4-3.5 1.3-4.2 1.2z"/>
+          <text x="750" y="350">新北市</text>
+        </g>
+        <g class="county" data-county="基隆市" onclick="showCounty('基隆市')">
+          <path d="M806.8 285.1l-0.2 8.6 0.1 2.2 2.7 2.8-0.3 1.8-1.8 1.3-2.9 1.1-3.7-0.5-7.6-3.1-2.2-1.6-2.6-2.5-2.1-2.5-1.2-2.5-2.1-2.7-0.4-2.1 2.3-1.5 5.2-2.3 3.1-2.1 1.1 0.7 0.5 0.8 1.2 1.1 2.8 1.1 8.1 1.9z"/>
+          <text x="808" y="292">基隆市</text>
+        </g>
+        <g class="county" data-county="南投縣" onclick="showCounty('南投縣')">
+          <path d="M599.5 519.1l3 0.1 13 1.8 3-0.5 3.6-3.4 5.4-10.4 2.7-6.1 4.6-2.2 7.3 1.1 4.3-0.2 4.2-5.5 2.2-1.4 6.4 4.8 2.5-0.7 1.9-3.9 3.4-2.8 4.8 0.1 3.6-1.4 5.7-5.5 3.6-2.1 3.2-0.6 6.4-3.3 4.4-0.2 4.5-0.7 8-3.2 3.4-0.2 3.4 0.8 9.6 0.9 1 4.5 0.2 2.6-3.8 1.7-4.7 1.6-2.7 2.1 0.2 7.2 2 2.2 3.8 2.4 1 3.3-0.1 2.7-5.8 7.6-3.7 7.7-1.7 5.5 1.5 2.4 1.3 3.2-0.5 5.4-1.1 7.2-2.2 6.3-2.8 6.1-1.8 5.1-0.1 2.7-4.1 6.8 1.5 2.9 2.3 2.9 0.8 3.9 0.7 5.2-0.9 6-2.3 9.1-1.1 3.6-3.3 2.3-5.5 2-2.8 3.7-1 6.2-3.8 3.4-5.3 0.2-5.4 1.2-3.7 2.7-1.1 3-1.1 1.9 1.2 4.4-2.2 2.1-4.3 2.5-0.5-1.5-3-4.2-4.2-1.6-3.2-0.7-0.6-0.2-18.4-0.1-5.5-1-0.8-2.8-0.3-4.2-1.9-4.7-0.9-3.4 2.1-3.7 0.3-3.8-3.7-2.1-3-0.8-4.8-1.9-4.4-0.5-1.9-2.5-6 0.6-4.9 1.5-4.2-1.8-2.8-3.4 0.7-4.2 1.3-3.7-0.7-5.5 0.7-5.2 1.5-3.4-1.4-5.2 1.7-1.1 1.8-1.7 2.8-1.1 0.7-2.5-4.1-2.1-2.8-1-2.6-2.4-1.5-4.5 0.7-9.7 0.8-4.7 0.1-4.1 1.2-3.9 1.4-3.3-0.4-2.9 0.9-2.1 3.1-1.1 0-2.6z"/>
+          <text x="658.6" y="552">南投縣</text>
+        </g>
+        <g class="county" data-county="臺北市" onclick="showCounty('臺北市')">
+          <path d="M776.8 321.1l-4.2 0-3.5-0.8-2.6-2.3-2.8-3.2-4.1-3.2-2.9-4.9 1.1-5.3-0.8-4.5-4.2-4-2.7-3.1 1.2-2.1 1.3-1.7 1.5-3.3 2.6-2.9 7.8-4.7 2.1-1.8 2.9-1.4 2.8 0.9 1.5 1.6-0.4 2.6 0.3 2.4 1.1 2.4 1.2 2.6 1.8 7.2 2.8 2.5 1.1 3.2-1.1 4.8 0.1 3.6 3.3 1.9 2.7 2.3-1.4 3-5.5 7-3 1.2z"/>
+          <text x="770" y="308">臺北市</text>
+        </g>
+      </svg>
+
+      <div style="margin-top:16px;display:flex;gap:16px;font-size:11px;color:var(--muted);letter-spacing:1px">
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#D8EEF4;display:inline-block;border:1px solid #B8D8E4"></span>有資源</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:var(--blue);display:inline-block"></span>已選取</span>
+      </div>
+    </div>
+
+    <div class="info-col">
+      <div class="info-default" id="infoDefault">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p>點擊左側地圖上的縣市<br>查看當地的免費諮商資源</p>
+      </div>
+      <div class="info-panel" id="infoPanel">
+        <div class="ip-region" id="ipRegion"></div>
+        <div class="ip-name" id="ipName"></div>
+        <div id="ipBadge"></div>
+        <div class="ip-section" id="ipInfoSection" style="display:none">
+          <div class="ip-section-label">服務說明</div>
+          <div class="ip-info" id="ipInfo"></div>
+        </div>
+        <div class="ip-section">
+          <div class="ip-section-label">預約方式</div>
+          <div class="ip-contact" id="ipContact"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div class="list-view hidden" id="listView">
+    <div class="resources-grid">
+
+      <div class="rc" data-region="north">
+        <div class="rc-head"><div class="rc-name">基隆市衛生局</div><span class="rc-free">免費</span></div>
+        <div class="rc-info">免費線上心理諮商服務</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div class="rc-phone"><a href="tel:0224566185">02-2456-6185</a></div><div>電話預約</div></div>
+      </div>
+
+      <div class="rc" data-region="north">
+        <div class="rc-head"><div class="rc-name">臺北市政府衛生局<br>社區心理衛生中心</div></div>
+        <div class="rc-info"><ul><li>社區心理諮商門診 30 分鐘</li><li>青少年諮商門診 50 分鐘</li><li>一般民眾：掛號費 50 元＋自費（前 8 次 200 元）</li><li>優惠民眾僅需掛號費 50 元</li></ul></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact">電話預約或臺北市立聯合醫院網路掛號</div>
+      </div>
+
+      <div class="rc" data-region="north">
+        <div class="rc-head"><div class="rc-name">新北市社區心理衛生中心</div><span class="rc-free">免費</span></div>
+        <div class="rc-info">依各區衛生所心理師駐點服務時間</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact">電話預約，洽各區衛生所</div>
+      </div>
+
+      <div class="rc" data-region="north">
+        <div class="rc-head"><div class="rc-name">桃園市政府衛生局</div><span class="rc-free">免費</span></div>
+        <div class="rc-info"><ul><li>限設籍或居住於桃園市民眾</li><li>每位每年度上限 4 次</li><li>每月 16 號開放下個月預約</li></ul></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact">線上預約，詳見官網</div>
+      </div>
+
+      <div class="rc" data-region="north">
+        <div class="rc-head"><div class="rc-name">新竹市社區心理衛生中心</div><span class="rc-free">免費</span></div>
+        <div class="rc-info"><ul><li>限設籍、居住或就業於新竹市民眾</li><li>每人上限 4 次</li></ul></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div>電話：<a href="tel:035355276">(03) 535-5276</a></div><div><a href="https://dgservice.hccg.gov.tw/serviceNotice.do?rule=guest&id=1010" target="_blank">線上預約 ↗</a></div></div>
+      </div>
+
+      <div class="rc" data-region="north">
+        <div class="rc-head"><div class="rc-name">苗栗縣政府</div><span class="rc-free">免費</span></div>
+        <div class="rc-info">每人 4 次，每次 50 分鐘</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div>電話：<a href="tel:037558759">037-558759</a></div><div>LINE：@200hpzau</div></div>
+      </div>
+
+      <div class="rc" data-region="central">
+        <div class="rc-head"><div class="rc-name">台中市政府衛生局</div><span class="rc-free">免費</span></div>
+        <div class="rc-info">台中各區免費諮商</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div>心理健康科：<a href="tel:045150326">04-5150326 #302</a></div></div>
+      </div>
+
+      <div class="rc" data-region="central">
+        <div class="rc-head"><div class="rc-name">南投縣政府衛生局</div><span class="rc-free">免費</span></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div>社區心理衛生中心：<a href="tel:0492202662">049-220-2662</a></div></div>
+      </div>
+
+      <div class="rc" data-region="central">
+        <div class="rc-head"><div class="rc-name">彰化縣社區心理衛生中心</div><span class="rc-free">免費</span></div>
+        <div class="rc-info"><ul><li>限設籍、居住、工作彰化縣民眾</li><li>每人每年 6 次</li></ul></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div><a href="https://center.chshb.gov.tw/counseling_list.asp" target="_blank">線上預約 ↗</a></div><div>電話：<a href="tel:047127839">04-712-7839</a></div></div>
+      </div>
+
+      <div class="rc" data-region="central">
+        <div class="rc-head"><div class="rc-name">雲林縣衛生局</div></div>
+        <div class="rc-info">每次 50 分鐘，每案年度申請以 10 次為限</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact">電話預約，洽各衛生所</div>
+      </div>
+
+      <div class="rc" data-region="south">
+        <div class="rc-head"><div class="rc-name">嘉義市政府衛生局</div><span class="rc-free">免費</span></div>
+        <div class="rc-info">每人每年度上限 4 次</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div><a href="https://forms.gle/KYrRSi9kpXLEY4GZ6" target="_blank">線上預約 ↗</a></div><div>電話：<a href="tel:052255155">05-225-5155 #46</a></div></div>
+      </div>
+
+      <div class="rc" data-region="south">
+        <div class="rc-head"><div class="rc-name">台南市政府衛生局</div></div>
+        <div class="rc-info">免收諮商費，部分地點酌收場地費 200 元</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div class="rc-phone"><a href="tel:063352982">06-335-2982</a></div></div>
+      </div>
+
+      <div class="rc" data-region="south">
+        <div class="rc-head"><div class="rc-name">高雄市政府衛生局</div></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div class="rc-phone"><a href="tel:077161925">07-716-1925</a></div></div>
+      </div>
+
+      <div class="rc" data-region="south">
+        <div class="rc-head"><div class="rc-name">屏東縣政府衛生局</div><span class="rc-free">免費</span></div>
+        <div class="rc-info"><ul><li>18 歲以上縣民或未滿 18 歲之中輟生</li><li>每人每次 1 小時</li></ul></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div class="rc-phone"><a href="tel:063352982">06-335-2982</a></div></div>
+      </div>
+
+      <div class="rc" data-region="east">
+        <div class="rc-head"><div class="rc-name">台東縣衛生局社區心理衛生中心</div><span class="rc-free">免費</span></div>
+        <div class="rc-info"><ul><li>諮商次數至多 6 次</li><li>服務據點：臺東市、成功鎮</li></ul></div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div>電話：<a href="tel:089230295">089-230-295</a></div></div>
+      </div>
+
+      <div class="rc" data-region="east">
+        <div class="rc-head"><div class="rc-name">花蓮縣衛生局</div><span class="rc-free">免費</span></div>
+        <div class="rc-info">實際居住花蓮縣的居民</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div>電話：<a href="tel:038351885">03-835-1885 #139</a></div><div><a href="https://docs.google.com/forms/d/e/1FAIpQLSf53XuIlZ5Oqwl0rTfsZ6QwT_rdH3PrHmyITDasnTuJG3Y8Ng/viewform" target="_blank">線上預約 ↗</a></div></div>
+      </div>
+
+      <div class="rc" data-region="east">
+        <div class="rc-head"><div class="rc-name">澎湖縣衛生局</div></div>
+        <div class="rc-info">限 18 歲以上澎湖籍民眾</div>
+        <div class="rc-divider"></div>
+        <div class="rc-contact"><div class="rc-phone"><a href="tel:069272162">06-927-2162 #128</a></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="fg">
+      <div class="fb">
+        <h3>華昕藝心心理諮商所</h3>
+        <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間<br>北市衛心字第XY01120039號</p>
+        <div class="socs">
+          <a href="https://lin.ee/nOmKPpP" class="soc"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></a>
+          <a href="https://www.facebook.com/huasin.apcc" class="soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/huasin.apcc/" class="soc"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div class="fc">
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="../../service-individual.html">個別諮商</a></li>
+          <li><a href="../../service-couples.html">伴侶婚姻諮商</a></li>
+          <li><a href="../../service-parenting.html">親子諮商</a></li>
+          <li><a href="../../service-online.html">線上遠距諮商</a></li>
+          <li><a href="../../service-group.html">團體諮商／工作坊</a></li>
+          <li><a href="../../service-eap.html">企業合作方案</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="https://forms.gle/ZJu7T7U1CWNZDshq8">預約諮商</a></li>
+          <li><a href="../../team.html">專業團隊</a></li>
+          <li><a href="../../faq.html">常見問答</a></li>
+          <li><a href="../index.html">資源連結</a></li>
+                  <li><a href="transportation.html">交通方式</a></li>
+          <li><a href="resources/index.html">資源連結</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+      <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const REGIONS = {
+      '基隆市':'北部','臺北市':'北部','新北市':'北部','桃園市':'北部',
+      '新竹市':'北部','新竹縣':'北部','苗栗縣':'北部','宜蘭縣':'北部',
+      '台中市':'中部','彰化縣':'中部','南投縣':'中部','雲林縣':'中部',
+      '嘉義市':'南部','嘉義縣':'南部','台南市':'南部','高雄市':'南部','屏東縣':'南部',
+      '花蓮縣':'東部','台東縣':'東部','澎湖縣':'離島','金門縣':'離島'
+    };
+
+    const DATA = {
+      '基隆市': {
+        free: true,
+        info: '免費線上心理諮商服務',
+        contacts: [
+          { type:'phone', label:'電話預約', value:'02-2456-6185', href:'tel:0224566185' }
+        ]
+      },
+      '臺北市': {
+        free: false,
+        info: ['社區心理諮商門診 30 分鐘', '青少年心理諮商門診 50 分鐘', '一般民眾：掛號費 50 元＋自費（前 8 次 200 元，第 9 次起 288 元）', '優惠民眾僅需掛號費 50 元'],
+        contacts: [
+          { type:'text', label:'請電話預約，或於臺北市立聯合醫院網站網路掛號' }
+        ]
+      },
+      '新北市': {
+        free: true,
+        info: '依新北市各區衛生所心理師駐點服務時間',
+        contacts: [
+          { type:'text', label:'電話預約，洽各區衛生所，聯繫資訊請參官網' }
+        ]
+      },
+      '桃園市': {
+        free: true,
+        info: ['限設籍或居住於桃園市民眾', '名額有限，每位每年度上限 4 次', '每月 16 號開放下個月預約時段'],
+        contacts: [
+          { type:'text', label:'線上預約，相關機構電話及預約方式詳見線上預約網頁' }
+        ]
+      },
+      '新竹市': {
+        free: true,
+        info: ['限設籍、居住或就業於新竹市民眾', '每人上限 4 次', '預約期間為 7 日後至 30 日內'],
+        contacts: [
+          { type:'phone', label:'電話諮詢', value:'(03) 535-5276', href:'tel:035355276' },
+          { type:'link', label:'線上預約', href:'https://dgservice.hccg.gov.tw/serviceNotice.do?rule=guest&id=1010' }
+        ]
+      },
+      '苗栗縣': {
+        free: true,
+        info: '每人 4 次，每次 50 分鐘，每週最多一次',
+        contacts: [
+          { type:'phone', label:'電話預約', value:'037-558759', href:'tel:037558759' },
+          { type:'text', label:'LINE：@200hpzau（Moodie心情e點通）' }
+        ]
+      },
+      '台中市': {
+        free: true,
+        info: '台中各區免費諮商，依各區服務中心時間洽詢預約',
+        contacts: [
+          { type:'phone', label:'衛生局心理健康科', value:'04-5150326 #302', href:'tel:045150326' }
+        ]
+      },
+      '南投縣': {
+        free: true,
+        info: '需致電或填寫表單預約',
+        contacts: [
+          { type:'phone', label:'社區心理衛生中心', value:'049-220-2662', href:'tel:0492202662' }
+        ]
+      },
+      '彰化縣': {
+        free: true,
+        info: ['限設籍、居住、工作彰化縣民眾', '每人每年 6 次'],
+        contacts: [
+          { type:'link', label:'線上預約', href:'https://center.chshb.gov.tw/counseling_list.asp' },
+          { type:'phone', label:'電話', value:'04-712-7839', href:'tel:047127839' }
+        ]
+      },
+      '雲林縣': {
+        free: false,
+        info: '每次諮商時間為 50 分鐘，每案年度申請以 10 次為限',
+        contacts: [
+          { type:'text', label:'電話預約，請洽各衛生所，聯繫資訊請參官網' }
+        ]
+      },
+      '嘉義市': {
+        free: true,
+        info: '每人每年度上限 4 次',
+        contacts: [
+          { type:'link', label:'線上預約', href:'https://forms.gle/KYrRSi9kpXLEY4GZ6' },
+          { type:'phone', label:'電話預約', value:'05-225-5155 #46', href:'tel:052255155' }
+        ]
+      },
+      '嘉義縣': {
+        free: false,
+        info: null,
+        contacts: [{ type:'text', label:'詳細資訊請洽嘉義縣衛生局' }]
+      },
+      '台南市': {
+        free: false,
+        info: '免收諮商費，部分地點酌收場地費 200 元',
+        contacts: [
+          { type:'phone', label:'電話', value:'06-335-2982', href:'tel:063352982' }
+        ]
+      },
+      '高雄市': {
+        free: false,
+        info: null,
+        contacts: [
+          { type:'phone', label:'電話', value:'07-716-1925', href:'tel:077161925' }
+        ]
+      },
+      '屏東縣': {
+        free: true,
+        info: ['18 歲以上縣民或未滿 18 歲之中輟生', '每人每次 1 小時'],
+        contacts: [
+          { type:'phone', label:'電話', value:'06-335-2982', href:'tel:063352982' }
+        ]
+      },
+      '台東縣': {
+        free: true,
+        info: ['諮商次數至多 6 次', '服務據點：臺東市、成功鎮社區心理衛生中心'],
+        contacts: [
+          { type:'phone', label:'電話洽詢', value:'089-230-295', href:'tel:089230295' }
+        ]
+      },
+      '花蓮縣': {
+        free: true,
+        info: '實際居住花蓮縣的居民',
+        contacts: [
+          { type:'phone', label:'電話預約', value:'03-835-1885 #139', href:'tel:038351885' },
+          { type:'link', label:'線上預約', href:'https://docs.google.com/forms/d/e/1FAIpQLSf53XuIlZ5Oqwl0rTfsZ6QwT_rdH3PrHmyITDasnTuJG3Y8Ng/viewform' }
+        ]
+      },
+      '宜蘭縣': {
+        free: false,
+        info: null,
+        contacts: [{ type:'text', label:'詳細資訊請洽宜蘭縣衛生局' }]
+      },
+      '澎湖縣': {
+        free: false,
+        info: '限 18 歲以上澎湖籍民眾',
+        contacts: [
+          { type:'phone', label:'電話', value:'06-927-2162 #128', href:'tel:069272162' }
+        ]
+      },
+      '金門縣': {
+        free: false,
+        info: null,
+        contacts: [{ type:'text', label:'詳細資訊請洽金門縣衛生局' }]
+      }
+    };
+
+    function showCounty(name) {
+      document.querySelectorAll('.county').forEach(g => g.classList.remove('active'));
+      const grp = document.querySelector(`.county[data-county="${name}"]`);
+      if (grp) grp.classList.add('active');
+
+      const d = DATA[name];
+      if (!d) return;
+
+      document.getElementById('infoDefault').style.display = 'none';
+      const panel = document.getElementById('infoPanel');
+      panel.classList.remove('show');
+      void panel.offsetWidth;
+      panel.classList.add('show');
+
+      document.getElementById('ipRegion').textContent = (REGIONS[name] || '') + ' · 地區';
+      document.getElementById('ipName').textContent = name;
+
+      const badge = document.getElementById('ipBadge');
+      badge.innerHTML = d.free
+        ? '<span class="ip-badge">免費</span>'
+        : '<span class="ip-badge partial">部分收費</span>';
+
+      const infoSec = document.getElementById('ipInfoSection');
+      const infoEl = document.getElementById('ipInfo');
+      if (d.info) {
+        infoSec.style.display = 'block';
+        if (Array.isArray(d.info)) {
+          infoEl.innerHTML = '<ul>' + d.info.map(i => `<li>${i}</li>`).join('') + '</ul>';
+        } else {
+          infoEl.textContent = d.info;
+        }
+      } else {
+        infoSec.style.display = 'none';
+      }
+
+      const contactEl = document.getElementById('ipContact');
+      contactEl.innerHTML = d.contacts.map(c => {
+        if (c.type === 'phone') {
+          return `<div class="ip-contact-row">
+            <div class="ip-contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.42-1.42a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="ip-contact-text">${c.label}：<a href="${c.href}">${c.value}</a></div>
+          </div>`;
+        } else if (c.type === 'link') {
+          return `<div class="ip-contact-row">
+            <div class="ip-contact-icon"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+            <div class="ip-contact-text"><a href="${c.href}" target="_blank">${c.label} ↗</a></div>
+          </div>`;
+        } else {
+          return `<div class="ip-contact-row">
+            <div class="ip-contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div class="ip-contact-text">${c.label}</div>
+          </div>`;
+        }
+      }).join('');
+    }
+
+    function switchView(v) {
+      document.getElementById('mapView').classList.toggle('hidden', v !== 'map');
+      document.getElementById('listView').classList.toggle('hidden', v !== 'list');
+      document.getElementById('btnMap').classList.toggle('active', v === 'map');
+      document.getElementById('btnList').classList.toggle('active', v === 'list');
+    }
+  </script>
+  <script src="../../nav-dropdown.js"></script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心情溫度計｜華昕藝心心理諮商所</title>
+  <meta name="description" content="BSRS-5簡式健康量表，五題自我評量了解近期情緒狀況，提供即時評估結果與建議。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../nav-dropdown.css">
+  <style>
+    :root{--blue:#7BB8C8;--mint:#A8D5C2;--sand:#F5F0EA;--dark:#2C4A5A;--white:#FAFAFA;--lb:#E8F4F8;--lm:#EAF7F2;--muted:#6B8A98}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans TC',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden}
+    nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,250,250,.93);backdrop-filter:blur(14px);border-bottom:1px solid #E0EEF3;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Noto Serif TC',serif;font-size:17px;font-weight:500;letter-spacing:3px;color:var(--dark);text-decoration:none}
+    .logo em{font-style:normal;color:var(--blue)}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--dark);font-size:14px;letter-spacing:1px;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--blue)}
+    .nav-cta{background:var(--blue);color:#fff;padding:9px 22px;border-radius:30px;font-size:13px;letter-spacing:1.5px;text-decoration:none;transition:all .3s}
+    .nav-cta:hover{background:var(--dark)}
+
+    /* HERO */
+    .hero{padding:140px 56px 72px;background:var(--dark);position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(123,184,200,.07) 0%,transparent 60%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1}
+    .bc{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:2px;margin-bottom:20px}
+    .bc a{color:rgba(255,255,255,.35);text-decoration:none}
+    .bc a:hover{color:var(--mint)}
+    .hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(32px,4vw,48px);font-weight:300;letter-spacing:6px;color:#fff;margin-bottom:16px}
+    .hero-desc{font-size:15px;line-height:2.1;color:rgba(255,255,255,.5);letter-spacing:.5px;max-width:560px}
+
+    /* SUBNAV */
+    .subnav{background:#fff;border-bottom:1px solid #EEF5F8;padding:0 56px;position:sticky;top:68px;z-index:90;display:flex;gap:0;overflow-x:auto}
+    .subnav-link{padding:16px 20px;font-size:13px;letter-spacing:1px;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;text-decoration:none;transition:all .25s;display:flex;align-items:center;gap:6px}
+    .subnav-link:hover{color:var(--dark)}
+    .subnav-link.active{color:var(--blue);border-bottom-color:var(--blue)}
+    .subnav-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+    /* PROGRESS */
+    .progress-wrap{background:#fff;border-bottom:1px solid #EEF5F8;padding:14px 56px}
+    .progress-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:16px}
+    .progress-bar{flex:1;height:4px;background:#EEF5F8;border-radius:4px;overflow:hidden}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--mint));border-radius:4px;width:0%;transition:width .5s ease}
+    .progress-text{font-size:11px;color:var(--muted);letter-spacing:2px;white-space:nowrap}
+
+    /* MAIN */
+    .main{padding:56px 56px 100px;max-width:720px;margin:0 auto}
+
+    /* QUESTION CARD */
+    .question-card{background:#fff;border-radius:20px;border:1px solid #EEF5F8;padding:28px 28px 24px;margin-bottom:14px;transition:all .4s}
+    .question-card.answered{border-color:rgba(123,184,200,.3);background:linear-gradient(135deg,rgba(232,244,248,.4),#fff)}
+    .q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .q-num{font-size:11px;color:var(--blue);letter-spacing:3px;font-weight:500}
+    .q-check{width:20px;height:20px;border-radius:50%;background:var(--lm);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+    .question-card.answered .q-check{opacity:1}
+    .q-check svg{width:11px;height:11px;stroke:#3a7a5c;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+    .q-text{font-size:15.5px;color:var(--dark);letter-spacing:.5px;line-height:1.7;margin-bottom:22px}
+    .score-row{display:flex;gap:8px}
+    .score-btn{flex:1;padding:14px 6px;border:1.5px solid #EEF5F8;border-radius:14px;background:#fff;cursor:pointer;font-family:'Noto Sans TC',sans-serif;font-size:11.5px;color:var(--muted);letter-spacing:.5px;transition:all .22s;text-align:center;line-height:1.5}
+    .score-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--lb)}
+    .score-btn.selected{border-color:var(--blue);background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(123,184,200,.3)}
+    .score-btn .sn{font-family:'Noto Serif TC',serif;font-size:20px;font-weight:400;display:block;margin-bottom:4px;line-height:1}
+
+    /* SUICIDE CARD */
+    .suicide-card{background:rgba(44,74,90,.04);border-radius:20px;border:1.5px solid rgba(44,74,90,.1);padding:28px 28px 24px;margin-bottom:28px}
+    .suicide-card.answered{border-color:rgba(44,74,90,.2);background:rgba(44,74,90,.06)}
+    .s-badge{display:inline-block;background:rgba(44,74,90,.08);color:var(--muted);font-size:10.5px;padding:4px 10px;border-radius:20px;letter-spacing:1.5px;margin-bottom:12px}
+    .suicide-note{font-size:12px;color:var(--muted);margin-top:14px;letter-spacing:.3px;line-height:1.8}
+
+    /* RESULT */
+    .result-box{display:none;background:#fff;border-radius:24px;border:1px solid #EEF5F8;padding:40px 36px;margin-top:8px;box-shadow:0 12px 44px rgba(44,74,90,.08)}
+    .result-box.show{display:block;animation:fadeUp .5s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    .result-top{display:flex;align-items:flex-start;gap:24px;margin-bottom:28px}
+    .result-score-circle{width:88px;height:88px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:3px solid var(--blue)}
+    .result-score-num{font-family:'Noto Serif TC',serif;font-size:36px;font-weight:300;color:var(--blue);line-height:1}
+    .result-score-max{font-size:10px;color:var(--muted);letter-spacing:1px}
+    .result-meta{}
+    .result-level{display:inline-block;padding:5px 14px;border-radius:20px;font-size:12.5px;letter-spacing:2px;margin-bottom:12px}
+    .result-level.good{background:var(--lm);color:#3a7a5c}
+    .result-level.mild{background:#FFF8E6;color:#8a6a00}
+    .result-level.moderate{background:#FFF0E6;color:#8a4000}
+    .result-level.severe{background:#FFE6E6;color:#8a0000}
+    .result-desc{font-size:14px;color:var(--muted);line-height:2.1;letter-spacing:.5px}
+    .suicide-alert{background:#FFF0F0;border:1px solid rgba(220,80,80,.2);border-radius:14px;padding:18px 20px;font-size:13px;color:#a03030;line-height:1.9;letter-spacing:.3px;margin-bottom:24px;display:none}
+    .suicide-alert.show{display:block}
+    .result-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn-primary{background:var(--blue);color:#fff;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:13px;letter-spacing:2px;transition:all .3s;border:none;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+    .btn-primary:hover{background:var(--dark)}
+    .btn-dark{background:var(--dark);color:#fff;padding:12px 28px;border-radius:30px;text-decoration:none;font-size:13px;letter-spacing:2px;transition:all .3s}
+    .btn-dark:hover{background:#1e3545}
+    .btn-outline{border:1.5px solid #D8E8EE;color:var(--muted);padding:11px 24px;border-radius:30px;background:none;font-family:'Noto Sans TC',sans-serif;font-size:13px;letter-spacing:2px;transition:all .3s;cursor:pointer}
+    .btn-outline:hover{border-color:var(--blue);color:var(--blue);background:var(--lb)}
+
+    /* SCALE TABLE */
+    .scale-section{margin-top:52px;padding-top:40px;border-top:1px solid #EEF5F8}
+    .scale-label{font-size:11px;letter-spacing:4px;color:var(--blue);margin-bottom:16px;font-weight:500}
+    .scale-table{width:100%;border-collapse:collapse;font-size:13px}
+    .scale-table th{background:var(--dark);color:rgba(255,255,255,.7);padding:12px 16px;text-align:left;letter-spacing:1px;font-weight:400;font-size:12px}
+    .scale-table th:first-child{border-radius:10px 0 0 0}
+    .scale-table th:last-child{border-radius:0 10px 0 0}
+    .scale-table td{padding:14px 16px;border-bottom:1px solid #EEF5F8;line-height:1.8;color:var(--muted)}
+    .scale-table tr:last-child td{border-bottom:none}
+    .scale-table td:first-child{font-weight:500;color:var(--dark);white-space:nowrap}
+    .scale-table tr.hl td{color:#a03030;font-weight:500}
+    .scale-note{font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:.3px}
+    .scale-note a{color:var(--blue);text-decoration:none}
+
+    footer{background:var(--dark);color:#fff;padding:56px 56px 28px}
+    .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;margin-bottom:44px}
+    .fb h3{font-family:'Noto Serif TC',serif;font-size:17px;letter-spacing:3px;margin-bottom:10px}
+    .fb p{font-size:12.5px;color:rgba(255,255,255,.4);line-height:2;letter-spacing:.5px;margin-bottom:20px}
+    .socs{display:flex;gap:9px}
+    .soc{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+    .soc:hover{background:var(--blue)}
+    .soc svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .fc h4{font-size:10.5px;letter-spacing:3px;color:var(--mint);margin-bottom:14px}
+    .fc ul{list-style:none}
+    .fc li{margin-bottom:8px}
+    .fc a{color:rgba(255,255,255,.4);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .2s}
+    .fc a:hover{color:#fff}
+    .fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .fbot p{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.5px}
+
+    @media(max-width:900px){
+      nav{padding:0 20px}
+      .nav-links{display:none}
+      .hero{padding:110px 24px 56px}
+      .subnav{padding:0 16px}
+      .progress-wrap{padding:12px 24px}
+      .main{padding:40px 20px 60px}
+      .score-row{gap:5px}
+      .score-btn{padding:11px 4px;font-size:10.5px}
+      .score-btn .sn{font-size:17px}
+      .result-top{flex-direction:column;gap:16px}
+      footer{padding:44px 24px 24px}
+      .fg{grid-template-columns:1fr;gap:28px}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../index.html" class="logo">華昕<em>藝心</em></a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">關於我們</a></li>
+      <li><a href="../../services.html">服務項目</a></li>
+      <li class="has-dropdown">
+        <a href="../../team.html">專業團隊</a>
+        <div class="dropdown-menu" id="navTherapistDropdown"></div>
+      </li>
+      <li><a href="../../news.html">最新消息</a></li>
+      <li><a href="../../faq.html">常見問答</a></li>
+      <li><a href="../index.html" class="active">資源連結</a></li>
+      <li><a href="../../transportation.html">交通方式</a></li>
+    </ul>
+    <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="nav-cta">立即預約</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="bc"><a href="../../index.html">首頁</a> &nbsp;/&nbsp; <a href="../index.html">資源連結</a> &nbsp;/&nbsp; 心情溫度計</div>
+      <h1>心情溫度計</h1>
+      <p class="hero-desc">請仔細回想一下，在最近這一星期中（包括今天），下列敘述讓您感到困擾或苦惱的程度？</p>
+    </div>
+  </section>
+
+  <div class="subnav">
+    <a href="../index.html" class="subnav-link">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      資源總覽
+    </a>
+    <a href="../immediate-support/" class="subnav-link">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.42-1.42a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      即時資源
+    </a>
+    <a href="index.html" class="subnav-link active">
+      <svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+      心情溫度計
+    </a>
+    <a href="../free-counseling-taiwan/" class="subnav-link">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      全台免費諮商
+    </a>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-inner">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-text" id="progressText">0 / 6 題完成</span>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <div class="question-card" id="q1">
+      <div class="q-meta">
+        <span class="q-num">01 · 05</span>
+        <div class="q-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="q-text">感覺緊張不安</div>
+      <div class="score-row">
+        <button class="score-btn" data-q="1" data-v="0" onclick="pick(this)"><span class="sn">0</span>完全沒有</button>
+        <button class="score-btn" data-q="1" data-v="1" onclick="pick(this)"><span class="sn">1</span>輕微</button>
+        <button class="score-btn" data-q="1" data-v="2" onclick="pick(this)"><span class="sn">2</span>中等</button>
+        <button class="score-btn" data-q="1" data-v="3" onclick="pick(this)"><span class="sn">3</span>厲害</button>
+        <button class="score-btn" data-q="1" data-v="4" onclick="pick(this)"><span class="sn">4</span>非常厲害</button>
+      </div>
+    </div>
+
+    <div class="question-card" id="q2">
+      <div class="q-meta">
+        <span class="q-num">02 · 05</span>
+        <div class="q-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="q-text">覺得容易苦惱或動怒</div>
+      <div class="score-row">
+        <button class="score-btn" data-q="2" data-v="0" onclick="pick(this)"><span class="sn">0</span>完全沒有</button>
+        <button class="score-btn" data-q="2" data-v="1" onclick="pick(this)"><span class="sn">1</span>輕微</button>
+        <button class="score-btn" data-q="2" data-v="2" onclick="pick(this)"><span class="sn">2</span>中等</button>
+        <button class="score-btn" data-q="2" data-v="3" onclick="pick(this)"><span class="sn">3</span>厲害</button>
+        <button class="score-btn" data-q="2" data-v="4" onclick="pick(this)"><span class="sn">4</span>非常厲害</button>
+      </div>
+    </div>
+
+    <div class="question-card" id="q3">
+      <div class="q-meta">
+        <span class="q-num">03 · 05</span>
+        <div class="q-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="q-text">感覺憂鬱、心情低落</div>
+      <div class="score-row">
+        <button class="score-btn" data-q="3" data-v="0" onclick="pick(this)"><span class="sn">0</span>完全沒有</button>
+        <button class="score-btn" data-q="3" data-v="1" onclick="pick(this)"><span class="sn">1</span>輕微</button>
+        <button class="score-btn" data-q="3" data-v="2" onclick="pick(this)"><span class="sn">2</span>中等</button>
+        <button class="score-btn" data-q="3" data-v="3" onclick="pick(this)"><span class="sn">3</span>厲害</button>
+        <button class="score-btn" data-q="3" data-v="4" onclick="pick(this)"><span class="sn">4</span>非常厲害</button>
+      </div>
+    </div>
+
+    <div class="question-card" id="q4">
+      <div class="q-meta">
+        <span class="q-num">04 · 05</span>
+        <div class="q-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="q-text">覺得比不上別人</div>
+      <div class="score-row">
+        <button class="score-btn" data-q="4" data-v="0" onclick="pick(this)"><span class="sn">0</span>完全沒有</button>
+        <button class="score-btn" data-q="4" data-v="1" onclick="pick(this)"><span class="sn">1</span>輕微</button>
+        <button class="score-btn" data-q="4" data-v="2" onclick="pick(this)"><span class="sn">2</span>中等</button>
+        <button class="score-btn" data-q="4" data-v="3" onclick="pick(this)"><span class="sn">3</span>厲害</button>
+        <button class="score-btn" data-q="4" data-v="4" onclick="pick(this)"><span class="sn">4</span>非常厲害</button>
+      </div>
+    </div>
+
+    <div class="question-card" id="q5">
+      <div class="q-meta">
+        <span class="q-num">05 · 05</span>
+        <div class="q-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="q-text">睡眠困難，譬如難以入睡、易醒或早醒</div>
+      <div class="score-row">
+        <button class="score-btn" data-q="5" data-v="0" onclick="pick(this)"><span class="sn">0</span>完全沒有</button>
+        <button class="score-btn" data-q="5" data-v="1" onclick="pick(this)"><span class="sn">1</span>輕微</button>
+        <button class="score-btn" data-q="5" data-v="2" onclick="pick(this)"><span class="sn">2</span>中等</button>
+        <button class="score-btn" data-q="5" data-v="3" onclick="pick(this)"><span class="sn">3</span>厲害</button>
+        <button class="score-btn" data-q="5" data-v="4" onclick="pick(this)"><span class="sn">4</span>非常厲害</button>
+      </div>
+    </div>
+
+    <div class="suicide-card" id="q6">
+      <div class="q-meta">
+        <span class="s-badge">額外題（不列入總分）</span>
+        <div class="q-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="q-text">有自殺的想法</div>
+      <div class="score-row">
+        <button class="score-btn" data-q="6" data-v="0" onclick="pick(this)"><span class="sn">0</span>完全沒有</button>
+        <button class="score-btn" data-q="6" data-v="1" onclick="pick(this)"><span class="sn">1</span>輕微</button>
+        <button class="score-btn" data-q="6" data-v="2" onclick="pick(this)"><span class="sn">2</span>中等</button>
+        <button class="score-btn" data-q="6" data-v="3" onclick="pick(this)"><span class="sn">3</span>厲害</button>
+        <button class="score-btn" data-q="6" data-v="4" onclick="pick(this)"><span class="sn">4</span>非常厲害</button>
+      </div>
+      <div class="suicide-note">此題不列入總分計算，但若評分 2 分以上，建議立即尋求專業輔導或精神科治療。</div>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-top">
+        <div class="result-score-circle" id="scoreCircle">
+          <span class="result-score-num" id="resultScore">—</span>
+          <span class="result-score-max">/ 20</span>
+        </div>
+        <div class="result-meta">
+          <div class="result-level" id="resultLevel"></div>
+          <p class="result-desc" id="resultDesc"></p>
+        </div>
+      </div>
+      <div class="suicide-alert" id="suicideAlert">
+        ⚠️ 您在「有自殺的想法」這題評分為 2 分以上，建議立即尋求專業輔導或精神科治療。如需即時協助，請撥打安心專線 <strong>1925</strong>（24 小時免付費）。
+      </div>
+      <div class="result-actions">
+        <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="btn-primary">預約心理諮商</a>
+        <a href="../immediate-support/" class="btn-dark">即時支援專線</a>
+        <button class="btn-outline" onclick="resetForm()">重新測量</button>
+      </div>
+    </div>
+
+    <div class="scale-section">
+      <div class="scale-label">BSRS-5 · 評分對照表</div>
+      <table class="scale-table">
+        <thead><tr><th>總分</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>0–5 分</td><td>身心適應狀況良好</td></tr>
+          <tr><td>6–9 分</td><td>輕度情緒困擾，建議找家人或朋友談談，抒發情緒</td></tr>
+          <tr><td>10–14 分</td><td>中度情緒困擾，建議尋求心理諮詢或接受專業諮詢</td></tr>
+          <tr><td>15–20 分</td><td>重度情緒困擾，需高關懷，建議尋求專業心理治療或精神科門診治療</td></tr>
+          <tr class="hl"><td>有自殺想法</td><td>評分為 2 分以上時，即建議尋求專業輔導或精神科治療</td></tr>
+        </tbody>
+      </table>
+      <p class="scale-note">量表來源：<a href="https://adh.mohw.gov.tw/file/心情溫度計（BSRS簡式健康量表）.html" target="_blank">衛生福利部 BSRS 簡式健康量表</a></p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="fg">
+      <div class="fb">
+        <h3>華昕藝心心理諮商所</h3>
+        <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間<br>北市衛心字第XY01120039號</p>
+        <div class="socs">
+          <a href="https://lin.ee/nOmKPpP" class="soc"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></a>
+          <a href="https://www.facebook.com/huasin.apcc" class="soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/huasin.apcc/" class="soc"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div class="fc">
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="../../service-individual.html">個別諮商</a></li>
+          <li><a href="../../service-couples.html">伴侶婚姻諮商</a></li>
+          <li><a href="../../service-parenting.html">親子諮商</a></li>
+          <li><a href="../../service-online.html">線上遠距諮商</a></li>
+          <li><a href="../../service-group.html">團體諮商／工作坊</a></li>
+          <li><a href="../../service-eap.html">企業合作方案</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="https://forms.gle/ZJu7T7U1CWNZDshq8">預約諮商</a></li>
+          <li><a href="../../team.html">專業團隊</a></li>
+          <li><a href="../../faq.html">常見問答</a></li>
+          <li><a href="../index.html">資源連結</a></li>
+                  <li><a href="transportation.html">交通方式</a></li>
+          <li><a href="resources/index.html">資源連結</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+      <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const answers = {};
+
+    function pick(btn) {
+      const q = btn.dataset.q;
+      answers[q] = parseInt(btn.dataset.v);
+      document.querySelectorAll(`.score-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const card = document.getElementById(`q${q}`);
+      card.classList.add('answered');
+      updateProgress();
+      if ([1,2,3,4,5].every(i => answers[i] !== undefined) && answers[6] !== undefined) {
+        setTimeout(showResult, 300);
+      }
+    }
+
+    function updateProgress() {
+      const done = [1,2,3,4,5,6].filter(i => answers[i] !== undefined).length;
+      document.getElementById('progressFill').style.width = (done / 6 * 100) + '%';
+      document.getElementById('progressText').textContent = `${done} / 6 題完成`;
+    }
+
+    function showResult() {
+      const total = [1,2,3,4,5].reduce((s,i) => s + (answers[i]||0), 0);
+      const suicide = answers[6] || 0;
+      document.getElementById('resultScore').textContent = total;
+
+      let level, desc, cls;
+      if (total <= 5) {
+        level = '身心適應良好'; cls = 'good';
+        desc = '您目前的身心狀況良好。繼續保持健康的生活習慣，適時關注自己的情緒狀態。';
+      } else if (total <= 9) {
+        level = '輕度情緒困擾'; cls = 'mild';
+        desc = '您目前有輕度情緒困擾，建議找家人或朋友談談，抒發情緒。若困擾持續，可考慮尋求心理諮詢。';
+      } else if (total <= 14) {
+        level = '中度情緒困擾'; cls = 'moderate';
+        desc = '您目前有中度情緒困擾，建議尋求心理諮詢或接受專業諮詢。請不要獨自承受，讓專業人士陪伴你度過。';
+      } else {
+        level = '重度情緒困擾'; cls = 'severe';
+        desc = '您目前有重度情緒困擾，建議盡快尋求專業心理治療或精神科門診治療。你不必一個人扛，請讓我們陪你。';
+      }
+
+      const lvEl = document.getElementById('resultLevel');
+      lvEl.textContent = level;
+      lvEl.className = `result-level ${cls}`;
+      document.getElementById('resultDesc').textContent = desc;
+
+      const circle = document.getElementById('scoreCircle');
+      const colors = {good:'#3a7a5c',mild:'#8a6a00',moderate:'#8a4000',severe:'#a03030'};
+      circle.style.borderColor = colors[cls];
+      document.getElementById('resultScore').style.color = colors[cls];
+
+      const alertEl = document.getElementById('suicideAlert');
+      suicide >= 2 ? alertEl.classList.add('show') : alertEl.classList.remove('show');
+
+      const box = document.getElementById('resultBox');
+      box.classList.add('show');
+      setTimeout(() => box.scrollIntoView({behavior:'smooth',block:'start'}), 100);
+    }
+
+    function resetForm() {
+      Object.keys(answers).forEach(k => delete answers[k]);
+      document.querySelectorAll('.score-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('.question-card,.suicide-card').forEach(c => c.classList.remove('answered'));
+      document.getElementById('resultBox').classList.remove('show');
+      document.getElementById('suicideAlert').classList.remove('show');
+      updateProgress();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  </script>
+  <script src="../../nav-dropdown.js"></script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章詳情｜華昕藝心心理諮商所</title>
+<meta name="description" content="華昕藝心心理諮商所專欄文章，由專業心理師分享心理健康知識、諮商資訊與藝術治療相關內容。">
+<link rel="canonical" href="https://visionary-melba-2c3e31.netlify.app/news.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="華昕藝心心理諮商所">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="nav-dropdown.css">
+<style>
+:root{--blue:#7BB8C8;--mint:#A8D5C2;--sand:#F5F0EA;--dark:#2C4A5A;--white:#FAFAFA;--lb:#E3F2F7;--lm:#E9F5F0;--muted:#6B8A98}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;background:#fff;color:var(--dark);line-height:1.7;overflow-x:hidden}
+
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid #eee;padding:0 56px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Noto Serif TC',serif;font-size:18px;font-weight:500;letter-spacing:4px;color:var(--dark);text-decoration:none}
+.logo em{font-style:normal;color:var(--blue)}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--dark);font-size:14px;letter-spacing:1px;transition:all .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--blue)}
+
+/* ARTICLE LAYOUT */
+.article-header{padding:160px 24px 60px;background:#F9FCFD;text-align:center}
+.bc{font-size:12px;color:var(--muted);letter-spacing:2px;margin-bottom:20px}
+.bc a{color:var(--muted);text-decoration:none}
+.bc a:hover{color:var(--blue)}
+.art-cat{display:inline-block;background:var(--lb);color:var(--blue);padding:6px 14px;border-radius:20px;font-size:12px;letter-spacing:2px;margin-bottom:20px}
+.article-header h1{font-family:'Noto Serif TC',serif;font-size:clamp(32px, 5vw, 48px);font-weight:400;color:var(--dark);letter-spacing:2px;margin-bottom:24px;line-height:1.4;max-width:900px;margin-left:auto;margin-right:auto}
+.art-meta{display:flex;justify-content:center;align-items:center;gap:20px;font-size:14px;color:var(--muted);letter-spacing:1px}
+
+.main-content{max-width:840px;margin:0 auto;padding:60px 24px 100px}
+.art-img-wrap{margin-bottom:60px;border-radius:24px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.05)}
+.art-img-wrap img{width:100%;display:block}
+
+.art-body{font-size:17px;line-height:2.2;color:#334E5C;letter-spacing:0.5px}
+.art-body p{margin-bottom:32px}
+.art-body h2,.art-body h3{font-family:'Noto Serif TC',serif;color:var(--dark);margin:60px 0 24px;letter-spacing:2px}
+.art-body h2{font-size:26px;border-left:4px solid var(--blue);padding-left:20px}
+.art-body ul,.art-body ol{margin-bottom:32px;padding-left:24px}
+.art-body li{margin-bottom:12px}
+
+/* Inline Styles */
+.art-body strong { color: var(--dark); font-weight: 500; }
+.art-body .blue-text { color: var(--blue); font-weight: 500; }
+.art-body .highlight { background: var(--lm); padding: 2px 6px; border-radius: 4px; color: var(--dark); }
+
+.art-footer{margin-top:80px;padding-top:40px;border-top:1px solid #eee}
+.tags-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:60px}
+.tag-item{font-size:14px;color:var(--blue);text-decoration:none}
+.tag-item:hover{text-decoration:underline}
+
+/* AUTHOR BIO */
+.author-card{background:var(--lb);border-radius:24px;padding:40px;display:flex;gap:30px;align-items:center}
+.author-photo{width:100px;height:100px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--white)}
+.author-photo img{width:100%;height:100%;object-fit:cover}
+.author-info h4{font-family:'Noto Serif TC',serif;font-size:20px;color:var(--dark);margin-bottom:8px}
+.author-info p{font-size:14px;color:var(--muted);margin-bottom:16px}
+.author-btn{display:inline-block;color:var(--blue);text-decoration:none;font-size:14px;font-weight:500;border-bottom:1px solid var(--blue);padding-bottom:2px}
+
+footer{background:var(--dark);color:#fff;padding:80px 56px 40px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.fb h3{font-family:'Noto Serif TC',serif;font-size:18px;letter-spacing:3px;margin-bottom:15px}
+.fb p{font-size:13px;color:rgba(255,255,255,0.4);line-height:2.2;margin-bottom:24px}
+.socs{display:flex;gap:12px}
+.soc{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.3s}
+.soc:hover{background:var(--blue)}
+.soc svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.5}
+.fc h4{font-size:11px;letter-spacing:4px;color:var(--mint);margin-bottom:20px}
+.fc ul{list-style:none}
+.fc li{margin-bottom:10px}
+.fc a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:14px;transition:color 0.2s}
+.fc a:hover{color:#fff}
+.fbot{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.2)}
+
+#loadingState{padding:200px 24px;text-align:center;color:var(--muted)}
+
+@media(max-width:1000px){
+  nav{padding:0 24px}
+  .fg{grid-template-columns:1fr;gap:40px}
+  .author-card{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">華昕<em>藝心</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">關於我們</a></li>
+    <li><a href="services.html">服務項目</a></li>
+    <li class="has-dropdown">
+      <a href="team.html">專業團隊</a>
+      <div class="dropdown-menu" id="navTherapistDropdown"></div>
+    </li>
+    <li><a href="news.html" class="active">最新消息</a></li>
+    <li><a href="faq.html">常見問答</a></li>
+    <li><a href="transportation.html">交通方式</a></li>
+      <li><a href="resources/index.html">資源連結</a></li>
+    </ul>
+</nav>
+
+<div id="loadingState">正在開啟文章...</div>
+
+<div id="artWrapper" style="display:none">
+  <article class="article-header">
+    <div class="bc"><a href="index.html">首頁</a> &nbsp;/&nbsp; <a href="news.html">最新消息</a> &nbsp;/&nbsp; <span id="bcTitle"></span></div>
+    <div class="art-cat" id="artCat"></div>
+    <h1 id="artTitle"></h1>
+    <div class="art-meta">
+      <span id="artAuthorName"></span>
+      <span>|</span>
+      <span id="artDate"></span>
+    </div>
+  </article>
+
+  <main class="main-content">
+    <div class="art-img-wrap" id="artImgWrap" style="display:none"></div>
+    <div class="art-body" id="artBody"></div>
+    
+    <div class="art-footer">
+      <div class="tags-row" id="artTags"></div>
+      
+      <div class="author-card" id="authorCard" style="display:none">
+        <div class="author-photo" id="authPhoto"></div>
+        <div class="author-info">
+          <p>本文作者</p>
+          <h4 id="authName"></h4>
+          <p id="authTitle" style="margin-bottom:12px"></p>
+          <a href="#" class="author-btn" id="authLink">查看心理師專頁</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="fg">
+    <div class="fb">
+      <h3>華昕藝心心理諮商所</h3>
+      <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間</p>
+      <div class="socs">
+        <a href="https://lin.ee/nOmKPpP" class="soc"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></a>
+        <a href="https://www.facebook.com/huasin.apcc" class="soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/huasin.apcc/" class="soc"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+    <div class="fc">
+      <h4>服務項目</h4>
+      <ul>
+        <li><a href="service-individual.html">個別諮商</a></li><li><a href="service-couples.html">伴侶婚姻諮商</a></li>
+        <li><a href="service-parenting.html">親子諮商</a></li><li><a href="service-online.html">線上遠距諮商</a></li>
+        <li><a href="service-group.html">團體諮商</a></li><li><a href="service-eap.html">企業合作</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="team.html">專業團隊</a></li><li><a href="faq.html">常見問答</a></li>
+        <li><a href="transportation.html">交通方式</a></li><li><a href="resources.html">資源連結</a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+    <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+const SHEET_ID = '1o0di_U7q_NKiDuwkHEnUqlX2QQNxAeXR1TKpAJl0WAQ';
+const ART_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=articles`;
+const THERAPIST_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=therapists`;
+
+function driveImg(url, sz='w1000') {
+  if (!url) return '';
+  const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=${sz}` : url;
+}
+
+function parseGviz(text) {
+  const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
+  const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
+  return (json.table.rows || []).map(row => {
+    const obj = {};
+    cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
+    return obj;
+  });
+}
+
+function formatContent(text) {
+  if (!text) return '';
+  
+  // 1. Process line-based elements (Headings, Lists, Paragraphs)
+  let html = text.split('\n').map(line => {
+    line = line.trim();
+    if (!line) return '';
+    
+    // Headings
+    if (line.startsWith('## ')) return `<h2>${line.substring(3)}</h2>`;
+    if (line.startsWith('### ')) return `<h3>${line.substring(4)}</h3>`;
+    
+    // Bullet points
+    if (line.startsWith('* ') || line.startsWith('- ')) return `<li>${line.substring(2)}</li>`;
+    
+    // Normal paragraph
+    return `<p>${line}</p>`;
+  }).join('');
+
+  // Wrap list items in <ul>
+  html = html.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
+
+  // 2. Process inline styles
+  // **Bold** -> <strong>
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // !!Blue!! -> <span class="blue-text">
+  html = html.replace(/!!(.*?)!!/g, '<span class="blue-text">$1</span>');
+  
+  // ==Highlight== -> <span class="highlight">
+  html = html.replace(/==(.*?)==/g, '<span class="highlight">$1</span>');
+
+  return html;
+}
+
+async function loadArticle() {
+  const params = new URLSearchParams(window.location.search);
+  const targetId = params.get('id');
+  if (!targetId) { window.location.href = 'news.html'; return; }
+
+  try {
+    const [aRes, tRes] = await Promise.all([fetch(ART_URL), fetch(THERAPIST_URL)]);
+    const articles = parseGviz(await aRes.text()).filter(a => String(a.active).toUpperCase() === 'TRUE');
+    const therapists = parseGviz(await tRes.text());
+
+    const art = articles.find(a => String(a.id) === String(targetId));
+    if (!art) { window.location.href = 'news.html'; return; }
+
+    // Render Basic Info
+    document.title = `${art.title}｜華昕藝心心理諮商所`;
+    document.getElementById('bcTitle').textContent = art.title;
+    document.getElementById('artCat').textContent = art.category || '專欄文章';
+    document.getElementById('artTitle').textContent = art.title;
+    
+    // Date
+    const dMatch = art.date?.match(/Date\((\d+),(\d+),(\d+)\)/);
+    if (dMatch) {
+      document.getElementById('artDate').textContent = `${dMatch[1]}.${(parseInt(dMatch[2])+1).toString().padStart(2,'0')}.${dMatch[3].padStart(2,'0')}`;
+    }
+
+    // Image
+    const imgUrl = driveImg(art.image_url);
+    if (imgUrl) {
+      const wrap = document.getElementById('artImgWrap');
+      wrap.style.display = 'block';
+      wrap.innerHTML = `<img src="${imgUrl}" alt="${art.title}">`;
+    }
+
+    // Body
+    document.getElementById('artBody').innerHTML = formatContent(art.content || art['content\t']);
+
+    // Tags
+    if (art.hashtags) {
+      const tags = art.hashtags.split(/[\s,，#]+/).filter(Boolean);
+      document.getElementById('artTags').innerHTML = tags.map(t => `<span class="tag-item"># ${t}</span>`).join('');
+    }
+
+    // Author Bio
+    const author = therapists.find(t => t.id === art.author_id || t.name === art.author_id);
+    if (author) {
+      document.getElementById('authorCard').style.display = 'flex';
+      document.getElementById('authName').textContent = author.name;
+      document.getElementById('authTitle').textContent = author.title;
+      document.getElementById('authLink').href = `therapist.html?id=${author.id}`;
+      document.getElementById('artAuthorName').textContent = author.name;
+      
+      const photo = author.photo_url ? driveImg(author.photo_url, 'w200') : '';
+      if (photo) {
+        document.getElementById('authPhoto').innerHTML = `<img src="${photo}" alt="${author.name}">`;
+      }
+    } else {
+      document.getElementById('artAuthorName').textContent = art.author_id || '華昕藝心';
+    }
+
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('artWrapper').style.display = 'block';
+
+  } catch (e) {
+    console.error(e);
+    document.getElementById('loadingState').innerHTML = '載入文章失敗。';
+  }
+}
+
+loadArticle();
+</script>
+<script src="nav-dropdown.js"></script>
+</body>
+</html>

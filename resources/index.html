@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心理健康資源｜華昕藝心心理諮商所</title>
+  <meta name="description" content="整合心理健康相關資源，包含即時危機專線、心情溫度計、全台免費心理諮商資源等，幫助你在需要時找到適當的支持。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../nav-dropdown.css">
+  <style>
+    :root{--blue:#7BB8C8;--mint:#A8D5C2;--sand:#F5F0EA;--dark:#2C4A5A;--white:#FAFAFA;--lb:#E8F4F8;--lm:#EAF7F2;--muted:#6B8A98;--shadow:rgba(44,74,90,.08)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans TC',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden}
+    nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(250,250,250,.93);backdrop-filter:blur(14px);border-bottom:1px solid #E0EEF3;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:'Noto Serif TC',serif;font-size:17px;font-weight:500;letter-spacing:3px;color:var(--dark);text-decoration:none}
+    .logo em{font-style:normal;color:var(--blue)}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--dark);font-size:14px;letter-spacing:1px;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--blue)}
+    .nav-cta{background:var(--blue);color:#fff;padding:9px 22px;border-radius:30px;font-size:13px;letter-spacing:1.5px;text-decoration:none;transition:all .3s}
+    .nav-cta:hover{background:var(--dark)}
+
+    /* HERO */
+    .hero{padding:140px 56px 80px;background:var(--dark);position:relative;overflow:hidden}
+    .hero::before{content:'RESOURCES';position:absolute;font-family:'Noto Serif TC',serif;font-size:180px;font-weight:500;color:rgba(255,255,255,.025);right:-30px;top:-10px;letter-spacing:10px;pointer-events:none;white-space:nowrap}
+    .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+    .hero-orb-1{width:400px;height:400px;border:1px solid rgba(123,184,200,.08);top:-150px;right:10%;animation:spin 30s linear infinite}
+    .hero-orb-2{width:200px;height:200px;border:1px solid rgba(168,213,194,.1);bottom:-50px;right:20%;animation:spin 20s linear infinite reverse}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .hero-inner{position:relative;z-index:1;max-width:680px}
+    .bc{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:2px;margin-bottom:20px}
+    .bc a{color:rgba(255,255,255,.35);text-decoration:none}
+    .bc a:hover{color:var(--mint)}
+    .hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(36px,5vw,54px);font-weight:300;letter-spacing:6px;color:#fff;margin-bottom:16px;line-height:1.3}
+    .hero-desc{font-size:15px;line-height:2.1;color:rgba(255,255,255,.5);letter-spacing:.5px;max-width:520px;margin-bottom:36px}
+    .hero-pills{display:flex;gap:10px;flex-wrap:wrap}
+    .hero-pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);padding:6px 14px;border-radius:20px;font-size:12px;letter-spacing:1px}
+
+    /* FEATURED CARDS */
+    .featured{padding:72px 56px;background:var(--sand)}
+    .featured-inner{max-width:1100px;margin:0 auto}
+    .sec-label{font-size:11px;letter-spacing:5px;color:var(--blue);display:block;margin-bottom:10px;font-weight:500}
+    .sec-title{font-family:'Noto Serif TC',serif;font-size:28px;font-weight:400;color:var(--dark);letter-spacing:4px;margin-bottom:40px}
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .feat-card{border-radius:24px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s;box-shadow:0 8px 32px var(--shadow)}
+    .feat-card:hover{transform:translateY(-8px);box-shadow:0 20px 52px rgba(44,74,90,.13)}
+    .feat-card-top{padding:36px 32px 28px;flex:1;display:flex;flex-direction:column;gap:16px}
+    .feat-card.c-emergency .feat-card-top{background:linear-gradient(145deg,#1e3a4a,#2C4A5A)}
+    .feat-card.c-thermo .feat-card-top{background:linear-gradient(145deg,#3a5f72,var(--dark))}
+    .feat-card.c-free .feat-card-top{background:linear-gradient(145deg,#2a4a5a,#3d6070)}
+    .feat-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center}
+    .feat-card.c-emergency .feat-icon{background:rgba(168,213,194,.15)}
+    .feat-card.c-thermo .feat-icon{background:rgba(123,184,200,.15)}
+    .feat-card.c-free .feat-icon{background:rgba(168,213,194,.12)}
+    .feat-icon svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .feat-badge{font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.4);font-weight:500}
+    .feat-title{font-family:'Noto Serif TC',serif;font-size:20px;letter-spacing:3px;color:#fff;font-weight:400}
+    .feat-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.9;letter-spacing:.3px}
+    .feat-card-foot{padding:16px 32px;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:space-between}
+    .feat-card-foot span{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:1.5px}
+    .feat-card-foot svg{width:16px;height:16px;stroke:rgba(255,255,255,.4);fill:none;stroke-width:2;transition:transform .3s}
+    .feat-card:hover .feat-card-foot svg{transform:translateX(5px);stroke:rgba(255,255,255,.8)}
+
+    /* ONLINE RESOURCES */
+    .online-section{padding:72px 56px;background:#fff}
+    .online-inner{max-width:1100px;margin:0 auto}
+    .online-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .online-card{background:var(--white);border:1px solid #EEF5F8;border-radius:18px;padding:24px 22px;text-decoration:none;color:inherit;transition:all .3s;display:flex;flex-direction:column;gap:10px}
+    .online-card:hover{border-color:var(--blue);box-shadow:0 8px 28px var(--shadow);transform:translateY(-3px)}
+    .oc-top{display:flex;align-items:center;gap:12px}
+    .oc-icon{width:40px;height:40px;border-radius:12px;background:var(--lb);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .oc-icon svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .oc-title{font-size:14px;font-weight:500;color:var(--dark);letter-spacing:1px;line-height:1.4}
+    .oc-desc{font-size:12.5px;color:var(--muted);line-height:1.8;letter-spacing:.3px}
+    .oc-link{font-size:11.5px;color:var(--blue);letter-spacing:1px;margin-top:auto}
+
+    /* WOMEN SECTION */
+    .women-section{padding:56px 56px 80px;background:var(--sand)}
+    .women-inner{max-width:1100px;margin:0 auto}
+    .women-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:28px}
+    .women-card{background:#fff;border:1px solid rgba(123,184,200,.2);border-radius:14px;padding:16px 20px;text-decoration:none;color:var(--dark);font-size:13.5px;letter-spacing:.5px;transition:all .25s;display:flex;align-items:center;gap:10px}
+    .women-card:hover{background:var(--lb);border-color:var(--blue);color:var(--blue)}
+    .women-card svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;opacity:.6}
+
+    /* FOOTER */
+    footer{background:var(--dark);color:#fff;padding:56px 56px 28px}
+    .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;margin-bottom:44px}
+    .fb h3{font-family:'Noto Serif TC',serif;font-size:17px;letter-spacing:3px;margin-bottom:10px}
+    .fb p{font-size:12.5px;color:rgba(255,255,255,.4);line-height:2;letter-spacing:.5px;margin-bottom:20px}
+    .socs{display:flex;gap:9px}
+    .soc{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s}
+    .soc:hover{background:var(--blue)}
+    .soc svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .fc h4{font-size:10.5px;letter-spacing:3px;color:var(--mint);margin-bottom:14px}
+    .fc ul{list-style:none}
+    .fc li{margin-bottom:8px}
+    .fc a{color:rgba(255,255,255,.4);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .2s}
+    .fc a:hover{color:#fff}
+    .fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .fbot p{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.5px}
+
+    /* REVEAL */
+    .r{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .r.on{opacity:1;transform:none}
+    .d1{transition-delay:.05s}.d2{transition-delay:.1s}.d3{transition-delay:.15s}
+
+    @media(max-width:900px){
+      nav{padding:0 20px}
+      .nav-links{display:none}
+      .hero{padding:110px 24px 60px}
+      .featured,.online-section,.women-section{padding:52px 24px}
+      .feat-grid,.online-grid{grid-template-columns:1fr}
+      .women-grid{grid-template-columns:1fr}
+      footer{padding:44px 24px 24px}
+      .fg{grid-template-columns:1fr;gap:28px}
+    }
+    @media(max-width:640px){
+      .women-section{padding-bottom:60px}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="logo">華昕<em>藝心</em></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">關於我們</a></li>
+      <li><a href="../services.html">服務項目</a></li>
+      <li class="has-dropdown">
+        <a href="../team.html">專業團隊</a>
+        <div class="dropdown-menu" id="navTherapistDropdown"></div>
+      </li>
+      <li><a href="../news.html">最新消息</a></li>
+      <li><a href="../faq.html">常見問答</a></li>
+      <li><a href="index.html" class="active">資源連結</a></li>
+      <li><a href="../transportation.html">交通方式</a></li>
+    </ul>
+    <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="nav-cta">立即預約</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-inner">
+      <div class="bc"><a href="../index.html">首頁</a> &nbsp;/&nbsp; 資源連結</div>
+      <h1>心理健康資源</h1>
+      <p class="hero-desc">整合各類心理健康資源，無論是緊急求助、自我評估或尋找免費諮商，都能在這裡找到你需要的幫助。</p>
+      <div class="hero-pills">
+        <span class="hero-pill">即時危機專線</span>
+        <span class="hero-pill">自我評量工具</span>
+        <span class="hero-pill">全台免費諮商</span>
+        <span class="hero-pill">婦女支持中心</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="featured-inner">
+      <span class="sec-label">RESOURCES · 資源分類</span>
+      <h2 class="sec-title">找到你需要的支持</h2>
+      <div class="feat-grid">
+        <a href="immediate-support/" class="feat-card c-emergency r d1">
+          <div class="feat-card-top">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.42-1.42a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span class="feat-badge">IMMEDIATE · 即時支援</span>
+            <div class="feat-title">危機支援專線</div>
+            <p class="feat-desc">1925、1995、1980 等 24 小時免費心理諮詢專線，當你或身邊的人需要立即支持時，請放心撥打。</p>
+          </div>
+          <div class="feat-card-foot">
+            <span>查看所有專線</span>
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+        <a href="mood-thermometer/" class="feat-card c-thermo r d2">
+          <div class="feat-card-top">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+            </div>
+            <span class="feat-badge">SELF-CHECK · 自我評估</span>
+            <div class="feat-title">心情溫度計</div>
+            <p class="feat-desc">BSRS-5 簡式健康量表，五題評量了解近期情緒狀況，提供即時結果與建議，幫助你更了解自己的心理狀態。</p>
+          </div>
+          <div class="feat-card-foot">
+            <span>開始自我評量</span>
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+        <a href="free-counseling-taiwan/" class="feat-card c-free r d3">
+          <div class="feat-card-top">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="feat-badge">FREE · 免費資源</span>
+            <div class="feat-title">全台免費諮商</div>
+            <p class="feat-desc">整理全台各縣市衛生局提供的免費或低費心理諮商服務，費用不是阻礙你尋求支持的理由。</p>
+          </div>
+          <div class="feat-card-foot">
+            <span>查看各縣市資源</span>
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="online-section">
+    <div class="online-inner">
+      <span class="sec-label">ONLINE · 線上平台</span>
+      <h2 class="sec-title">官方資源平台</h2>
+      <div class="online-grid">
+        <a href="https://adao.mohw.gov.tw/" target="_blank" class="online-card r d1">
+          <div class="oc-top">
+            <div class="oc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <div class="oc-title">心理評量</div>
+          </div>
+          <p class="oc-desc">衛生福利部提供之線上心理健康評量工具</p>
+          <span class="oc-link">前往網站 ↗</span>
+        </a>
+        <a href="https://step.mohw.gov.tw/" target="_blank" class="online-card r d1">
+          <div class="oc-top">
+            <div class="oc-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <div class="oc-title">心快活心理健康學習平台</div>
+          </div>
+          <p class="oc-desc">衛福部心理健康知識學習資源</p>
+          <span class="oc-link">前往網站 ↗</span>
+        </a>
+        <a href="https://map.mohw.gov.tw/" target="_blank" class="online-card r d2">
+          <div class="oc-top">
+            <div class="oc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="oc-title">心理衛生資源地圖</div>
+          </div>
+          <p class="oc-desc">全台心理衛生相關機構查詢地圖</p>
+          <span class="oc-link">前往網站 ↗</span>
+        </a>
+        <a href="https://www.mohw.gov.tw/cp-88-70961-1.html" target="_blank" class="online-card r d2">
+          <div class="oc-top">
+            <div class="oc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div class="oc-title">青壯世代心理健康支持方案</div>
+          </div>
+          <p class="oc-desc">15–45 歲補助心理諮商方案說明</p>
+          <span class="oc-link">前往網站 ↗</span>
+        </a>
+        <a href="https://osha.tw/" target="_blank" class="online-card r d3">
+          <div class="oc-top">
+            <div class="oc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+            <div class="oc-title">勞工健康照護整合平台</div>
+          </div>
+          <p class="oc-desc">勞工心理健康相關資源與服務</p>
+          <span class="oc-link">前往網站 ↗</span>
+        </a>
+        <a href="https://www.health.ntpc.gov.tw/" target="_blank" class="online-card r d3">
+          <div class="oc-top">
+            <div class="oc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="oc-title">精神復健機構查詢</div>
+          </div>
+          <p class="oc-desc">臺北市、新北市精神復健相關機構資訊</p>
+          <span class="oc-link">前往網站 ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="women-section">
+    <div class="women-inner">
+      <span class="sec-label">SUPPORT · 婦女支持</span>
+      <h2 class="sec-title">台北市各區婦女中心</h2>
+      <div class="women-grid">
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r d1">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市松山南港婦女支持培力中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r d1">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市新移民家庭服務中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r d2">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市中正婦女暨家庭服務中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r d2">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市萬華婦女支持培力中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r d3">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市大同士林婦女支持培力中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r d3">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市信義婦女支持培力中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市內湖婦女支持培力中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市北投婦女支持培力中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市大直婦女支持培力中心
+        </a>
+        <a href="https://www.sfaa.gov.tw/SFAA/Pages/List.aspx?nodeid=392" target="_blank" class="women-card r">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          臺北市文山婦女暨家庭服務中心
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fg">
+      <div class="fb">
+        <h3>華昕藝心心理諮商所</h3>
+        <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間<br>北市衛心字第XY01120039號</p>
+        <div class="socs">
+          <a href="https://lin.ee/nOmKPpP" class="soc"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></a>
+          <a href="https://www.facebook.com/huasin.apcc" class="soc"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/huasin.apcc/" class="soc"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div class="fc">
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="../service-individual.html">個別諮商</a></li>
+          <li><a href="../service-couples.html">伴侶婚姻諮商</a></li>
+          <li><a href="../service-parenting.html">親子諮商</a></li>
+          <li><a href="../service-online.html">線上遠距諮商</a></li>
+          <li><a href="../service-group.html">團體諮商／工作坊</a></li>
+          <li><a href="../service-eap.html">企業合作方案</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="https://forms.gle/ZJu7T7U1CWNZDshq8">預約諮商</a></li>
+          <li><a href="../team.html">專業團隊</a></li>
+          <li><a href="../faq.html">常見問答</a></li>
+          <li><a href="../transportation.html">交通方式</a></li>
+          <li><a href="index.html">資源連結</a></li>
+                  <li><a href="resources/index.html">資源連結</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+      <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('on') }), {threshold:0.08});
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  </script>
+  <script src="../nav-dropdown.js"></script>
+</body>
+</html>

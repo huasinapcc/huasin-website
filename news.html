@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>最新消息與心理健康專欄｜華昕藝心心理諮商所</title>
+  <meta name="description" content="華昕藝心最新消息、活動公告與心理健康專欄文章。由專業心理師撰寫，分享心理健康知識、諮商資訊與藝術治療相關內容。">
+  <link rel="canonical" href="https://visionary-melba-2c3e31.netlify.app/news.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:site_name" content="華昕藝心心理諮商所">
+  <meta property="og:url" content="https://visionary-melba-2c3e31.netlify.app/news.html">
+  <meta property="og:title" content="最新消息與心理健康專欄｜華昕藝心心理諮商所">
+  <meta property="og:description" content="華昕藝心最新消息、活動公告與心理健康專欄文章。由專業心理師分享心理健康知識與藝術治療相關內容。">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="最新消息與心理健康專欄｜華昕藝心心理諮商所">
+  <meta name="twitter:description" content="華昕藝心最新消息、活動公告與心理健康專欄文章。由專業心理師分享心理健康知識與藝術治療相關內容。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="nav-dropdown.css">
+  <style>
+    :root {
+      --blue: #7BB8C8;
+      --mint: #A8D5C2;
+      --sand: #F5F0EA;
+      --dark: #2C4A5A;
+      --white: #FAFAFA;
+      --lb: #E8F4F8;
+      --lm: #EAF7F2;
+      --muted: #6B8A98
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body { font-family: 'Noto Sans TC', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; line-height: 1.7}
+
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(255, 255, 255, .95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid #E0EEF3; padding: 0 56px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between
+    }
+    .logo { font-family: 'Noto Serif TC', serif; font-size: 17px; font-weight: 500; letter-spacing: 3px; color: var(--dark); text-decoration: none }
+    .logo em { font-style: normal; color: var(--blue) }
+    .nav-links { display: flex; gap: 32px; list-style: none }
+    .nav-links a { text-decoration: none; color: var(--dark); font-size: 14px; letter-spacing: 1px; transition: color .2s }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue) }
+    .nav-cta { background: var(--blue); color: #fff; padding: 9px 22px; border-radius: 30px; font-size: 13px; letter-spacing: 1.5px; text-decoration: none; transition: all .3s }
+    .nav-cta:hover { background: var(--dark) }
+
+    /* HERO */
+    .hero { padding: 140px 56px 72px; background: linear-gradient(150deg, #fafafa 0%, #F0F8FB 60%, #EBF6F1 100%); position: relative; overflow: hidden }
+    .hero::before { content: 'NEWS'; position: absolute; font-family: 'Noto Serif TC', serif; font-size: 180px; font-weight: 500; color: rgba(123, 184, 200, .04); right: -20px; top: -20px; letter-spacing: 10px; pointer-events: none; white-space: nowrap }
+    .hero-inner { max-width: 600px; position:relative; z-index:1 }
+    .bc { font-size: 12px; color: var(--muted); letter-spacing: 2px; margin-bottom: 18px }
+    .bc a { color: var(--muted); text-decoration: none }
+    .hero h1 { font-family: 'Noto Serif TC', serif; font-size: clamp(36px, 5vw, 54px); font-weight: 300; letter-spacing: 6px; color: var(--dark); margin-bottom: 14px }
+    .hero p { font-size: 15px; color: var(--muted); letter-spacing: .5px }
+
+    /* FILTER TABS */
+    .filter-bar { background: #fff; border-bottom: 1px solid #EEF5F8; padding: 0 56px; position: sticky; top: 72px; z-index: 900; display: flex; overflow-x: auto }
+    .ftab { padding: 18px 24px; font-size: 13.5px; letter-spacing: 1px; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; cursor: pointer; transition: all .25s; background: none; border: none; font-family: inherit }
+    .ftab.active { color: var(--blue); border-bottom-color: var(--blue) }
+
+    #loadingOverlay { padding: 100px 56px; text-align: center; color: var(--muted); font-size: 14px; letter-spacing: 1px }
+    #dynamicContent { display: none }
+
+    /* FEATURED CARD */
+    .featured { padding: 60px 56px 0 }
+    .featured-card { background: #fff; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #EEF5F8; transition: all .35s; text-decoration: none; color: inherit }
+    .featured-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(44, 74, 90, .1); border-color: transparent }
+    .featured-img { min-height: 320px; background-color: var(--lb); background-size: cover; background-position: center; position: relative }
+    .feat-badge { position: absolute; top: 24px; left: 24px; background: var(--mint); color: var(--dark); padding: 6px 14px; border-radius: 20px; font-size: 11.5px; letter-spacing: 2px; font-weight: 500 }
+    .featured-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center }
+    .featured-body h2 { font-family: 'Noto Serif TC', serif; font-size: 24px; margin-bottom: 16px; color: var(--dark); line-height: 1.5 }
+    .featured-body p { font-size: 14px; line-height: 2; color: var(--muted); margin-bottom: 24px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
+
+    /* GRID */
+    .posts-section { padding: 60px 56px 100px }
+    .posts-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; border-bottom: 1px solid #EEF5F8; padding-bottom: 15px }
+    .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px }
+    .post-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid #EEF5F8; transition: all .3s; text-decoration: none; color: inherit }
+    .post-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,0.06) }
+    .post-thumb { aspect-ratio: 16/9; background-color: var(--lb); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative }
+    .ended-badge { position: absolute; top: 10px; left: 10px; background: rgba(44,74,90,0.82); color: #fff; font-size: 11px; letter-spacing: 2px; padding: 4px 10px; border-radius: 20px; backdrop-filter: blur(6px) }
+    .featured-img { position: relative }
+    .featured-img .ended-badge { top: 16px; left: 16px; font-size: 12px; padding: 5px 14px }
+    .post-content { padding: 22px }
+    .post-type { font-size: 11px; color: var(--blue); letter-spacing: 2px; margin-bottom: 10px }
+    .post-content h4 { font-family: 'Noto Serif TC', serif; font-size: 16px; color: var(--dark); margin-bottom: 12px; line-height: 1.5; height: 48px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical }
+    .post-date { font-size: 12px; color: var(--muted) }
+
+    footer { background: var(--dark); color: #fff; padding: 72px 56px 36px }
+    .fg { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px }
+    .fb h3 { font-family: 'Noto Serif TC', serif; font-size: 18px; margin-bottom: 12px; letter-spacing: 2px }
+    .fb p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 2.2 }
+    .fc h4 { font-size: 11px; color: var(--mint); letter-spacing: 4px; margin-bottom: 20px }
+    .fc ul { list-style: none }
+    .fc li { margin-bottom: 10px }
+    .fc a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 14px; transition: color .2s }
+    .fc a:hover { color: #fff }
+    .fbot { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; font-size: 12px; color: rgba(255,255,255,0.2); display: flex; justify-content: space-between }
+
+    .r { opacity: 0; transform: translateY(18px); transition: all .6s ease }
+    .r.on { opacity: 1; transform: none }
+
+    @media(max-width:1000px) {
+      nav, .hero, .filter-bar, .featured, .posts-section, footer { padding-left: 24px; padding-right: 24px }
+      .featured-card, .fg { grid-template-columns: 1fr }
+      .posts-grid { grid-template-columns: 1fr 1fr }
+    }
+    @media(max-width:600px) {
+      .posts-grid { grid-template-columns: 1fr }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">華昕<em>藝心</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">關於我們</a></li>
+      <li><a href="services.html">服務項目</a></li>
+      <li class="has-dropdown">
+        <a href="team.html">專業團隊</a>
+        <div class="dropdown-menu" id="navTherapistDropdown"></div>
+      </li>
+      <li><a href="news.html" class="active">最新消息</a></li>
+      <li><a href="faq.html">常見問答</a></li>
+      <li><a href="transportation.html">交通方式</a></li>
+      <li><a href="resources/index.html">資源連結</a></li>
+    </ul>
+    <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="nav-cta">立即預約</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="bc"><a href="index.html">首頁</a> &nbsp;/&nbsp; 最新消息</div>
+      <h1>最新消息 & 專欄</h1>
+      <p>探索心靈的點滴，獲取最新的專業心理學知識分享。</p>
+    </div>
+  </section>
+
+  <div class="filter-bar" id="categoryFilter">
+    <div class="ftab active" data-filter="all">全部</div>
+    <div class="ftab" data-filter="最新消息">最新消息</div>
+    <div class="ftab" data-filter="藝術療癒">藝術療癒</div>
+    <div class="ftab" data-filter="自我探索">自我探索</div>
+    <div class="ftab" data-filter="親密關係">親密關係</div>
+    <div class="ftab" data-filter="親子教養">親子教養</div>
+    <div class="ftab" data-filter="情緒與壓力">情緒與壓力</div>
+    <div class="ftab" data-filter="活動">活動</div>
+  </div>
+
+  <div id="loadingOverlay">正在載入專欄文章...</div>
+
+  <div id="dynamicContent">
+    <section class="featured" id="featuredSection" style="display:none">
+      <div id="featuredContainer"></div>
+    </section>
+
+    <section class="posts-section">
+      <div class="posts-header">
+        <h3 id="gridTitle">所有訊息</h3>
+        <div class="posts-count" id="postsCount"></div>
+      </div>
+      <div class="posts-grid" id="postsGrid"></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="fg">
+      <div class="fb">
+        <h3>華昕藝心心理諮商所</h3>
+        <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間</p>
+      </div>
+      <div class="fc">
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="service-individual.html">個別諮商</a></li>
+          <li><a href="service-couples.html">伴侶婚姻諮商</a></li>
+          <li><a href="service-parenting.html">親子諮商</a></li>
+          <li><a href="service-online.html">線上遠距諮商</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="team.html">專業團隊</a></li>
+          <li><a href="faq.html">常見問答</a></li>
+          <li><a href="transportation.html">交通方式</a></li>
+          <li><a href="resources/index.html">資源連結</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+      <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('on'); }), { threshold: 0.1 });
+
+    const SHEET_ID = '1o0di_U7q_NKiDuwkHEnUqlX2QQNxAeXR1TKpAJl0WAQ';
+    const ART_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=articles`;
+    const THERAPIST_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=therapists`;
+
+    let allArticles = [];
+    let therapists = [];
+
+    function driveThumb(url) {
+      if (!url) return '';
+      const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=800` : url;
+    }
+
+    function parseGviz(text) {
+      const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
+      const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
+      return (json.table.rows || []).map(row => {
+        const obj = {};
+        cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
+        return obj;
+      }).filter(item => {
+        if (Object.hasOwn(item, 'active')) return String(item.active).toUpperCase() === 'TRUE';
+        return item.name;
+      });
+    }
+
+    async function init() {
+      try {
+        const [aRes, tRes] = await Promise.all([fetch(ART_URL), fetch(THERAPIST_URL)]);
+        if (!aRes.ok || !tRes.ok) throw new Error("Fetch failed");
+        
+        allArticles = parseGviz(await aRes.text());
+        therapists = parseGviz(await tRes.text());
+        
+        renderList(allArticles);
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('dynamicContent').style.display = 'block';
+      } catch (e) {
+        console.error(e);
+        document.getElementById('loadingOverlay').innerHTML = '<p>載入失敗。請確認 Google Sheet 已公開分享（知道連結的人都能查看）。</p>';
+      }
+    }
+
+    function renderList(list) {
+      const featured = list.find(a => String(a.is_featured).toUpperCase() === 'TRUE');
+      const grid = document.getElementById('postsGrid');
+      
+      const featSec = document.getElementById('featuredSection');
+      if (featured) {
+        featSec.style.display = 'block';
+        document.getElementById('featuredContainer').innerHTML = buildFeaturedCard(featured);
+      } else {
+        featSec.style.display = 'none';
+      }
+
+      grid.innerHTML = list.map((a, i) => buildPostCard(a, i)).join('');
+      document.getElementById('postsCount').textContent = `共 ${list.length} 則訊息`;
+      
+      grid.querySelectorAll('.r').forEach(el => obs.observe(el));
+      if (featured) obs.observe(featSec.querySelector('.r'));
+    }
+
+    function buildFeaturedCard(a) {
+      const img = driveThumb(a.image_url);
+      const auth = therapists.find(t => t.id === a.author_id || t.name === a.author_id) || { name: a.author_id || '華昕藝心' };
+      return `
+      <a href="article.html?id=${a.id}" class="featured-card r">
+        <div class="featured-img" style="${img ? `background-image:url(${img})` : ''}">
+          <div class="feat-badge">精選推薦</div>
+          ${String(a.event_ended).toUpperCase() === 'TRUE' ? '<span class="ended-badge">已結束</span>' : ''}
+        </div>
+        <div class="featured-body">
+          <div class="post-type">${a.category}</div>
+          <h2>${a.title}</h2>
+          <p>${a.summary || ''}</p>
+          <div class="post-meta">
+            <div class="post-author">${auth.name}</div>
+            <div class="post-date">${formatDate(a.date)}</div>
+          </div>
+        </div>
+      </a>`;
+    }
+
+    function buildPostCard(a, i) {
+      const img = driveThumb(a.image_url);
+      const auth = therapists.find(t => t.id === a.author_id || t.name === a.author_id) || { name: a.author_id || '華昕藝心' };
+      return `
+      <a href="article.html?id=${a.id}" class="post-card r" style="transition-delay: ${(i%3)*0.1}s">
+        <div class="post-thumb" style="${img ? `background-image:url(${img})` : ''}">
+          ${!img ? '<svg viewBox="0 0 24 24" width="40" opacity="0.2"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg>' : ''}
+          ${String(a.event_ended).toUpperCase() === 'TRUE' ? '<span class="ended-badge">已結束</span>' : ''}
+        </div>
+        <div class="post-content">
+          <div class="post-type">${a.category} · ${auth.name}</div>
+          <h4>${a.title}</h4>
+          <div class="post-date">${formatDate(a.date)}</div>
+        </div>
+      </a>`;
+    }
+
+    function formatDate(val) {
+      if (!val) return '';
+      const m = val.match(/Date\((\d+),(\d+),(\d+)\)/);
+      if (!m) return val;
+      return `${m[1]}.${(parseInt(m[2])+1).toString().padStart(2,'0')}.${m[3].padStart(2,'0')}`;
+    }
+
+    document.querySelectorAll('.ftab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        const filtered = filter === 'all' ? allArticles : allArticles.filter(a => a.category === filter);
+        renderList(filtered);
+        document.getElementById('gridTitle').textContent = filter === 'all' ? '所有訊息' : filter;
+      });
+    });
+
+    init();
+  </script>
+  <script src="nav-dropdown.js"></script>
+</body>
+</html>

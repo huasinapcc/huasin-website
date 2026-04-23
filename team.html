@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>專業團隊｜華昕藝心心理諮商所</title>
+  <meta name="description" content="認識華昕藝心的專業心理師團隊，包含諮商心理師、臨床心理師與藝術治療師，各擁不同專長與溫度。找到適合你的那一位，是療癒的起點。">
+  <link rel="canonical" href="https://visionary-melba-2c3e31.netlify.app/team.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:site_name" content="華昕藝心心理諮商所">
+  <meta property="og:url" content="https://visionary-melba-2c3e31.netlify.app/team.html">
+  <meta property="og:title" content="專業團隊｜華昕藝心心理諮商所">
+  <meta property="og:description" content="認識華昕藝心的諮商心理師、臨床心理師與藝術治療師團隊。各擁不同專長與溫度，找到最適合你的陪伴。">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="專業團隊｜華昕藝心心理諮商所">
+  <meta name="twitter:description" content="認識華昕藝心的諮商心理師、臨床心理師與藝術治療師團隊。各擁不同專長與溫度，找到最適合你的陪伴。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="nav-dropdown.css">
+  <style>
+    :root {
+      --blue: #7BB8C8;
+      --mint: #A8D5C2;
+      --sand: #F5F0EA;
+      --dark: #2C4A5A;
+      --white: #FAFAFA;
+      --lb: #E8F4F8;
+      --lm: #EAF7F2;
+      --muted: #6B8A98
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      overflow-x: hidden
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(250, 250, 250, .93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #E0EEF3;
+      padding: 0 56px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .logo {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: var(--dark);
+      text-decoration: none
+    }
+
+    .logo em {
+      font-style: normal;
+      color: var(--blue)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color .2s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--blue)
+    }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      transition: all .3s
+    }
+
+    .nav-cta:hover {
+      background: var(--dark)
+    }
+
+    /* HERO */
+    .hero {
+      padding: 140px 56px 80px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero::before {
+      content: '專業團隊';
+      position: absolute;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 140px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .03);
+      right: -10px;
+      top: 20px;
+      letter-spacing: 10px;
+      pointer-events: none;
+      white-space: nowrap
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 1px solid rgba(123, 184, 200, .1);
+      top: -200px;
+      right: -100px;
+      pointer-events: none
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center
+    }
+
+    .hero-left {
+      animation: up .8s ease both
+    }
+
+    @keyframes up {
+      from {
+        opacity: 0;
+        transform: translateY(22px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .bc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .35);
+      letter-spacing: 2px;
+      margin-bottom: 20px
+    }
+
+    .bc a {
+      color: rgba(255, 255, 255, .35);
+      text-decoration: none
+    }
+
+    .bc a:hover {
+      color: var(--mint)
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(36px, 5vw, 54px);
+      font-weight: 300;
+      letter-spacing: 6px;
+      color: #fff;
+      margin-bottom: 14px
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 2.1;
+      color: rgba(255, 255, 255, .5);
+      letter-spacing: .5px;
+      margin-bottom: 32px
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px
+    }
+
+    .stat-n {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--blue);
+      line-height: 1
+    }
+
+    .stat-l {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: 2px;
+      margin-top: 5px
+    }
+
+    .hero-right {
+      animation: up .8s .2s ease both
+    }
+
+    .spec-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px
+    }
+
+    .spec-pill {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .65);
+      padding: 7px 15px;
+      border-radius: 30px;
+      font-size: 12.5px;
+      letter-spacing: 1px;
+      transition: all .3s;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .spec-pill:hover,
+    .spec-pill.active {
+      background: rgba(123, 184, 200, .25);
+      border-color: var(--blue);
+      color: #fff
+    }
+
+    .spec-pill.active {
+      background: var(--blue);
+      box-shadow: 0 0 15px rgba(123, 184, 200, 0.4)
+    }
+
+    .spec-pill.art {
+      background: rgba(168, 213, 194, .12);
+      border-color: rgba(168, 213, 194, .25);
+      color: var(--mint)
+    }
+
+    .spec-pill.art:hover,
+    .spec-pill.art.active {
+      background: var(--mint);
+      color: var(--dark);
+      border-color: var(--mint)
+    }
+
+    /* FILTER */
+    .filter-bar {
+      background: #fff;
+      border-bottom: 1px solid #EEF5F8;
+      padding: 0 56px;
+      position: sticky;
+      top: 68px;
+      z-index: 90;
+      display: flex;
+      gap: 0;
+      overflow-x: auto
+    }
+
+    .filter-btn {
+      padding: 18px 24px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all .25s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: 'Noto Sans TC', sans-serif
+    }
+
+    .filter-btn:hover {
+      color: var(--dark)
+    }
+
+    .filter-btn.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue)
+    }
+
+    /* HOW TO CHOOSE */
+    .how-section {
+      padding: 72px 56px;
+      background: var(--sand)
+    }
+
+    .how-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: start
+    }
+
+    .how-left h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: 3px;
+      margin-bottom: 10px
+    }
+
+    .how-left p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 2;
+      letter-spacing: .5px
+    }
+
+    .how-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .how-step {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--lb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--blue)
+    }
+
+    .step-text strong {
+      display: block;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin-bottom: 3px
+    }
+
+    .step-text span {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      letter-spacing: .3px
+    }
+
+    /* LOADING */
+    .loading {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 1px
+    }
+
+    .loading-dots {
+      display: inline-flex;
+      gap: 6px;
+      margin-top: 12px
+    }
+
+    .loading-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: bounce .8s ease infinite
+    }
+
+    .loading-dots span:nth-child(2) {
+      animation-delay: .15s
+    }
+
+    .loading-dots span:nth-child(3) {
+      animation-delay: .3s
+    }
+
+    @keyframes bounce {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0.6);
+        opacity: .4
+      }
+
+      40% {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    /* TEAM GRID */
+    /* TEAM GRID V3 */
+    .team-section {
+      padding: 80px 56px 120px;
+      max-width: 1300px;
+      margin: 0 auto
+    }
+
+    .team-header {
+      margin-bottom: 60px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between
+    }
+
+    .sec-label {
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: var(--blue);
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 500
+    }
+
+    .sec-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: 4px
+    }
+
+    .team-count {
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 1px
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px
+    }
+
+    /* MEMBER CARD V3 - MINIMALIST */
+    .member-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all .5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 10px 40px var(--shadow);
+      height: 100%
+    }
+
+    .member-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 60px rgba(44, 74, 90, 0.12);
+      border-color: var(--blue)
+    }
+
+    .card-accent {
+      height: 6px;
+      width: 100%
+    }
+
+    .cat-art .card-accent {
+      background: linear-gradient(90deg, var(--mint), #8BC8B8)
+    }
+
+    .cat-counseling .card-accent {
+      background: linear-gradient(90deg, var(--blue), #5A9DB5)
+    }
+
+    .cat-clinical .card-accent {
+      background: linear-gradient(90deg, #9BB8D4, var(--blue))
+    }
+
+    .cat-intern .card-accent {
+      background: linear-gradient(90deg, #C5A8D5, #A88EC0)
+    }
+
+    .card-body {
+      padding: 48px 32px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center
+    }
+
+    /* PHOTO LARGE & CENTERED */
+    .photo-container {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 32px;
+      position: relative
+    }
+
+    .member-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: 5px solid #fff
+    }
+
+    .member-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 56px;
+      font-weight: 300;
+      color: var(--blue);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+      border: 5px solid #fff
+    }
+
+    .cat-art .member-photo-placeholder {
+      background: linear-gradient(135deg, var(--lm), #D5EDE6)
+    }
+
+    .cat-counseling .member-photo-placeholder {
+      background: linear-gradient(135deg, var(--lb), #D0E8F2)
+    }
+
+    .cat-clinical .member-photo-placeholder {
+      background: linear-gradient(135deg, #E0EDF5, var(--lb))
+    }
+
+    .cat-intern .member-photo-placeholder {
+      background: linear-gradient(135deg, #EDE8F5, #D8D0EC)
+    }
+
+    .member-name {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 24px;
+      letter-spacing: 5px;
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-weight: 400
+    }
+
+    .member-title {
+      font-size: 15px;
+      color: var(--blue);
+      letter-spacing: 2px;
+      margin-bottom: 0;
+      font-weight: 400;
+      opacity: 0.8
+    }
+
+    .card-foot {
+      padding: 24px 32px;
+      background: rgba(0, 0, 0, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: all .3s;
+      border-top: 1px solid rgba(0, 0, 0, 0.03)
+    }
+
+    .card-foot span {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      font-weight: 500;
+      transition: all .3s
+    }
+
+    .card-foot svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--muted);
+      fill: none;
+      stroke-width: 2;
+      transition: all .3s
+    }
+
+    .member-card:hover .card-foot {
+      background: var(--lb)
+    }
+
+    .member-card:hover .card-foot span {
+      color: var(--blue)
+    }
+
+    .member-card:hover .card-foot svg {
+      transform: translateX(6px);
+      stroke: var(--blue)
+    }
+
+    .member-card.hidden {
+      display: none
+    }
+
+    /* CTA */
+    .cta {
+      padding: 80px 56px;
+      background: linear-gradient(135deg, var(--blue), var(--mint));
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='1' fill='%23fff' fill-opacity='.07'/%3E%3C/svg%3E")
+    }
+
+    .cta h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 30px;
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 5px;
+      margin-bottom: 10px;
+      position: relative
+    }
+
+    .cta p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .82);
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+      position: relative
+    }
+
+    .btn-w {
+      background: #fff;
+      color: var(--dark);
+      padding: 13px 40px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      display: inline-block;
+      font-weight: 500;
+      transition: all .3s;
+      position: relative
+    }
+
+    .btn-w:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .15)
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+      margin-top: 20px
+    }
+
+    .btn-o-white {
+      border: 1.5px solid #fff;
+      color: #fff;
+      padding: 12px 34px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      transition: all .3s
+    }
+
+    .btn-o-white:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-3px)
+    }
+
+    footer {
+      background: var(--dark);
+      color: #fff;
+      padding: 56px 56px 28px
+    }
+
+    .fg {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 56px;
+      margin-bottom: 44px
+    }
+
+    .fb h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 17px;
+      letter-spacing: 3px;
+      margin-bottom: 10px
+    }
+
+    .fb p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, .4);
+      line-height: 2;
+      letter-spacing: .5px;
+      margin-bottom: 20px
+    }
+
+    .socs {
+      display: flex;
+      gap: 9px
+    }
+
+    .soc {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background .2s
+    }
+
+    .soc:hover {
+      background: var(--blue)
+    }
+
+    .soc svg {
+      width: 14px;
+      height: 14px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .fc h4 {
+      font-size: 10.5px;
+      letter-spacing: 3px;
+      color: var(--mint);
+      margin-bottom: 14px
+    }
+
+    .fc ul {
+      list-style: none
+    }
+
+    .fc li {
+      margin-bottom: 8px
+    }
+
+    .fc a {
+      color: rgba(255, 255, 255, .4);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: .5px;
+      transition: color .2s
+    }
+
+    .fc a:hover {
+      color: #fff
+    }
+
+    .fbot {
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .fbot p {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .25);
+      letter-spacing: .5px
+    }
+
+    .r {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .65s ease, transform .65s ease
+    }
+
+    .r.on {
+      opacity: 1;
+      transform: none
+    }
+
+    .d1 {
+      transition-delay: .05s
+    }
+
+    .d2 {
+      transition-delay: .1s
+    }
+
+    .d3 {
+      transition-delay: .15s
+    }
+
+    .d4 {
+      transition-delay: .2s
+    }
+
+    @media(max-width:1100px) {
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+
+    @media(max-width:900px) {
+      nav {
+        padding: 0 20px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .hero {
+        padding: 110px 24px 60px
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 36px
+      }
+
+      .filter-bar {
+        padding: 0 20px
+      }
+
+      .how-section {
+        padding: 56px 24px
+      }
+
+      .how-inner {
+        grid-template-columns: 1fr;
+        gap: 32px
+      }
+
+      .team-section {
+        padding: 56px 24px 60px
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .cta {
+        padding: 60px 24px
+      }
+
+      footer {
+        padding: 44px 24px 24px
+      }
+
+      .fg {
+        grid-template-columns: 1fr;
+        gap: 28px
+      }
+    }
+
+    @media(max-width:480px) {
+      .team-grid {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">華昕<em>藝心</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">關於我們</a></li>
+      <li><a href="services.html">服務項目</a></li>
+      <li class="has-dropdown">
+        <a href="team.html" class="active">專業團隊</a>
+        <div class="dropdown-menu" id="navTherapistDropdown"></div>
+      </li>
+      <li><a href="news.html">最新消息</a></li>
+      <li><a href="faq.html">常見問答</a></li>
+      <li><a href="transportation.html">交通方式</a></li>
+      <li><a href="resources/index.html">資源連結</a></li>
+    </ul>
+    <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="nav-cta">立即預約</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="bc"><a href="index.html">首頁</a> &nbsp;/&nbsp; 專業團隊</div>
+        <h1>專業團隊</h1>
+        <p class="hero-desc">每一位心理師都帶著不同的專長與溫度，在華昕藝心陪伴每一個來訪者。找到適合你的那一位，是療癒的起點。</p>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-n" id="statTotal">—</div>
+            <div class="stat-l">位心理師</div>
+          </div>
+          <div>
+            <div class="stat-n" id="statArt">—</div>
+            <div class="stat-l">位藝術治療師／心理師</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="spec-cloud" id="specCloud">
+          <!-- Dynamically generated tags will appear here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="art">藝術治療師</button>
+    <button class="filter-btn" data-filter="counseling">諮商心理師</button>
+    <button class="filter-btn" data-filter="clinical">臨床心理師</button>
+    <button class="filter-btn" data-filter="intern">實習心理師</button>
+  </div>
+
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="r">
+        <span style="font-size:11px;letter-spacing:4px;color:var(--blue);display:block;margin-bottom:10px">GUIDE ·
+          選擇指南</span>
+        <h2 class="how-left h2">如何找到<br>適合你的<br>心理師？</h2>
+        <p style="font-size:14px;color:var(--muted);line-height:2;letter-spacing:.5px;margin-top:10px">
+          每個人與心理師的緣分不同，以下幾個步驟幫助你找到最適合的陪伴者。</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step r d1">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>確認你想處理的主題</strong><span>情緒困擾、關係問題、還是藝術治療？不同主題適合不同專長的心理師。</span></div>
+        </div>
+        <div class="how-step r d2">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>看看各心理師的專長</strong><span>瀏覽下方介紹，找幾位感覺對了的候選人，直覺往往是很好的指引。</span></div>
+        </div>
+        <div class="how-step r d3">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>預約初次諮商</strong><span>初次諮商主要是認識彼此，不確定合不合適很正常，幾次後通常就會有感覺。</span></div>
+        </div>
+        <div class="how-step r d4">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>覺得不合適可以換人</strong><span>如果幾次後感覺不對，告訴我們，我們會協助你轉介給更適合的心理師。</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="team-header">
+      <div>
+        <span class="sec-label">TEAM · 心理師介紹</span>
+        <h2 class="sec-title">與你同行的專業夥伴</h2>
+      </div>
+      <span class="team-count" id="teamCount"></span>
+    </div>
+    <div id="loadingState" class="loading">
+      載入心理師資料中
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+    </div>
+    <div class="team-grid" id="teamGrid" style="display:none"></div>
+  </section>
+
+  <div class="cta">
+    <h2>找到適合您的陪伴了嗎？</h2>
+    <p>如果您不確定哪位心理師最適合您的需求，歡迎與小助手聊聊，讓我們為您推薦。</p>
+    <div class="cta-btns">
+      <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="btn-w">立即預約諮商</a>
+      <a href="https://lin.ee/nOmKPpP" class="btn-o-white">不確定找誰？由我們為您推薦</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fg">
+      <div class="fb">
+        <h3>華昕藝心心理諮商所</h3>
+        <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間<br>北市衛心字第XY01120039號</p>
+        <div class="socs">
+          <a href="https://lin.ee/nOmKPpP" class="soc"><svg viewBox="0 0 24 24">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg></a>
+          <a href="https://www.facebook.com/huasin.apcc" class="soc"><svg viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg></a>
+          <a href="https://www.instagram.com/huasin.apcc/" class="soc"><svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg></a>
+        </div>
+      </div>
+      <div class="fc">
+        <h4>服務項目</h4>
+        <ul>
+          <li><a href="service-individual.html">個別諮商</a></li>
+          <li><a href="service-couples.html">伴侶婚姻諮商</a></li>
+          <li><a href="service-parenting.html">親子諮商</a></li>
+          <li><a href="service-online.html">線上遠距諮商</a></li>
+          <li><a href="service-group.html">團體諮商／工作坊</a></li>
+          <li><a href="service-eap.html">企業合作方案</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>快速連結</h4>
+        <ul>
+          <li><a href="https://forms.gle/ZJu7T7U1CWNZDshq8">預約諮商</a></li>
+          <li><a href="resources.html">資源連結</a></li>
+          <li><a href="faq.html">常見問答</a></li>
+          <li><a href="transportation.html">交通方式</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+      <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const SHEET_ID = '1o0di_U7q_NKiDuwkHEnUqlX2QQNxAeXR1TKpAJl0WAQ';
+    const SHEET_NAME = 'therapists';
+    const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    // Detect category from title
+    function getCategory(title) {
+      if (!title) return 'counseling';
+      if (title.includes('實習')) return 'intern';
+      if (title.includes('臨床')) return 'clinical';
+      if (title.includes('藝術治療')) return 'art';
+      return 'counseling';
+    }
+
+    function getCatLabel(cat) {
+      return { art: '藝術治療師', counseling: '諮商心理師', clinical: '臨床心理師', intern: '實習心理師' }[cat] || '';
+    }
+
+    // Convert Google Drive share URL to direct image URL
+    function driveImgUrl(url) {
+      if (!url) return '';
+      const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (m) return `https://lh3.googleusercontent.com/d/${m[1]}=w200`;
+      return url;
+    }
+
+    function buildCard(t) {
+      const cat = getCategory(t.title);
+      const specs = t.specialties ? t.specialties.split(/[,，]/).map(s => s.trim()).filter(Boolean) : [];
+      const driveUrl = driveImgUrl(t.photo_url);
+      const showPlaceholder = `this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex'`;
+      const tryDrive = driveUrl ? `if(!this._triedDrive){this._triedDrive=true;this.src='${driveUrl}'}else{${showPlaceholder}}` : showPlaceholder;
+      const photoHtml = `<img src="images/therapists/${t.id}.avif" alt="${t.name}" class="member-photo" onerror="if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${tryDrive}}">`;
+      const placeholderHtml = `<div class="member-photo-placeholder" style="display:none">
+    ${t.name ? t.name.charAt(0) : '？'}
+  </div>`;
+      const specsHtml = specs.slice(0, 4).map(s => `<span class="spec">${s}</span>`).join('');
+
+      return `
+  <a href="therapist.html?id=${t.id}" class="member-card cat-${cat} r" data-cat="${cat}" data-specs="${t.specialties || ''}">
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="photo-container">
+        ${photoHtml}${placeholderHtml}
+      </div>
+      <div class="member-name">${t.name || ''}</div>
+      <div class="member-title">${t.title || ''}</div>
+    </div>
+    <div class="card-foot">
+      <span>閱讀完整介紹</span>
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </div>
+  </a>`;
+    }
+
+    async function loadTeam() {
+      try {
+        const res = await fetch(URL);
+        const text = await res.text();
+        const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
+        const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
+        const rows = json.table.rows || [];
+
+        const therapists = rows.map(row => {
+          const obj = {};
+          cols.forEach((col, i) => {
+            obj[col] = row.c[i]?.v ?? '';
+          });
+          return obj;
+        }).filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name);
+
+        // Stats
+        const artCount = therapists.filter(t => getCategory(t.title) === 'art').length;
+        const psychCount = therapists.length - artCount;
+        document.getElementById('statTotal').textContent = psychCount;
+        document.getElementById('statArt').textContent = artCount;
+        document.getElementById('teamCount').textContent = `共 ${therapists.length} 位`;
+
+        // Render cards
+        const grid = document.getElementById('teamGrid');
+        grid.innerHTML = therapists.map(buildCard).join('');
+        document.getElementById('loadingState').style.display = 'none';
+        grid.style.display = 'grid';
+
+        // Dynamic Specialty Tags
+        generateSpecialtyTags(therapists);
+
+        // Reveal animation
+        const obs = new IntersectionObserver(e => e.forEach((x, i) => {
+          if (x.isIntersecting) {
+            x.target.style.transitionDelay = `${(i % 3) * 0.15}s`;
+            x.target.classList.add('on');
+          }
+        }), { threshold: 0.05 });
+        grid.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+      } catch (e) {
+        document.getElementById('loadingState').innerHTML = '<p style="color:var(--muted);font-size:14px;letter-spacing:1px">載入失敗，請稍後重試或<a href="https://lin.ee/nOmKPpP" style="color:var(--blue)">聯絡我們</a>。</p>';
+        console.error(e);
+      }
+    }
+
+    function generateSpecialtyTags(therapists) {
+      const curatedSpecs = [
+        '自我探索', '情緒困擾', '原生家庭', '人際議題',
+        '親職教養', '伴侶諮商', '兒童青少年', '藝術治療',
+        '悲傷失落', '睡眠困擾', '多元性別', '性別認同',
+        '網路成癮', '跨文化適應'
+      ];
+
+      const cloud = document.getElementById('specCloud');
+      cloud.innerHTML = curatedSpecs.map((spec, i) => {
+        const isArt = spec.includes('藝術');
+        return `<span class="spec-pill ${isArt ? 'art' : ''} r d1" style="transition-delay: ${i * 0.05}s" data-spec="${spec}">${spec}</span>`;
+      }).join('');
+
+      // Add click listeners to tags
+      cloud.querySelectorAll('.spec-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          const spec = pill.dataset.spec;
+          const isActive = pill.classList.contains('active');
+
+          // Reset all pills
+          cloud.querySelectorAll('.spec-pill').forEach(p => p.classList.remove('active'));
+
+          if (isActive) {
+            filterTeam('all', null);
+          } else {
+            pill.classList.add('active');
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+            filterTeam('all', spec);
+          }
+        });
+        obs2.observe(pill);
+      });
+    }
+
+    function filterTeam(category, specialty) {
+      document.querySelectorAll('.member-card').forEach(card => {
+        const cardCat = card.dataset.cat;
+        const cardSpecs = card.dataset.specs || '';
+        const matchCat = category === 'all' || cardCat === category;
+        const matchSpec = !specialty || checkFuzzyMatch(cardSpecs, specialty);
+
+        card.classList.toggle('hidden', !(matchCat && matchSpec));
+      });
+    }
+
+    function checkFuzzyMatch(text, filter) {
+      if (!text || !filter) return false;
+      if (text.includes(filter)) return true;
+      // Special aliases for tags that have multiple common spellings
+      const aliases = {
+        '兒童青少年': ['兒童青少年', '兒童/青少年', '兒童&青少年', '青少年'],
+        '跨文化適應': ['跨文化適應', '跨文化生活適應', '跨文化互動'],
+        '藝術治療': ['藝術治療', '折衷取向 藝術治療'],
+      };
+      if (aliases[filter]) {
+        return aliases[filter].some(alias => text.includes(alias));
+      }
+      return false;
+    }
+
+    // Global Filter update
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Reset specialty pills when a category is clicked
+        document.querySelectorAll('.spec-pill').forEach(p => p.classList.remove('active'));
+
+        filterTeam(btn.dataset.filter, null);
+      });
+    });
+
+    // Scroll reveal
+    const obs2 = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('on') }), { threshold: 0.05 });
+    document.querySelectorAll('.r').forEach(el => obs2.observe(el));
+
+    loadTeam();
+  </script>
+  <script src="nav-dropdown.js"></script>
+</body>
+
+</html>
