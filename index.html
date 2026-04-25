@@ -1353,6 +1353,50 @@
       footer {
         padding: 46px 24px 24px
       }
+
+      .partners { padding: 60px 24px }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); gap: 12px }
+    }
+  </style>
+
+  <style>
+    /* PARTNERS */
+    .partners {
+      padding: 80px 56px;
+      background: var(--sand);
+    }
+    .partners .sec-hd {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .partner-card {
+      background: var(--white);
+      border: 1px solid #E0EEF3;
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 14px;
+      letter-spacing: 1px;
+      line-height: 1.6;
+      transition: all .25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .partner-card:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      box-shadow: 0 4px 16px rgba(123,184,200,.18);
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -1579,6 +1623,15 @@
     </div>
   </div>
 
+  <!-- PARTNERS -->
+  <section class="partners">
+    <div class="sec-hd r">
+      <span class="sec-label">PARTNERS · 合作夥伴</span>
+      <h2 class="sec-title">攜手同行的夥伴們</h2>
+    </div>
+    <div class="partners-grid" id="partnersGrid"></div>
+  </section>
+
   <!-- CONTACT -->
   <section class="contact">
     <div class="cl r">
@@ -1780,6 +1833,31 @@
       .catch(() => {
         document.getElementById('homeTeamLoading').textContent = '';
       });
+
+    // Load partners from Sheets
+    const PARTNERS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=partners`;
+    fetch(PARTNERS_URL)
+      .then(r => r.text())
+      .then(text => {
+        const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
+        const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
+        const partners = (json.table.rows || [])
+          .map(row => {
+            const obj = {};
+            cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
+            return obj;
+          })
+          .filter(p => p['名稱'] || p['name']);
+        const grid = document.getElementById('partnersGrid');
+        if (!grid || partners.length === 0) return;
+        grid.innerHTML = partners.map(p => {
+          const name = p['名稱'] || p['name'] || '';
+          const url = p['網站連結'] || p['連結'] || p['url'] || '#';
+          return `<a href="${url}" class="partner-card r" target="_blank" rel="noopener">${name}</a>`;
+        }).join('');
+        grid.querySelectorAll('.r').forEach(el => obs.observe(el));
+      })
+      .catch(() => {});
   </script>
   <script src="nav-dropdown.js"></script>
 <script type="application/ld+json">
