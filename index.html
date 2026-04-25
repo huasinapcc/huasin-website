@@ -642,6 +642,22 @@
       transition: background .3s;
     }
     .slide-dot.active { background: #fff }
+    .slide-caption {
+      position: absolute;
+      bottom: 44px;
+      left: 20px;
+      background: rgba(44, 74, 90, .55);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity .8s ease;
+    }
+    .slide-caption.active { opacity: 1 }
 
     .ab-badge {
       position: absolute;
@@ -1602,6 +1618,7 @@
           <path d="M60 142 Q88 126 112 142 Q136 158 158 136" stroke-width="1.5" opacity=".3" />
         </svg>
         <div class="space-slide" id="spaceSlide"></div>
+        <div class="slide-caption" id="slideCaption"></div>
         <div class="slide-dots" id="slideDots"></div>
       </div>
       <div class="ab-badge"><strong>藝術治療</strong><span>大台北地區少數專業機構</span></div>
@@ -1873,6 +1890,7 @@
 
         const slide = document.getElementById('spaceSlide');
         const dots = document.getElementById('slideDots');
+        const caption = document.getElementById('slideCaption');
         const placeholder = document.getElementById('spaceSlidePlaceholder');
 
         photos.forEach((p, i) => {
@@ -1896,13 +1914,22 @@
         const imgs = slide.querySelectorAll('img');
         const dotEls = dots.querySelectorAll('.slide-dot');
 
+        const captions = photos.map(p => p.desc);
+
         function goTo(n) {
           imgs[cur].classList.remove('active');
           dotEls[cur].classList.remove('active');
+          caption.classList.remove('active');
           cur = (n + imgs.length) % imgs.length;
           imgs[cur].classList.add('active');
           dotEls[cur].classList.add('active');
+          if (captions[cur]) {
+            caption.textContent = captions[cur];
+            caption.classList.add('active');
+          }
         }
+
+        if (captions[0]) { caption.textContent = captions[0]; caption.classList.add('active'); }
 
         setInterval(() => goTo(cur + 1), 4000);
       })
