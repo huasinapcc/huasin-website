@@ -1406,6 +1406,40 @@
   </style>
 
   <style>
+    /* NEWS NAV */
+    .news-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .news-nav-btn {
+      background: none;
+      border: 1.5px solid #E0EEF3;
+      color: var(--muted);
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      transition: all .25s;
+    }
+    .news-nav-btn:hover:not(:disabled) {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .news-nav-btn:disabled {
+      opacity: .3;
+      cursor: default;
+    }
+    .news-nav-page {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
     /* PARTNERS */
     .partners {
       padding: 80px 56px;
@@ -1650,6 +1684,11 @@
       <h2 class="sec-title">好文與最新動態</h2>
     </div>
     <div class="news-grid" id="homeNewsGrid"></div>
+    <div class="news-nav" id="newsNav" style="display:none">
+      <button class="news-nav-btn" id="newsPrev">← 上一頁</button>
+      <span class="news-nav-page" id="newsPage"></span>
+      <button class="news-nav-btn" id="newsNext">下一頁 →</button>
+    </div>
   </section>
 
   <!-- CTA -->
@@ -1803,24 +1842,42 @@
           .filter(a => String(a.active).toUpperCase() === 'TRUE' && String(a.is_featured).toUpperCase() === 'TRUE');
 
         const grid = document.getElementById('homeNewsGrid');
+        const newsNav = document.getElementById('newsNav');
+        const newsPrev = document.getElementById('newsPrev');
+        const newsNext = document.getElementById('newsNext');
+        const newsPage = document.getElementById('newsPage');
         if (!grid || articles.length === 0) return;
 
-        grid.innerHTML = articles.slice(0, 3).map((a, i) => {
-          const color = CATEGORY_COLORS[a.category] || 'var(--mint)';
-          const excerpt = a.summary || (a['content\t'] || a.content || '').replace(/#+\s*/g, '').slice(0, 60) + '…';
-          return `<a href="article.html?id=${a.id}" class="nc r${i > 0 ? ' d' + i : ''}">
-            <div class="nc-top">
-              <div class="ndot" style="background:${color}"></div><span class="ntype">${a.category}</span>
-            </div>
-            <div class="nc-body">
-              <div class="ndiv"></div>
-              <h3>${a.title}</h3>
-              <p>${excerpt}</p>
-            </div>
-          </a>`;
-        }).join('');
+        const PER_PAGE = 3;
+        let page = 0;
+        const totalPages = Math.ceil(articles.length / PER_PAGE);
 
-        grid.querySelectorAll('.r').forEach(el => obs.observe(el));
+        function renderNews() {
+          const slice = articles.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
+          grid.innerHTML = slice.map((a, i) => {
+            const color = CATEGORY_COLORS[a.category] || 'var(--mint)';
+            const excerpt = a.summary || (a['content\t'] || a.content || '').replace(/#+\s*/g, '').slice(0, 60) + '…';
+            return `<a href="article.html?id=${a.id}" class="nc r${i > 0 ? ' d' + i : ''}">
+              <div class="nc-top">
+                <div class="ndot" style="background:${color}"></div><span class="ntype">${a.category}</span>
+              </div>
+              <div class="nc-body">
+                <div class="ndiv"></div>
+                <h3>${a.title}</h3>
+                <p>${excerpt}</p>
+              </div>
+            </a>`;
+          }).join('');
+          grid.querySelectorAll('.r').forEach(el => obs.observe(el));
+          newsPage.textContent = `${page + 1} / ${totalPages}`;
+          newsPrev.disabled = page === 0;
+          newsNext.disabled = page === totalPages - 1;
+        }
+
+        if (totalPages > 1) newsNav.style.display = 'flex';
+        newsPrev.addEventListener('click', () => { if (page > 0) { page--; renderNews(); } });
+        newsNext.addEventListener('click', () => { if (page < totalPages - 1) { page++; renderNews(); } });
+        renderNews();
       })
       .catch(() => {});
 
