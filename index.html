@@ -1070,7 +1070,8 @@
       background: var(--sand);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px
+      gap: 80px;
+      align-items: start
     }
 
     .cl .sec-label {
@@ -1919,21 +1920,14 @@
       .then(r => r.text())
       .then(text => {
         const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
-        const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
-        const partners = (json.table.rows || [])
-          .map(row => {
-            const obj = {};
-            cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
-            return obj;
-          })
-          .filter(p => p['名稱'] || p['name']);
+        const rows = (json.table.rows || [])
+          .map(row => ({ name: row.c[0]?.v ?? '', url: row.c[1]?.v ?? '' }))
+          .filter(p => p.name && p.name !== '名稱');
         const grid = document.getElementById('partnersGrid');
-        if (!grid || partners.length === 0) return;
-        grid.innerHTML = partners.map(p => {
-          const name = p['名稱'] || p['name'] || '';
-          const url = p['網站連結'] || p['連結'] || p['url'] || '#';
-          return `<a href="${url}" class="partner-card r" target="_blank" rel="noopener">${name}</a>`;
-        }).join('');
+        if (!grid || rows.length === 0) return;
+        grid.innerHTML = rows.map(p =>
+          `<a href="${p.url || '#'}" class="partner-card r" target="_blank" rel="noopener">${p.name}</a>`
+        ).join('');
         grid.querySelectorAll('.r').forEach(el => obs.observe(el));
       })
       .catch(() => {});
