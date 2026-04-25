@@ -1865,14 +1865,9 @@
       .then(r => r.text())
       .then(text => {
         const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
-        const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
         const photos = (json.table.rows || [])
-          .map(row => {
-            const obj = {};
-            cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
-            return obj;
-          })
-          .filter(p => p['google drive 連結'] || p['連結'] || p['url']);
+          .map(row => ({ desc: row.c[0]?.v ?? '', url: row.c[1]?.v ?? '' }))
+          .filter(p => p.url && p.url !== 'Google Drive 連結');
 
         if (photos.length === 0) return;
 
@@ -1881,12 +1876,11 @@
         const placeholder = document.getElementById('spaceSlidePlaceholder');
 
         photos.forEach((p, i) => {
-          const url = p['google drive 連結'] || p['連結'] || p['url'];
-          const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-          const src = m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w800` : url;
+          const m = p.url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+          const src = m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w800` : p.url;
           const img = document.createElement('img');
           img.src = src;
-          img.alt = p['說明'] || `空間照片 ${i + 1}`;
+          img.alt = p.desc || `空間照片 ${i + 1}`;
           if (i === 0) img.classList.add('active');
           slide.appendChild(img);
 
