@@ -602,17 +602,46 @@
       opacity: .38
     }
 
-    .av-art::before {
-      content: '藝術治療';
+    .av-art::before { display: none }
+
+    /* SPACE SLIDESHOW */
+    .space-slide {
       position: absolute;
-      bottom: 26px;
-      left: 26px;
-      font-family: 'Noto Serif TC', serif;
-      font-size: 12px;
-      letter-spacing: 4px;
-      color: var(--dark);
-      opacity: .35
+      inset: 0;
+      display: flex;
+      transition: none;
     }
+    .space-slide img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity .8s ease;
+      border-radius: 28px;
+    }
+    .space-slide img.active { opacity: 1 }
+    .slide-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+    .slide-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background .3s;
+    }
+    .slide-dot.active { background: #fff }
 
     .ab-badge {
       position: absolute;
@@ -1561,23 +1590,18 @@
   <!-- ABOUT -->
   <section class="about">
     <div class="av r">
-      <div class="av-art">
+      <div class="av-art" id="spaceSlideWrap">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#2C4A5A"
-          stroke-linecap="round">
+          stroke-linecap="round" id="spaceSlidePlaceholder">
           <circle cx="100" cy="100" r="72" stroke-width=".7" opacity=".3" />
           <circle cx="100" cy="100" r="50" stroke-width=".5" opacity=".22" />
           <circle cx="100" cy="100" r="28" stroke-width=".5" opacity=".18" />
           <path d="M55 82 Q78 62 100 76 Q122 90 145 68" stroke-width="2" opacity=".45" />
           <path d="M52 112 Q82 96 106 117 Q128 133 152 112" stroke-width="2" opacity=".38" />
           <path d="M60 142 Q88 126 112 142 Q136 158 158 136" stroke-width="1.5" opacity=".3" />
-          <circle cx="78" cy="86" r="3.5" fill="#7BB8C8" stroke="none" opacity=".55" />
-          <circle cx="116" cy="76" r="2.5" fill="#A8D5C2" stroke="none" opacity=".6" />
-          <circle cx="138" cy="112" r="3" fill="#7BB8C8" stroke="none" opacity=".48" />
-          <circle cx="72" cy="122" r="2" fill="#A8D5C2" stroke="none" opacity=".5" />
-          <path d="M88 52 Q100 38 112 52 Q100 63 88 52Z" fill="#A8D5C2" stroke="none" opacity=".28" />
-          <path d="M132 88 Q148 78 151 94 Q137 100 132 88Z" fill="#7BB8C8" stroke="none" opacity=".22" />
-          <path d="M50 140 Q58 130 66 140 Q58 148 50 140Z" fill="#A8D5C2" stroke="none" opacity=".25" />
         </svg>
+        <div class="space-slide" id="spaceSlide"></div>
+        <div class="slide-dots" id="slideDots"></div>
       </div>
       <div class="ab-badge"><strong>藝術治療</strong><span>大台北地區少數專業機構</span></div>
     </div>
@@ -1833,6 +1857,61 @@
       .catch(() => {
         document.getElementById('homeTeamLoading').textContent = '';
       });
+
+    // Load space photos from Sheets
+    const SPACE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=space`;
+    fetch(SPACE_URL)
+      .then(r => r.text())
+      .then(text => {
+        const json = JSON.parse(text.replace(/^.*?({.*}).*$/s, '$1'));
+        const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
+        const photos = (json.table.rows || [])
+          .map(row => {
+            const obj = {};
+            cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
+            return obj;
+          })
+          .filter(p => p['google drive 連結'] || p['連結'] || p['url']);
+
+        if (photos.length === 0) return;
+
+        const slide = document.getElementById('spaceSlide');
+        const dots = document.getElementById('slideDots');
+        const placeholder = document.getElementById('spaceSlidePlaceholder');
+
+        photos.forEach((p, i) => {
+          const url = p['google drive 連結'] || p['連結'] || p['url'];
+          const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+          const src = m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w800` : url;
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = p['說明'] || `空間照片 ${i + 1}`;
+          if (i === 0) img.classList.add('active');
+          slide.appendChild(img);
+
+          const dot = document.createElement('button');
+          dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', () => goTo(i));
+          dots.appendChild(dot);
+        });
+
+        if (placeholder) placeholder.style.display = 'none';
+
+        let cur = 0;
+        const imgs = slide.querySelectorAll('img');
+        const dotEls = dots.querySelectorAll('.slide-dot');
+
+        function goTo(n) {
+          imgs[cur].classList.remove('active');
+          dotEls[cur].classList.remove('active');
+          cur = (n + imgs.length) % imgs.length;
+          imgs[cur].classList.add('active');
+          dotEls[cur].classList.add('active');
+        }
+
+        setInterval(() => goTo(cur + 1), 4000);
+      })
+      .catch(() => {});
 
     // Load partners from Sheets
     const PARTNERS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=partners`;
