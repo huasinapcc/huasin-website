@@ -1416,33 +1416,30 @@
       margin-bottom: 48px;
     }
     .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       max-width: 1000px;
       margin: 0 auto;
+      justify-content: center;
     }
     .partner-card {
-      background: var(--white);
-      border: 1px solid #E0EEF3;
-      border-radius: 12px;
-      padding: 18px 20px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 30px;
+      padding: 8px 20px;
       text-align: center;
       text-decoration: none;
       color: var(--dark);
       font-size: 14px;
       letter-spacing: 1px;
-      line-height: 1.6;
       transition: all .25s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .partner-card:hover {
-      border-color: var(--blue);
+      background: var(--white);
+      border-color: #E0EEF3;
       color: var(--blue);
-      box-shadow: 0 4px 16px rgba(123,184,200,.18);
-      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(123,184,200,.15);
     }
   </style>
 </head>
