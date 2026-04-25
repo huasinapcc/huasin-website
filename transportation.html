@@ -997,6 +997,25 @@
         gap: 28px
       }
     }
+    .line-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #06C755;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(6, 199, 85, .3);
+      z-index: 9999;
+      transition: transform .3s;
+      font-size: 14px
+    }
+    .line-float:hover { transform: translateY(-5px) }
+    @media(max-width:768px) { .line-float span { display: none } }
   </style>
 </head>
 
@@ -1307,6 +1326,10 @@
     document.querySelectorAll('.r').forEach(el => obs.observe(el));
   </script>
   <script src="nav-dropdown.js"></script>
+  <a href="https://lin.ee/nOmKPpP" target="_blank" class="line-float">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M22 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>預約或了解更多？加入LINE由專人協助</span>
+  </a>
 </body>
 
 </html>
