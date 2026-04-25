@@ -1860,7 +1860,7 @@
       });
 
     // Load space photos from Sheets
-    const SPACE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=space`;
+    const SPACE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=1270099181`;
     fetch(SPACE_URL)
       .then(r => r.text())
       .then(text => {
@@ -1915,7 +1915,7 @@
       .catch(() => {});
 
     // Load partners from Sheets
-    const PARTNERS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=partners`;
+    const PARTNERS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=595055078`;
     fetch(PARTNERS_URL)
       .then(r => r.text())
       .then(text => {
