@@ -1124,7 +1124,7 @@
       const specsHtml = specs.slice(0, 4).map(s => `<span class="spec">${s}</span>`).join('');
 
       return `
-  <a href="therapist.html?id=${t.id}" class="member-card cat-${cat} r" data-cat="${cat}" data-specs="${t.specialties || ''}">
+  <a href="therapist-${Math.round(t.id)}.html" class="member-card cat-${cat} r" data-cat="${cat}" data-specs="${t.specialties || ''}">
     <div class="card-accent"></div>
     <div class="card-body">
       <div class="photo-container">
