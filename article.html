@@ -47,14 +47,16 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,.95
 .art-body li{margin-bottom:12px}
 
 /* Inline Styles */
+.art-body a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.art-body a:hover { color: var(--dark); }
 .art-body strong { color: var(--dark); font-weight: 500; }
 .art-body .blue-text { color: var(--blue); font-weight: 500; }
 .art-body .highlight { background: var(--lm); padding: 2px 6px; border-radius: 4px; color: var(--dark); }
 
 .art-footer{margin-top:80px;padding-top:40px;border-top:1px solid #eee}
 .tags-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:60px}
-.tag-item{font-size:14px;color:var(--blue);text-decoration:none}
-.tag-item:hover{text-decoration:underline}
+.tag-item{font-size:14px;color:var(--blue);text-decoration:none;background:var(--lb);padding:5px 12px;border-radius:20px;transition:background .2s}
+.tag-item:hover{background:#d0eaf3;text-decoration:none}
 
 /* AUTHOR BIO */
 .author-card{background:var(--lb);border-radius:24px;padding:40px;display:flex;gap:30px;align-items:center}
@@ -226,6 +228,12 @@ function formatContent(text) {
   // ==Highlight== -> <span class="highlight">
   html = html.replace(/==(.*?)==/g, '<span class="highlight">$1</span>');
 
+  // [text](url) -> <a href="url">text</a>
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  // bare URLs -> <a href="url">url</a> (only if not already inside an href)
+  html = html.replace(/(?<!href=")(https?:\/\/[^\s<>"]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+
   return html;
 }
 
@@ -268,7 +276,19 @@ async function loadArticle() {
     // Tags
     if (art.hashtags) {
       const tags = art.hashtags.split(/[\s,，#]+/).filter(Boolean);
-      document.getElementById('artTags').innerHTML = tags.map(t => `<span class="tag-item"># ${t}</span>`).join('');
+      document.getElementById('artTags').innerHTML = tags.map(t => `<a href="news.html?tag=${encodeURIComponent(t)}" class="tag-item"># ${t}</a>`).join('');
+
+      // JSON-LD keywords for SEO
+      const ld = document.createElement('script');
+      ld.type = 'application/ld+json';
+      ld.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": art.title,
+        "keywords": tags.join(', '),
+        "publisher": { "@type": "Organization", "name": "華昕藝心心理諮商所", "url": "https://www.hua-sin.com" }
+      });
+      document.head.appendChild(ld);
     }
 
     // Author Bio

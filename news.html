@@ -249,23 +249,6 @@
       });
     }
 
-    async function init() {
-      try {
-        const [aRes, tRes] = await Promise.all([fetch(ART_URL), fetch(THERAPIST_URL)]);
-        if (!aRes.ok || !tRes.ok) throw new Error("Fetch failed");
-        
-        allArticles = parseGviz(await aRes.text());
-        therapists = parseGviz(await tRes.text());
-        
-        renderList(allArticles);
-        document.getElementById('loadingOverlay').style.display = 'none';
-        document.getElementById('dynamicContent').style.display = 'block';
-      } catch (e) {
-        console.error(e);
-        document.getElementById('loadingOverlay').innerHTML = '<p>載入失敗。請確認 Google Sheet 已公開分享（知道連結的人都能查看）。</p>';
-      }
-    }
-
     function renderList(list) {
       const featured = list.find(a => String(a.is_featured).toUpperCase() === 'TRUE');
       const grid = document.getElementById('postsGrid');
@@ -330,16 +313,59 @@
       return `${m[1]}.${(parseInt(m[2])+1).toString().padStart(2,'0')}.${m[3].padStart(2,'0')}`;
     }
 
+    function applyFilter(filter, label) {
+      document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+      const matchTab = [...document.querySelectorAll('.ftab')].find(t => t.dataset.filter === filter);
+      if (matchTab) matchTab.classList.add('active');
+
+      let filtered;
+      if (filter === 'all') {
+        filtered = allArticles;
+      } else if (filter.startsWith('tag:')) {
+        const tag = filter.slice(4);
+        filtered = allArticles.filter(a => {
+          if (!a.hashtags) return false;
+          const tags = a.hashtags.split(/[\s,，#]+/).filter(Boolean);
+          return tags.some(t => t === tag);
+        });
+      } else {
+        filtered = allArticles.filter(a => a.category === filter);
+      }
+
+      renderList(filtered);
+      document.getElementById('gridTitle').textContent = label || (filter === 'all' ? '所有訊息' : filter);
+    }
+
     document.querySelectorAll('.ftab').forEach(tab => {
       tab.addEventListener('click', () => {
-        document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const filter = tab.dataset.filter;
-        const filtered = filter === 'all' ? allArticles : allArticles.filter(a => a.category === filter);
-        renderList(filtered);
-        document.getElementById('gridTitle').textContent = filter === 'all' ? '所有訊息' : filter;
+        history.replaceState(null, '', 'news.html');
+        applyFilter(tab.dataset.filter);
       });
     });
+
+    async function init() {
+      try {
+        const [aRes, tRes] = await Promise.all([fetch(ART_URL), fetch(THERAPIST_URL)]);
+        if (!aRes.ok || !tRes.ok) throw new Error("Fetch failed");
+
+        allArticles = parseGviz(await aRes.text());
+        therapists = parseGviz(await tRes.text());
+
+        const params = new URLSearchParams(window.location.search);
+        const tagParam = params.get('tag');
+        if (tagParam) {
+          applyFilter(`tag:${tagParam}`, `# ${tagParam}`);
+        } else {
+          renderList(allArticles);
+        }
+
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('dynamicContent').style.display = 'block';
+      } catch (e) {
+        console.error(e);
+        document.getElementById('loadingOverlay').innerHTML = '<p>載入失敗。請確認 Google Sheet 已公開分享（知道連結的人都能查看）。</p>';
+      }
+    }
 
     init();
   </script>
