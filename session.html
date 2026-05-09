@@ -26,12 +26,12 @@ body {
 }
 .fg input[type="text"]:focus { border-color: #888; background: #fff; }
 .col-heads {
-  display: grid; grid-template-columns: 52px 155px 1fr 32px;
+  display: grid; grid-template-columns: 220px 1fr 32px;
   padding: 0 0 6px; border-bottom: 1px solid #e8e5e0; margin-bottom: 4px;
 }
 .th { font-size: 11px; color: #bbb; padding: 0 6px; }
 .row-item {
-  display: grid; grid-template-columns: 52px 155px 1fr 32px;
+  display: grid; grid-template-columns: 220px 1fr 32px;
   align-items: start; padding: 8px 0; border-bottom: 1px solid #f0ede8;
 }
 .row-item:last-child { border-bottom: none; }
@@ -145,6 +145,90 @@ body {
   white-space: nowrap;
   line-height: 1;
 }
+/* ===== 手機版樣式 ===== */
+@media (max-width: 600px) {
+  body { padding: 0; background: #f0ede8; }
+  .screen-ui { max-width: 100%; }
+  .page-title { font-size: 15px; padding: 1rem 1rem 0; margin-bottom: 0.75rem; }
+  .hint { padding: 0 1rem; font-size: 13px; margin-bottom: 0.75rem; }
+
+  .card { border-radius: 0; border-left: none; border-right: none; padding: 1rem; margin-bottom: 0.5rem; }
+
+  /* 頂部資訊：改成一欄 */
+  .header-grid { grid-template-columns: 1fr; gap: 12px; }
+  .fg label { font-size: 13px; margin-bottom: 6px; }
+  .fg input[type="text"],
+  .fg select { font-size: 16px !important; padding: 10px 12px !important; border-radius: 8px !important; }
+
+  /* 每筆記錄：改成卡片式一欄 */
+  .col-heads { display: none; }
+  .row-item {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 12px 0; border-bottom: 1px solid #e8e5e0;
+    background: #fff;
+  }
+  .rc { padding: 0; }
+
+  /* 次數 + 日期 同一行 */
+  .row-item .rc:first-child {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rc input[type="number"] {
+    width: 60px !important; font-size: 16px !important; padding: 10px !important;
+    border-radius: 8px !important;
+  }
+  .rc input[type="date"] {
+    font-size: 16px !important; padding: 10px 12px !important;
+    border-radius: 8px !important; flex: 1;
+  }
+  .roc-lbl { font-size: 12px; }
+
+  /* 內容摘要 */
+  .rc textarea {
+    font-size: 16px !important; padding: 10px 12px !important;
+    min-height: 100px; border-radius: 8px !important; line-height: 1.6;
+  }
+
+  /* 紀錄者 */
+  .sig-block { gap: 8px; }
+  .sig-line { font-size: 14px; }
+  .sig-line input[type="text"] { font-size: 16px !important; width: 120px; padding: 4px 6px !important; }
+  .sig-line input[type="date"] { font-size: 16px !important; width: 100%; padding: 4px 6px !important; }
+
+  /* 刪除按鈕 */
+  .del-btn { font-size: 18px; padding: 6px 10px; align-self: flex-end; }
+
+  /* 新增按鈕 */
+  .add-btn { font-size: 15px; padding: 12px 16px; margin-top: 4px; border-radius: 10px; }
+
+  /* 字體設定 */
+  .card > div[style*="flex"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .fg[style*="width:110px"] { width: 100% !important; }
+  .fg[style*="min-width:180px"] { min-width: 0 !important; }
+  #fontFamily, #fontSize, #lineHeight {
+    font-size: 16px !important; padding: 10px 12px !important; border-radius: 8px !important;
+    width: 100% !important;
+  }
+
+  /* 按鈕區 */
+  .actions {
+    flex-direction: column; gap: 8px; padding: 1rem;
+    position: sticky; bottom: 0; background: #f0ede8;
+    border-top: 1px solid #e0ddd8;
+  }
+  .btn-print, .btn-clear, .btn-preview {
+    width: 100%; justify-content: center;
+    font-size: 16px !important; padding: 14px !important;
+    border-radius: 10px !important;
+  }
+  .btn-print { order: -1; }
+
+  /* 行次數欄位標籤 */
+  .row-num-label { font-size: 12px; color: #aaa; }
+}
 </style>
 </head>
 <body>
@@ -181,8 +265,7 @@ body {
 
   <div class="card">
     <div class="col-heads">
-      <div class="th">次數</div>
-      <div class="th">日期</div>
+      <div class="th">次數 ／ 日期</div>
       <div class="th">內容摘要 ＋ 紀錄者</div>
       <div class="th"></div>
     </div>
@@ -294,11 +377,11 @@ function addRow() {
   const div = document.createElement('div');
   div.className = 'row-item';
   div.innerHTML = `
-    <div class="rc">
-      <input type="number" min="1">
-    </div>
-    <div class="rc">
-      <div class="date-wrap">
+    <div class="rc rc-num-date" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span class="row-num-label">第</span>
+      <input type="number" min="1" style="width:52px;">
+      <span class="row-num-label">次</span>
+      <div class="date-wrap" style="flex:1;min-width:140px;">
         <input type="date" onchange="updateDate(this)">
         <span class="roc-lbl" data-roc></span>
       </div>
