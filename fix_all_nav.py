@@ -2,6 +2,10 @@ import os
 import re
 
 def fix_file(filepath):
+    # Skip temporary or backup files
+    if '~' in filepath or '#' in filepath:
+        return
+
     with open(filepath, 'r', encoding='utf-8') as file:
         content = file.read()
     
@@ -21,6 +25,7 @@ def fix_file(filepath):
     faq_link = f'{prefix}faq.html'
     transport_link = f'{prefix}transportation.html'
     resource_link = f'{prefix}resources/index.html'
+    assessment_link = f'{prefix}burnout-assessment.html'
 
     nav_pattern = r'(<ul class="nav-links">.*?)(</ul>)'
     match = re.search(nav_pattern, content, re.DOTALL)
@@ -35,6 +40,16 @@ def fix_file(filepath):
         # If resources is missing
         if 'resources' not in inner and '資源連結' not in inner:
             inner += f'\n      <li><a href="{resource_link}">資源連結</a></li>'
+            
+        # If burnout assessment is missing
+        if 'burnout-assessment.html' not in inner:
+            # Try to insert after news.html
+            news_pattern = rf'<li><a href="{prefix}news.html"( class="active")?>最新消息</a></li>'
+            if re.search(news_pattern, inner):
+                replacement = f'<li><a href="{prefix}news.html"\\1>最新消息</a></li>\n      <li><a href="{assessment_link}">電量自評</a></li>'
+                inner = re.sub(news_pattern, replacement, inner)
+            else:
+                inner += f'\n      <li><a href="{assessment_link}">電量自評</a></li>'
             
         inner += '\n    '
         content = content[:match.start()] + inner + '</ul>' + content[match.end():]
@@ -51,6 +66,15 @@ def fix_file(filepath):
         if 'resources' not in finner and '資源連結' not in finner:
             finner += f'\n          <li><a href="{resource_link}">資源連結</a></li>'
             
+        # If burnout assessment is missing
+        if 'burnout-assessment.html' not in finner:
+            team_pattern = rf'<li><a href="{prefix}team.html">專業團隊</a></li>'
+            if re.search(team_pattern, finner):
+                replacement = f'<li><a href="{prefix}team.html">專業團隊</a></li>\n          <li><a href="{assessment_link}">電量自評</a></li>'
+                finner = re.sub(team_pattern, replacement, finner)
+            else:
+                finner += f'\n          <li><a href="{assessment_link}">電量自評</a></li>'
+            
         finner += '\n        '
         content = content[:fmatch.start()] + finner + '</ul>' + content[fmatch.end():]
 
@@ -60,7 +84,7 @@ def fix_file(filepath):
         print(f"Fixed {filepath}")
 
 for root, dirs, files in os.walk('.'):
-    if 'node_modules' in root:
+    if 'node_modules' in root or '.git' in root or '.gemini' in root or 'antigravity' in root:
         continue
     for f in files:
         if f.endswith('.html'):

@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>職場身心健康電量自評｜華昕藝心心理諮商所</title>
+<meta name="description" content="花五分鐘了解你現在的工作壓力與身心狀態。華昕藝心心理諮商所提供簡式健康量表（BSRS-5）與改編版職業倦怠量表（MBI）自評，陪你同行，關注情緒電量與職場耗竭，找回內在的平衡與支持。">
+<meta name="keywords" content="職場身心健康,電量自評,職業倦怠,心理檢測,簡式健康量表,BSRS-5,MBI職業倦怠,壓力自我評估,南港心理諮商,華昕藝心">
+<link rel="canonical" href="https://www.hua-sin.com/burnout-assessment.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="華昕藝心心理諮商所">
+<meta property="og:url" content="https://www.hua-sin.com/burnout-assessment.html">
+<meta property="og:title" content="職場身心健康電量自評｜情緒電量檢測">
+<meta property="og:description" content="透過 BSRS-5 與 MBI 職場倦怠檢測，了解自己累積的工作疲累與情緒耗損狀態。花五分鐘，先照顧自己。">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="nav-dropdown.css">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green-50:#EAF3DE;--green-100:#C0DD97;--green-200:#97C459;
+  --green-400:#639922;--green-600:#3B6D11;--green-800:#27500A;
+  --teal-400:#1D9E75;--amber-50:#FAEEDA;--amber-400:#BA7517;
+  --coral-50:#FAECE7;--coral-400:#D85A30;--coral-600:#993C1D;
+  --bg:#f8f6f0;--card-bg:#ffffff;--text-primary:#2c2c2a;
+  --text-secondary:#5F5E5A;--border:#D3D1C7;--gray-50:#F1EFE8;
+  --gray-100:#D3D1C7;--gray-400:#888780;--gray-600:#5F5E5A;
+
+  /* 華昕藝心品牌變數 */
+  --blue: #7BB8C8;
+  --mint: #A8D5C2;
+  --sand: #F5F0EA;
+  --dark: #2C4A5A;
+  --white: #FAFAFA;
+  --lb: #E8F4F8;
+  --lm: #EAF7F2;
+  --muted: #6B8A98;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1a1a18;--card-bg:#252523;--text-primary:#f0ede6;
+    --text-secondary:#b0ada6;--border:#3a3a38;
+    --gray-50:#2a2a28;--gray-100:#3a3a38;
+  }
+}
+body{font-family:'Noto Serif TC',serif;background:var(--bg);color:var(--text-primary);min-height:100vh;overflow-x:hidden;}
+
+/* 華昕藝心 NAV 整合 */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(250, 250, 250, .93);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #E0EEF3;
+  padding: 0 56px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--dark);
+  text-decoration: none;
+}
+.logo em {
+  font-style: normal;
+  color: var(--blue);
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: color .2s;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--blue);
+}
+.nav-cta {
+  background: var(--blue);
+  color: #fff;
+  padding: 9px 22px;
+  border-radius: 30px;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: all .3s;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.nav-cta:hover {
+  background: var(--dark);
+}
+
+/* 測驗專屬 TOP-BAR (修正重疊問題) */
+.top-bar{
+  background:var(--green-600);
+  padding:.9rem 1.5rem;
+  position:sticky;
+  top:72px; /* 在 fixed nav 下方黏貼 */
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-top:72px; /* 初始偏移，避免被 fixed nav 遮擋 */
+}
+.top-bar-left{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.top-icon{font-size:1.4rem;color:white;opacity:.9;}
+.top-text h1{font-size:.95rem;font-weight:500;color:white;line-height:1.3;margin-bottom:.1rem;}
+.top-text p{font-size:.75rem;color:rgba(255,255,255,.75);font-family:'Noto Sans TC',sans-serif;line-height:1.3;}
+.progress-steps{display:flex;align-items:center;gap:0;flex-shrink:0;}
+.step{text-align:center;position:relative;padding:0 6px;}
+.step::after{content:'';position:absolute;top:13px;left:calc(50% + 16px);width:calc(100% - 32px);height:1px;background:rgba(255,255,255,.3);z-index:0;}
+.step:last-child::after{display:none;}
+.step-dot{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:rgba(255,255,255,.7);position:relative;z-index:1;transition:all .3s;}
+.step.active .step-dot{background:white;border-color:white;color:var(--green-600);}
+.step.done .step-dot{background:rgba(255,255,255,.5);border-color:white;color:white;}
+.step-label{font-size:10px;color:rgba(255,255,255,.65);font-family:'Noto Sans TC',sans-serif;white-space:nowrap;}
+.step.active .step-label{color:white;font-weight:500;}
+.step.done .step-label{color:rgba(255,255,255,.85);}
+
+/* 測驗容器與卡片 */
+.container{max-width:680px;margin:0 auto;padding:3rem 1.5rem 5rem;}
+.section{display:none;animation:fadeIn .4s ease;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.section-header{margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
+.section-icon-row{display:flex;align-items:center;gap:12px;margin-bottom:.75rem;}
+.section-icon{width:44px;height:44px;border-radius:12px;background:var(--green-50);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--green-600);flex-shrink:0;}
+@media(prefers-color-scheme:dark){.section-icon{background:#1f3310;color:var(--green-100);}}
+.section-tag{display:inline-block;background:var(--green-50);color:var(--green-600);font-size:11px;font-family:'Noto Sans TC',sans-serif;letter-spacing:.1em;padding:4px 12px;border-radius:20px;}
+@media(prefers-color-scheme:dark){.section-tag{background:#1f3310;color:var(--green-100);}}
+.section-title{font-size:1.2rem;font-weight:400;color:var(--text-primary);line-height:1.6;margin-bottom:.5rem;}
+.section-desc{font-size:.88rem;color:var(--text-secondary);line-height:1.8;font-family:'Noto Sans TC',sans-serif;}
+.scale-hint{display:flex;gap:6px;flex-wrap:wrap;margin-top:.75rem;}
+.scale-chip{display:inline-flex;align-items:center;gap:4px;background:var(--gray-50);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;}
+.scale-chip .chip-num{font-weight:500;color:var(--green-600);font-size:12px;}
+@media(prefers-color-scheme:dark){.scale-chip .chip-num{color:var(--green-100);}}
+.question-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem;}
+.question-text{font-size:.95rem;line-height:1.8;color:var(--text-primary);margin-bottom:1.25rem;font-family:'Noto Sans TC',sans-serif;}
+.question-num{display:inline-block;width:22px;height:22px;background:var(--green-50);color:var(--green-600);border-radius:50%;font-size:11px;font-weight:500;text-align:center;line-height:22px;margin-right:8px;font-family:'Noto Sans TC',sans-serif;}
+@media(prefers-color-scheme:dark){.question-num{background:#1f3310;color:var(--green-100);}}
+.question-sensitive .question-num{background:var(--coral-50);color:var(--coral-600);}
+.options{display:flex;gap:6px;flex-wrap:wrap;}
+.option-btn{flex:1;min-width:44px;padding:6px 2px;border:1.5px solid var(--border);border-radius:8px;background:var(--card-bg);cursor:pointer;text-align:center;transition:all .2s;font-family:'Noto Sans TC',sans-serif;}
+.option-btn .opt-value{font-size:14px;font-weight:500;color:var(--text-secondary);display:block;}
+.option-btn .opt-label{font-size:11px;color:var(--text-secondary);display:block;margin-top:2px;line-height:1.3;opacity:.85;white-space:nowrap;}
+.option-btn:hover{border-color:var(--green-200);background:var(--green-50);}
+@media(prefers-color-scheme:dark){.option-btn:hover{background:#1f3310;border-color:var(--green-400);}}
+.option-btn.selected{border-color:var(--green-400);background:var(--green-50);}
+@media(prefers-color-scheme:dark){.option-btn.selected{background:#1f3310;border-color:var(--green-200);}}
+.option-btn.selected .opt-value{color:var(--green-600);}
+@media(prefers-color-scheme:dark){.option-btn.selected .opt-value{color:var(--green-100);}}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:2rem;gap:1rem;}
+.btn{padding:.85rem 2rem;border-radius:8px;font-size:.9rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:all .2s;border:none;}
+.btn-outline{background:var(--card-bg);border:1.5px solid var(--border);color:var(--text-secondary);}
+.btn-outline:hover{border-color:var(--gray-400);}
+.btn-primary{background:var(--green-600);color:white;flex:1;}
+.btn-primary:hover{background:var(--green-800);}
+.warning-msg{font-size:12px;color:var(--coral-400);font-family:'Noto Sans TC',sans-serif;margin-top:1rem;display:none;}
+
+/* 結果呈現 */
+.battery-display{text-align:center;padding:1.25rem 1rem 1rem;}
+.battery-label{font-size:.9rem;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;margin-bottom:1.25rem;}
+.battery-icon-wrap{display:flex;justify-content:center;margin-bottom:1rem;}
+.battery-body{display:flex;align-items:center;gap:0;}
+.battery-tip{width:8px;height:24px;background:var(--gray-400);border-radius:0 4px 4px 0;margin-left:-1px;flex-shrink:0;}
+.battery-shell{width:180px;height:80px;border:3px solid var(--gray-400);border-radius:10px;position:relative;overflow:hidden;background:var(--card-bg);}
+.battery-fill{position:absolute;left:0;top:0;height:100%;width:0%;border-radius:7px 0 0 7px;transition:width 1.2s ease,background .5s ease;}
+.battery-percent{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.8rem;font-weight:400;color:var(--text-primary);font-family:'Noto Serif TC',serif;z-index:2;text-shadow:0 1px 3px rgba(255,255,255,0.5);}
+@media(prefers-color-scheme:dark){.battery-percent{text-shadow:0 1px 3px rgba(0,0,0,0.5);}}
+.battery-status{font-size:1rem;font-weight:500;font-family:'Noto Sans TC',sans-serif;color:var(--text-primary);margin-bottom:1rem;}
+.raw-score{font-size:11px;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;margin-top:6px;opacity:.8;}
+.formula-box{background:var(--gray-50);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-top:1rem;text-align:left;}
+@media(prefers-color-scheme:dark){
+  .formula-box{background:#222220;}
+}
+.formula-title{font-size:.85rem;font-weight:500;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;margin-bottom:.5rem;display:flex;align-items:center;gap:6px;}
+.formula-body{font-size:.85rem;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;line-height:1.8;}
+.formula-note{font-size:.78rem;opacity:.8;}
+.sub-scores{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:.75rem 0;}
+.sub-score-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;}
+.sub-score-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.sub-score-label{font-size:.82rem;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;line-height:1.4;}
+.sub-score-value{font-size:1.1rem;font-weight:500;font-family:'Noto Serif TC',serif;}
+.sub-score-bar{height:4px;border-radius:2px;background:var(--gray-100);overflow:hidden;margin-top:4px;}
+.sub-score-fill{height:100%;border-radius:2px;transition:width 1s ease;}
+.radar-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:.75rem 1rem .5rem;margin:.75rem 0;text-align:center;}
+.radar-title{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;color:var(--text-primary);margin-bottom:.5rem;font-family:'Noto Sans TC',sans-serif;justify-content:center;}
+.mbi-dim-cards{display:grid;grid-template-columns:1fr;gap:6px;margin-top:.5rem;}
+.mbi-dim-card{background:var(--gray-50);border-radius:10px;padding:.75rem 1rem;}
+@media(prefers-color-scheme:dark){.mbi-dim-card{background:#222220;}}
+.mbi-dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.mbi-dim-name{font-size:.85rem;font-weight:500;color:var(--text-primary);font-family:'Noto Sans TC',sans-serif;display:flex;align-items:center;gap:6px;}
+.mbi-badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500;}
+.badge-low{background:var(--green-50);color:var(--green-600);}
+.badge-mid{background:var(--amber-50);color:var(--amber-400);}
+.badge-high{background:var(--coral-50);color:var(--coral-600);}
+@media(prefers-color-scheme:dark){
+  .badge-low{background:#1f3310;color:var(--green-100);}
+  .badge-mid{background:#2a1f08;color:#f5b84a;}
+  .badge-high{background:#2a1008;color:#f08060;}
+}
+.mbi-dim-desc{font-size:.82rem;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;line-height:1.6;}
+.result-message{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.75rem;display:flex;gap:10px;align-items:flex-start;}
+.result-msg-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;color:var(--green-600);}
+.result-msg-content{flex:1;}
+.result-message .msg-title{font-size:.95rem;font-weight:500;color:var(--text-primary);margin-bottom:.35rem;font-family:'Noto Sans TC',sans-serif;}
+.result-message .msg-body{font-size:.85rem;color:var(--text-secondary);line-height:1.8;font-family:'Noto Sans TC',sans-serif;}
+.alert-box{border-radius:10px;padding:.85rem 1rem;margin-bottom:.5rem;font-family:'Noto Sans TC',sans-serif;display:flex;gap:10px;align-items:flex-start;}
+.alert-warning{background:var(--amber-50);border-left:4px solid var(--amber-400);}
+.alert-danger{background:var(--coral-50);border-left:4px solid var(--coral-400);}
+@media(prefers-color-scheme:dark){.alert-warning{background:#2a1f08;}.alert-danger{background:#2a1008;}}
+.alert-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.alert-icon.danger{color:var(--coral-400);}
+.alert-icon.warning{color:var(--amber-400);}
+.alert-content{flex:1;}
+.alert-title{font-size:.88rem;font-weight:500;margin-bottom:.3rem;color:var(--text-primary);line-height:1.4;}
+.alert-body{font-size:.83rem;line-height:1.7;color:var(--text-secondary);}
+.resource-links{margin-top:.5rem;display:flex;gap:.75rem;flex-wrap:wrap;}
+.resource-links a{display:inline-flex;align-items:center;gap:4px;color:var(--coral-600);text-decoration:none;font-weight:500;font-size:.83rem;}
+.cutoff-box{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-top:.75rem;}
+.cutoff-title{font-size:.9rem;font-weight:500;color:var(--text-primary);font-family:'Noto Sans TC',sans-serif;margin-bottom:1.25rem;display:flex;align-items:center;gap:6px;}
+.cutoff-section{margin-bottom:1rem;}
+.cutoff-section:last-child{margin-bottom:0;}
+.cutoff-subtitle{font-size:.85rem;font-weight:500;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;margin-bottom:.75rem;display:flex;align-items:center;gap:6px;}
+.cutoff-table{width:100%;border-collapse:collapse;font-size:.82rem;font-family:'Noto Sans TC',sans-serif;}
+.cutoff-table th{background:var(--gray-50);color:var(--text-secondary);padding:8px 10px;text-align:left;font-weight:500;border-bottom:2px solid var(--border);}
+@media(prefers-color-scheme:dark){.cutoff-table th{background:#2a2a28;}}
+.cutoff-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text-secondary);line-height:1.5;vertical-align:middle;}
+.cutoff-table tr:last-child td{border-bottom:none;}
+.badge-pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap;}
+.badge-pill.badge-low{background:var(--green-50);color:var(--green-600);}
+.badge-pill.badge-yellow{background:#FFF8E1;color:#A06000;}
+.badge-pill.badge-mid{background:var(--amber-50);color:var(--amber-400);}
+.badge-pill.badge-high{background:var(--coral-50);color:var(--coral-600);}
+@media(prefers-color-scheme:dark){
+  .badge-pill.badge-low{background:#1f3310;color:var(--green-100);}
+  .badge-pill.badge-yellow{background:#2a1f08;color:#f5b84a;}
+  .badge-pill.badge-mid{background:#2a1f08;color:#f5b84a;}
+  .badge-pill.badge-high{background:#2a1008;color:#f08060;}
+}
+.disclaimer-box{display:flex;gap:10px;align-items:flex-start;background:var(--amber-50);border-radius:8px;padding:1rem 1.1rem;font-size:.85rem;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;line-height:1.8;margin-bottom:.25rem;}
+@media(prefers-color-scheme:dark){.disclaimer-box{background:#2a1f08;}}
+.cutoff-note{font-size:.78rem;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;margin-top:.6rem;opacity:.8;line-height:1.6;}
+.references-box{background:var(--gray-50);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-top:.75rem;}
+@media(prefers-color-scheme:dark){
+  .references-box{background:#222220;}
+}
+.ref-title{font-size:.9rem;font-weight:500;color:var(--text-primary);font-family:'Noto Sans TC',sans-serif;margin-bottom:1rem;display:flex;align-items:center;gap:6px;}
+.ref-body{font-size:.8rem;color:var(--text-secondary);font-family:'Noto Sans TC',sans-serif;line-height:1.9;}
+.ref-body p{margin-bottom:.5rem;}
+.ref-body p:last-child{margin-bottom:0;}
+.ref-body em{font-style:italic;}
+.restart-btn{width:100%;padding:1rem;background:var(--card-bg);border:1.5px solid var(--border);border-radius:8px;color:var(--text-secondary);font-size:.9rem;font-family:'Noto Sans TC',sans-serif;cursor:pointer;margin-top:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.restart-btn:hover{border-color:var(--green-400);color:var(--green-600);}
+
+/* 華昕藝心 FOOTER 整合 */
+footer {
+  background: var(--dark);
+  color: #fff;
+  padding: 80px 56px 40px;
+  font-family: 'Noto Sans TC', sans-serif;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.fg {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.fb h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: #fff;
+}
+.fb p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 2.2;
+  margin-bottom: 24px;
+}
+.fc h4 {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--mint);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.fc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fc li {
+  margin-bottom: 10px;
+}
+.fc a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.fc a:hover {
+  color: #fff;
+}
+.fbot {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+}
+.fbot p {
+  margin: 0;
+}
+
+/* LINE FLOAT 整合 */
+.line-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #06C755;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(6, 199, 85, .3);
+  z-index: 9999;
+  transition: transform .3s;
+  font-size: 14px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.line-float:hover {
+  transform: translateY(-5px);
+}
+
+/* 響應式佈局微調 */
+@media(max-width:1000px) {
+  nav {
+    padding: 0 24px;
+  }
+  .top-bar {
+    margin-top: 72px; /* 行動端依然是 72px */
+  }
+  footer {
+    padding: 60px 24px;
+  }
+  .fg {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+@media(max-width:480px){
+  nav {
+    padding: 0 16px;
+  }
+  .top-bar-left p {
+    display: none; /* 行動小螢幕隱藏子標題 */
+  }
+  .progress-steps {
+    gap: 2px;
+  }
+  .step-label {
+    display: none; /* 隱藏步驟文字，只留圓圈 */
+  }
+  .step::after {
+    left: calc(50% + 13px);
+    width: calc(100% - 26px);
+  }
+  .hero h1{font-size:1.3rem;}
+  .sub-scores{grid-template-columns:1fr;}
+  .options{gap:4px;}
+  .option-btn{min-width:44px;}
+  .line-float span {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- 華昕藝心導覽列 -->
+<nav>
+  <a href="index.html" class="logo">華昕<em>藝心</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">關於我們</a></li>
+    <li><a href="services.html">服務項目</a></li>
+    <li class="has-dropdown">
+      <a href="team.html">專業團隊</a>
+      <div class="dropdown-menu" id="navTherapistDropdown"></div>
+    </li>
+    <li><a href="news.html">最新消息</a></li>
+    <li><a href="burnout-assessment.html" class="active">電量自評</a></li>
+    <li><a href="faq.html">常見問答</a></li>
+    <li><a href="transportation.html">交通方式</a></li>
+    <li><a href="resources/index.html">資源連結</a></li>
+    </ul>
+  <a href="https://forms.gle/ZJu7T7U1CWNZDshq8" class="nav-cta">立即預約</a>
+</nav>
+
+<!-- 測驗進度條區塊 -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <i class="ti ti-battery-charging top-icon"></i>
+    <div class="top-text">
+      <h1>職場身心健康電量自評</h1>
+      <p>了解你現在的工作壓力與身心狀態，花五分鐘，先照顧自己。</p>
+    </div>
+  </div>
+  <div class="progress-steps">
+    <div class="step active" id="step1"><div class="step-dot">1</div><div class="step-label">心理健康</div></div>
+    <div class="step" id="step2"><div class="step-dot">2</div><div class="step-label">職業倦怠</div></div>
+    <div class="step" id="step3"><div class="step-dot">3</div><div class="step-label">結果</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Section 1: BSRS-5 -->
+  <div class="section active" id="section1">
+    <div class="section-header">
+      <div class="section-icon-row">
+        <div class="section-icon"><i class="ti ti-heart-rate-monitor"></i></div>
+        <div><div class="section-tag">第一部分｜心理健康狀態</div></div>
+      </div>
+      <h2 class="section-title">過去一週，你有多少時間有以下的感覺？</h2>
+      <p class="section-desc">簡式健康量表（BSRS-5）｜共 6 題</p>
+    </div>
+    <div id="bsrs-questions"></div>
+    <p class="warning-msg" id="warn1"><i class="ti ti-alert-circle"></i> 請回答所有題目後繼續</p>
+    <div class="nav-buttons">
+      <button class="btn btn-primary" onclick="nextSection(1)">下一部分 <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Section 2: MBI -->
+  <div class="section" id="section2">
+    <div class="section-header">
+      <div class="section-icon-row">
+        <div class="section-icon"><i class="ti ti-flame"></i></div>
+        <div><div class="section-tag">第二部分｜職業倦怠</div></div>
+      </div>
+      <h2 class="section-title">以下描述符合你目前的狀況嗎？</h2>
+      <p class="section-desc">職業倦怠量表（MBI）｜共 15 題</p>
+    </div>
+    <div id="mbi-questions"></div>
+    <p class="warning-msg" id="warn2"><i class="ti ti-alert-circle"></i> 請回答所有題目後繼續</p>
+    <div class="nav-buttons">
+      <button class="btn btn-outline" onclick="prevSection(2)"><i class="ti ti-arrow-left"></i> 上一部分</button>
+      <button class="btn btn-primary" onclick="showResult()"><i class="ti ti-battery-charging"></i> 查看我的電量</button>
+    </div>
+  </div>
+
+  <!-- Section 3: Result -->
+  <div class="section" id="section3">
+    <div class="battery-display">
+      <div class="battery-label">你今天的情緒電量</div>
+      <div class="battery-icon-wrap">
+        <div class="battery-body">
+          <div class="battery-tip"></div>
+          <div class="battery-shell">
+            <div class="battery-fill" id="battery-fill"></div>
+            <div class="battery-percent" id="result-percent">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="battery-status" id="result-status"></div>
+      <div class="formula-box">
+        <div class="formula-title"><i class="ti ti-math-function"></i> 電量計算方式</div>
+        <div class="formula-body">
+          情緒電量 ＝ 心理健康（BSRS-5）× 40% ＋ 職業倦怠（MBI）× 60%<br>
+          <span class="formula-note">※ BSRS-5 及 MBI 分數皆已反向轉換，分數越低代表電量越高</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-scores">
+      <div class="sub-score-card">
+        <div class="sub-score-top">
+          <div class="sub-score-label"><i class="ti ti-heart-rate-monitor" style="margin-right:4px;color:var(--teal-400)"></i>心理健康 BSRS-5</div>
+          <div class="sub-score-value" id="bsrs-score-display" style="color:var(--teal-400)">—</div>
+        </div>
+        <div class="sub-score-bar"><div class="sub-score-fill" id="bsrs-bar" style="background:var(--teal-400);width:0%"></div></div>
+        <div class="raw-score">原始分數：<span id="bsrs-raw-display">—</span> / 20</div>
+      </div>
+      <div class="sub-score-card">
+        <div class="sub-score-top">
+          <div class="sub-score-label"><i class="ti ti-flame" style="margin-right:4px;color:var(--amber-400)"></i>職業倦怠 MBI</div>
+          <div class="sub-score-value" id="mbi-score-display" style="color:var(--amber-400)">—</div>
+        </div>
+        <div class="sub-score-bar"><div class="sub-score-fill" id="mbi-bar" style="background:var(--amber-400);width:0%"></div></div>
+        <div class="raw-score">原始分數：<span id="mbi-raw-display">—</span> / 60</div>
+      </div>
+    </div>
+
+    <!-- Radar Chart -->
+    <div class="radar-wrap">
+      <div class="radar-title"><i class="ti ti-chart-radar"></i> 職業倦怠三向度</div>
+      <svg id="radarChart" viewBox="0 0 300 260" width="100%" style="max-width:320px;margin:0 auto;display:block;"></svg>
+    </div>
+
+    <div class="mbi-dim-cards" id="mbi-dim-cards"></div>
+
+    <div id="alerts-section" style="margin-top:.5rem;"></div>
+
+    <div class="result-message" style="margin-top:.5rem;">
+      <i class="ti result-msg-icon" id="result-icon"></i>
+      <div class="result-msg-content">
+        <div class="msg-title" id="result-msg-title"></div>
+        <div class="msg-body" id="result-msg-body"></div>
+      </div>
+    </div>
+
+    <div class="cutoff-box">
+      <div class="cutoff-title"><i class="ti ti-info-circle"></i> 量表說明</div>
+
+      <div class="cutoff-section">
+        <div class="cutoff-subtitle"><i class="ti ti-heart-rate-monitor"></i> BSRS-5 簡式健康量表</div>
+        <table class="cutoff-table">
+          <thead><tr><th>前5題總分</th><th>狀態</th><th>建議</th></tr></thead>
+          <tbody>
+            <tr><td>0–5分</td><td><span class="badge-pill badge-low">一般正常範圍</span></td><td>繼續維持良好生活習慣</td></tr>
+            <tr><td>6–9分</td><td><span class="badge-pill badge-yellow">輕度情緒困擾</span></td><td>建議找親友談談，抒發情緒</td></tr>
+            <tr><td>10–14分</td><td><span class="badge-pill badge-mid">中度情緒困擾</span></td><td>建議尋求心理衛生或精神醫療專業諮詢</td></tr>
+            <tr><td>15分以上</td><td><span class="badge-pill badge-high">重度情緒困擾</span></td><td>建議盡快尋求精神醫療專業諮詢</td></tr>
+          </tbody>
+        </table>
+        <div class="cutoff-note">★ 第6題（有自殺的想法）評分達2分（中等程度）以上時，建議尋求精神醫療專業諮詢</div>
+      </div>
+
+      <div class="cutoff-section">
+        <div class="cutoff-subtitle"><i class="ti ti-flame"></i> MBI 職業倦怠量表（改編版）</div>
+        <div class="disclaimer-box">
+          <i class="ti ti-bulb" style="color:var(--amber-400);font-size:1.1rem;flex-shrink:0;margin-top:2px;"></i>
+          <div>這份量表主要協助你了解目前的工作壓力與身心耗竭狀態，並非正式診斷。若分數偏高，可能代表近期累積了較多壓力、疲憊感或情緒耗損，值得適時留意與照顧自己。</div>
+        </div>
+        <table class="cutoff-table" style="margin-top:.75rem">
+          <thead><tr><th>向度</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td><i class="ti ti-mood-sad" style="margin-right:4px"></i>情緒耗竭</td><td>身心被掏空、難以應付工作的感受。分數越高，代表近期耗竭感越明顯。</td></tr>
+            <tr><td><i class="ti ti-user-off" style="margin-right:4px"></i>冷漠去人性化</td><td>對工作對象產生疏離、冷漠的傾向。分數越高，代表與他人的連結感越低。</td></tr>
+            <tr><td><i class="ti ti-star-off" style="margin-right:4px"></i>成就感低落</td><td>對自身工作價值的懷疑與不確定感。分數越高，代表成就感越不足。</td></tr>
+          </tbody>
+        </table>
+        <div class="cutoff-note">※ 本量表為改編版（每向度5題，0–4分制），結果供自我覺察參考，不作為臨床診斷依據。</div>
+      </div>
+    </div>
+
+    <div class="references-box">
+      <div class="ref-title"><i class="ti ti-books"></i> 參考文獻</div>
+      <div class="ref-body">
+        <p><strong>BSRS-5 簡式健康量表</strong><br>
+        Lee, M. B., Liao, S. C., Lee, Y. J., Wu, C. H., Tseng, M. C., Gau, S. F., & Rau, C. L. (2003). Development and verification of validity and reliability of a short screening instrument to identify psychiatric morbidity. <em>Journal of the Formosan Medical Association, 102</em>(10), 687–694.</p>
+        <p><strong>MBI 職業倦怠量表</strong><br>
+        Maslach, C., Jackson, S. E., & Leiter, M. P. (1996). <em>Maslach burnout inventory manual</em> (3rd ed.). Consulting Psychologists Press.</p>
+        <p>Leiter, M. P., & Maslach, C. (2004). Areas of worklife: A structured approach to organizational predictors of job burnout. In P. L. Perrewe & D. C. Ganster (Eds.), <em>Research in occupational stress and well-being</em> (Vol. 3, pp. 91–134). Elsevier.</p>
+        <p>黃慧如、陳欽雨（2008）。壓力量表之編製及其心理計量特性研究。<em>教育心理學報，39</em>（1），91–110。</p>
+        <p>心不懶專業心理成長智庫（2021）。職業倦怠自我檢核。取自 <a href="https://www.unlazy-mind.com/knowledge/psy-scales/burnout" target="_blank" style="color:var(--green-600);">https://www.unlazy-mind.com/knowledge/psy-scales/burnout</a></p>
+        <p style="margin-top:.5rem;font-size:.76rem;opacity:.7;">※ MBI量表題目依Maslach職業倦怠理論三向度改編，計分採0–4五點尺度。本工具僅供自我覺察參考，不作為臨床診斷依據。</p>
+      </div>
+    </div>
+
+    <button class="restart-btn" onclick="restart()">
+      <i class="ti ti-refresh"></i> 重新評估
+    </button>
+  </div>
+
+</div>
+
+<!-- 華昕藝心頁尾 -->
+<footer>
+  <div class="fg">
+    <div class="fb">
+      <h3>華昕藝心心理諮商所</h3>
+      <p>藝術 × 心理諮商的深度結合<br>陪你同行，在南港找到你的療癒空間</p>
+    </div>
+    <div class="fc">
+      <h4>服務項目</h4>
+      <ul>
+        <li><a href="service-individual.html">個別諮商</a></li>
+        <li><a href="service-couples.html">伴侶婚姻諮商</a></li>
+        <li><a href="service-parenting.html">親子諮商</a></li>
+        <li><a href="service-online.html">線上遠距諮商</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="team.html">專業團隊</a></li>
+        <li><a href="burnout-assessment.html">電量自評</a></li>
+        <li><a href="faq.html">常見問答</a></li>
+        <li><a href="transportation.html">交通方式</a></li>
+        <li><a href="resources/index.html">資源連結</a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2025 華昕藝心心理諮商所 All rights reserved.</p>
+    <p>02-6605-7103 ｜ huasin.apcc@gmail.com</p>
+  </div>
+</footer>
+
+<!-- LINE 浮動預約按鈕 -->
+<a href="https://lin.ee/nOmKPpP" target="_blank" class="line-float">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M22 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span>預約或了解更多？加入LINE由專人協助</span>
+</a>
+
+<script>
+const bsrsQuestions = [
+  { text: "睡眠困難，譬如難以入睡、易醒或早醒" },
+  { text: "感覺緊張不安" },
+  { text: "覺得容易苦惱或動怒" },
+  { text: "感覺憂鬱、心情低落" },
+  { text: "覺得比不上別人" },
+  { text: "★ 有自殺的想法", sensitive: true }
+];
+const bsrsLabels = ["完全沒有","輕微","中等程度","厲害","非常厲害"];
+
+const mbiQuestions = [
+  { text: "我經常感覺身心疲憊，難以應付每日的工作。", dim: "ee" },
+  { text: "下班後我常覺得完全沒力氣做其他事情。", dim: "ee" },
+  { text: "我一想到隔天要上班，就感到壓力沈重。", dim: "ee" },
+  { text: "工作時我感覺情緒被掏空，難以再投入。", dim: "ee" },
+  { text: "我常常覺得沒有時間或精力照顧自己。", dim: "ee" },
+  { text: "我對工作上的人際互動越來越冷淡。", dim: "dp" },
+  { text: "我對同事或服務對象感到不耐與煩躁。", dim: "dp" },
+  { text: "我變得用很機械化、公式化的方式回應他人。", dim: "dp" },
+  { text: "我不再認為自己的工作對別人有幫助。", dim: "dp" },
+  { text: "我會有意識地與工作相關的人事物保持距離。", dim: "dp" },
+  { text: "我覺得自己在工作上的表現沒有價值。", dim: "pa" },
+  { text: "即使完成工作，也無法感到真正的成就。", dim: "pa" },
+  { text: "我懷疑自己是否適合現在的工作。", dim: "pa" },
+  { text: "我對自己的專業能力越來越沒有信心。", dim: "pa" },
+  { text: "我覺得自己在職場中一直被忽視或低估。", dim: "pa" }
+];
+const mbiLabels = ["沒有","偶爾","有時","經常","總是"];
+
+let answers = { bsrs: {}, mbi: {} };
+
+function renderQuestions(containerId, questions, labels, prefix, maxVal) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card' + (q.sensitive ? ' question-sensitive' : '');
+    let opts = '';
+    for (let v = 0; v <= maxVal; v++) {
+      const lbl = labels[v] !== undefined ? labels[v] : v;
+      opts += `<button class="option-btn" onclick="selectAnswer('${prefix}',${i},${v},this)">
+        <span class="opt-value">${v}</span>
+        <span class="opt-label">${lbl}</span>
+      </button>`;
+    }
+    card.innerHTML = `<div class="question-text"><span class="question-num">${i+1}</span>${q.text}</div>
+      <div class="options">${opts}</div>`;
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(prefix, idx, val, btn) {
+  answers[prefix][idx] = val;
+  btn.closest('.question-card').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function nextSection(current) {
+  const counts = { 1: 6, 2: 15 };
+  const prefixes = { 1: 'bsrs', 2: 'mbi' };
+  const prefix = prefixes[current];
+  if (Object.keys(answers[prefix]).length < counts[current]) {
+    document.getElementById('warn'+current).style.display = 'block';
+    return;
+  }
+  document.getElementById('warn'+current).style.display = 'none';
+  goToSection(current + 1);
+}
+
+function prevSection(current) { goToSection(current - 1); }
+
+function goToSection(n) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section'+n).classList.add('active');
+  document.querySelectorAll('.step').forEach((s,i) => {
+    s.classList.remove('active','done');
+    if (i+1 < n) s.classList.add('done');
+    if (i+1 === n) s.classList.add('active');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function calcScores() {
+  const bsrsVals = Object.entries(answers.bsrs).map(([k,v]) => ({ k: parseInt(k), v }));
+  const bsrsRaw = bsrsVals.filter(x => x.k < 5).reduce((a,x) => a+x.v, 0);
+  const bsrsSuicidal = answers.bsrs[5] || 0;
+  const bsrsPct = Math.round((1 - bsrsRaw/20) * 100);
+
+  let eeRaw=0, dpRaw=0, paRaw=0;
+  mbiQuestions.forEach((q,i) => {
+    const v = answers.mbi[i] || 0;
+    if (q.dim==='ee') eeRaw += v;
+    else if (q.dim==='dp') dpRaw += v;
+    else paRaw += v;
+  });
+  const eePct = Math.round((eeRaw/20)*100);
+  const dpPct = Math.round((dpRaw/20)*100);
+  const paPct = Math.round((paRaw/20)*100);
+  const mbiElectric = Math.round((1 - (eeRaw+dpRaw+paRaw)/60) * 100);
+  const total = Math.max(0, Math.min(100, Math.round(bsrsPct*0.4 + mbiElectric*0.6)));
+
+  return { bsrsRaw, bsrsSuicidal, bsrsPct, eeRaw, dpRaw, paRaw, eePct, dpPct, paPct, mbiElectric, total };
+}
+
+function drawRadar(eePct, dpPct, paPct) {
+  const svg = document.getElementById('radarChart');
+  svg.innerHTML = '';
+  const cx = 150, cy = 130, r = 88;
+  const labels = ['情緒耗竭', '冷漠', '成就感低落'];
+  const pcts = [eePct, dpPct, paPct];
+  const values = pcts.map(p => p/100);
+  const angles = [-Math.PI/2, -Math.PI/2 + 2*Math.PI/3, -Math.PI/2 + 4*Math.PI/3];
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const gridColor = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)';
+  const textColor = isDark ? '#b0ada6' : '#5F5E5A';
+  const accentColor = '#D85A30';
+
+  const ns = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(ns, tag);
+    for (const [k,v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  // Grid rings
+  for (let lvl = 1; lvl <= 5; lvl++) {
+    const rr = r * lvl/5;
+    const pts = angles.map(a => `${cx+rr*Math.cos(a)},${cy+rr*Math.sin(a)}`).join(' ');
+    el('polygon', { points: pts, fill: 'none', stroke: gridColor, 'stroke-width': '1' }, svg);
+  }
+
+  // Axes
+  angles.forEach(a => {
+    el('line', { x1: cx, y1: cy, x2: cx+r*Math.cos(a), y2: cy+r*Math.sin(a), stroke: gridColor, 'stroke-width': '1' }, svg);
+  });
+
+  // Data polygon
+  const dataPts = angles.map((a,i) => {
+    const rr = r * values[i];
+    return `${cx+rr*Math.cos(a)},${cy+rr*Math.sin(a)}`;
+  }).join(' ');
+  el('polygon', { points: dataPts, fill: 'rgba(210,90,48,0.18)', stroke: accentColor, 'stroke-width': '2' }, svg);
+
+  // Dots
+  angles.forEach((a,i) => {
+    const rr = r * values[i];
+    el('circle', { cx: cx+rr*Math.cos(a), cy: cy+rr*Math.sin(a), r: '4', fill: accentColor }, svg);
+  });
+
+  // Labels
+  const labelPad = 22;
+  angles.forEach((a,i) => {
+    const lx = cx + (r+labelPad)*Math.cos(a);
+    let ly = cy + (r+labelPad)*Math.sin(a);
+    const anchor = i===0 ? 'middle' : (Math.cos(a) < -0.1 ? 'end' : Math.cos(a) > 0.1 ? 'start' : 'middle');
+
+    const labelEl = el('text', { x: lx, y: ly, 'text-anchor': anchor, fill: textColor, 'font-size': '13', 'font-family': 'Noto Sans TC, sans-serif', 'font-weight': '500' }, svg);
+    labelEl.textContent = labels[i];
+
+    const pctEl = el('text', { x: lx, y: ly+16, 'text-anchor': anchor, fill: accentColor, 'font-size': '12', 'font-family': 'Noto Sans TC, sans-serif', 'font-weight': '500' }, svg);
+    pctEl.textContent = pcts[i] + '%';
+  });
+}
+
+function showResult() {
+  if (Object.keys(answers.mbi).length < 15) {
+    document.getElementById('warn2').style.display = 'block';
+    return;
+  }
+  document.getElementById('warn2').style.display = 'none';
+  const s = calcScores();
+  goToSection(3);
+
+  setTimeout(() => {
+    // Battery fill
+    document.getElementById('result-percent').textContent = s.total + '%';
+    let fillColor = '#3B6D11';
+    if (s.total < 40) fillColor = '#D85A30';
+    else if (s.total < 60) fillColor = '#BA7517';
+    else if (s.total < 80) fillColor = '#639922';
+    const fill = document.getElementById('battery-fill');
+    fill.style.background = fillColor;
+    setTimeout(() => { fill.style.width = s.total + '%'; }, 50);
+
+    // Sub scores
+    document.getElementById('bsrs-score-display').textContent = s.bsrsPct + '%';
+    document.getElementById('mbi-score-display').textContent = s.mbiElectric + '%';
+    document.getElementById('bsrs-raw-display').textContent = s.bsrsRaw;
+    document.getElementById('mbi-raw-display').textContent = s.eeRaw + s.dpRaw + s.paRaw;
+    setTimeout(() => {
+      document.getElementById('bsrs-bar').style.width = s.bsrsPct + '%';
+      document.getElementById('mbi-bar').style.width = s.mbiElectric + '%';
+    }, 100);
+
+    // Radar chart
+    drawRadar(s.eePct, s.dpPct, s.paPct);
+
+    // MBI dim cards
+    const dimData = [
+      { icon: 'ti-mood-sad', name: '情緒耗竭', pct: s.eePct, max: 20, raw: s.eeRaw,
+        low: '你的情緒能量目前還算充足，繼續維持良好的自我照顧習慣。',
+        mid: '你已有些情緒疲憊，需要為自己補充能量，找到屬於你的充電方式。',
+        high: '你的情緒能量已嚴重透支，請優先照顧自己，暫停過度給出去。' },
+      { icon: 'ti-user-off', name: '冷漠（去人性化）', pct: s.dpPct, max: 20, raw: s.dpRaw,
+        low: '你對工作和他人還保有溫度，繼續珍惜這份連結感。',
+        mid: '你可能開始對某些人或事感到麻木，這是需要休息的信號。',
+        high: '情緒保護機制已過度啟動，建議尋求支持，重新找回對工作的意義感。' },
+      { icon: 'ti-star-off', name: '成就感低落', pct: s.paPct, max: 20, raw: s.paRaw,
+        low: '你對自己的工作還有正向的感受，成就感是繼續前進的動力。',
+        mid: '你對工作的成就感有些下滑，試著找回小小的成功經驗。',
+        high: '你很難從工作中感受到價值感，這需要被認真對待，請考慮尋求支持。' }
+    ];
+
+    const dimContainer = document.getElementById('mbi-dim-cards');
+    dimContainer.innerHTML = '';
+    dimData.forEach(d => {
+      let desc, barColor;
+      if (d.pct <= 33) { desc=d.low; barColor='var(--green-400)'; }
+      else if (d.pct <= 66) { desc=d.mid; barColor='var(--amber-400)'; }
+      else { desc=d.high; barColor='var(--coral-400)'; }
+
+      dimContainer.innerHTML += `<div class="mbi-dim-card">
+        <div class="mbi-dim-header">
+          <div class="mbi-dim-name"><i class="ti ${d.icon}"></i>${d.name}</div>
+          <span style="font-size:12px;color:${barColor};font-family:'Noto Sans TC',sans-serif;font-weight:500;">${d.pct}%</span>
+        </div>
+        <div style="height:4px;border-radius:2px;background:var(--gray-100);margin-bottom:.6rem;overflow:hidden;">
+          <div style="height:100%;width:${d.pct}%;background:${barColor};border-radius:2px;transition:width 1s ease;"></div>
+        </div>
+        <div class="mbi-dim-desc">${desc}</div>
+      </div>`;
+    });
+
+    // Alerts
+    const alerts = document.getElementById('alerts-section');
+    alerts.innerHTML = '';
+
+    if (s.bsrsSuicidal >= 2) {
+      alerts.innerHTML += `<div class="alert-box alert-danger">
+        <i class="ti ti-heart-handshake alert-icon danger"></i>
+        <div class="alert-content">
+          <div class="alert-title">謝謝你誠實回答這個問題</div>
+          <div class="alert-body">有這樣的想法，代表你現在承受的已經很重了。你不需要一個人扛，請讓身邊的人或專業的人陪你。
+            <div class="resource-links">
+              <a href="tel:1925"><i class="ti ti-phone"></i> 安心專線 1925（24小時）</a>
+              <a href="tel:1980"><i class="ti ti-phone"></i> 張老師專線 1980</a>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    if (s.bsrsRaw >= 15) {
+      alerts.innerHTML += `<div class="alert-box alert-danger">
+        <i class="ti ti-heart-broken alert-icon danger"></i>
+        <div class="alert-content">
+          <div class="alert-title">根據BSRS-5量表，你現在承受的已超過一個人應該獨自扛的重量</div>
+          <div class="alert-body">這不是你的問題，是你需要多一點支持。請考慮尋求專業協助，你值得被好好照顧。
+            <div class="resource-links">
+              <a href="tel:1925"><i class="ti ti-phone"></i> 安心專線 1925（24小時）</a>
+              <a href="tel:1980"><i class="ti ti-phone"></i> 張老師專線 1980</a>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    } else if (s.bsrsRaw >= 10) {
+      alerts.innerHTML += `<div class="alert-box alert-warning">
+        <i class="ti ti-alert-triangle alert-icon warning"></i>
+        <div class="alert-content">
+          <div class="alert-title">根據BSRS-5量表，你承受的壓力已經不小了</div>
+          <div class="alert-body">建議尋求心理諮商或專業協助，給自己一個被支持的機會。</div>
+        </div>
+      </div>`;
+    } else if (s.bsrsRaw >= 6) {
+      alerts.innerHTML += `<div class="alert-box alert-warning">
+        <i class="ti ti-mood-confused alert-icon warning"></i>
+        <div class="alert-content">
+          <div class="alert-title">根據BSRS-5量表，你最近有些心理壓力</div>
+          <div class="alert-body">建議多關注自己的狀態，找一個信任的人說說話。</div>
+        </div>
+      </div>`;
+    }
+
+    // Main message
+    let icon='ti-leaf', title='', body='';
+    if (s.total >= 80) {
+      icon='ti-sun'; title='你目前的身心狀態還不錯';
+      body='這份穩定很珍貴。建議繼續在工作日中穿插微休息、維持社交連結，並定期安排讓自己充電修復的活動——不要等到快沒電才開始照顧自己。';
+    } else if (s.total >= 60) {
+      icon='ti-cloud'; title='你還在線，但有些地方開始累積疲憊了';
+      body='壓力正在慢慢堆積，現在是開始照顧自己的好時機。試試看在工作中安排微休息、建立下班後不查工作訊息的界線，或找一個讓你真正放鬆的活動——效果是累積的。';
+    } else if (s.total >= 40) {
+      icon='ti-battery-2'; title='你的身心已累積了相當多的疲憊';
+      body='這不是意志力的問題，是你需要真正的復原時間。試著讓自己慢下來：充足的睡眠、與信任的人說說話、做一件讓自己感到修復的事。從倦怠中復原需要時間，請認真看待這個訊號。';
+    } else {
+      icon='ti-battery-1'; title='你現在需要的，是好好照顧自己';
+      body='你可能已經長期承受高壓，身心都需要完整的休息與復原。請考慮與信任的人談談、尋求專業協助，或爭取工作條件的調整。你不需要一個人扛，尋求支持是勇氣，不是軟弱。';
+    }
+    document.getElementById('result-icon').className = `ti ${icon} result-msg-icon`;
+    document.getElementById('result-msg-title').textContent = title;
+    document.getElementById('result-msg-body').textContent = body;
+
+    // Status
+    const statuses = ['🔴 需要充電','🟠 電量偏低','🟡 電量尚可','🟢 電量充足'];
+    const si = s.total < 40 ? 0 : s.total < 60 ? 1 : s.total < 80 ? 2 : 3;
+    document.getElementById('result-status').textContent = statuses[si];
+
+  }, 200);
+}
+
+function restart() {
+  answers = { bsrs:{}, mbi:{} };
+  renderQuestions('bsrs-questions', bsrsQuestions, bsrsLabels, 'bsrs', 4);
+  renderQuestions('mbi-questions', mbiQuestions, mbiLabels, 'mbi', 4);
+  goToSection(1);
+}
+
+renderQuestions('bsrs-questions', bsrsQuestions, bsrsLabels, 'bsrs', 4);
+renderQuestions('mbi-questions', mbiQuestions, mbiLabels, 'mbi', 4);
+</script>
+<script src="nav-dropdown.js"></script>
+</body>
+</html>
