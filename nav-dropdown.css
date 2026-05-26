@@ -92,6 +92,85 @@
   border-radius: 10px;
 }
 
+/* Floating LINE contact button */
+.line-float {
+  position: fixed !important;
+  right: 30px !important;
+  bottom: 30px !important;
+  width: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  background: #06C755 !important;
+  color: #fff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+  box-shadow: 0 12px 34px rgba(6, 199, 85, .28) !important;
+  z-index: 9999 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  transition: width .32s ease, box-shadow .32s ease, transform .32s ease !important;
+}
+
+.line-float:hover,
+.line-float:focus-visible {
+  width: 318px !important;
+  max-width: calc(100vw - 40px) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 40px rgba(6, 199, 85, .34) !important;
+}
+
+.line-float svg {
+  width: 20px !important;
+  height: 20px !important;
+  margin-left: 18px !important;
+  flex: 0 0 20px !important;
+}
+
+.line-float span {
+  display: inline-block !important;
+  max-width: 0 !important;
+  margin-left: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  transition: max-width .32s ease, margin-left .32s ease, opacity .2s ease !important;
+}
+
+.line-float:hover span,
+.line-float:focus-visible span {
+  max-width: 250px !important;
+  margin-left: 10px !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+  .line-float {
+    right: 18px !important;
+    bottom: 18px !important;
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .line-float:hover,
+  .line-float:focus-visible {
+    width: 52px !important;
+    transform: translateY(-3px) !important;
+  }
+
+  .line-float svg {
+    margin-left: 16px !important;
+  }
+
+  .line-float span {
+    display: none !important;
+  }
+}
+
 /* ── Hamburger Button ── */
 .nav-hamburger {
   display: none;
