@@ -351,13 +351,14 @@ const H1  = 7.55;
 const H2  = 13.48;
 const HDR_Y = 4.46;
 const PRINT_Y_OFFSET = 0.15; // 整體列印文字往下 1.5mm
+const SESSION_NO_X = L + 0.05; // 次數欄往左 7mm
 
 const ROWCFG = [
   { contentY: 6.24,  sigY: 9.485, midY: 7.96,  bottomY: 9.99  },
   { contentY: 10.29, sigY: 13.635, midY: 12.07, bottomY: 14.14 },
-  { contentY: 14.44, sigY: 17.755, midY: 16.20, bottomY: 18.26 },
-  { contentY: 18.56, sigY: 21.865, midY: 20.32, bottomY: 22.37 },
-  { contentY: 22.67, sigY: 25.985, midY: 24.43, bottomY: 26.49 },
+  { contentY: 14.44, sigY: 17.755, midY: 16.20, bottomY: 18.26, contentOffsetY: 0.15 },
+  { contentY: 18.56, sigY: 21.865, midY: 20.32, bottomY: 22.37, contentOffsetY: 0.30 },
+  { contentY: 22.67, sigY: 25.985, midY: 24.43, bottomY: 26.49, contentOffsetY: 0.50 },
 ];
 
 // 紀錄者簽名行的 x 位置
@@ -370,6 +371,12 @@ function toROC(s) {
   if (!s) return '';
   const [y,m,d] = s.split('-');
   return (parseInt(y)-1911)+'年'+parseInt(m)+'月'+parseInt(d)+'日';
+}
+
+function toROCSlash(s) {
+  if (!s) return '';
+  const [y,m,d] = s.split('-');
+  return (parseInt(y)-1911)+'/'+parseInt(m)+'/'+parseInt(d);
 }
 
 function addRow() {
@@ -404,7 +411,7 @@ function addRow() {
 }
 
 function updateDate(inp) {
-  inp.closest('.date-wrap').querySelector('[data-roc]').textContent = toROC(inp.value);
+  inp.closest('.date-wrap').querySelector('[data-roc]').textContent = toROCSlash(inp.value);
 }
 function updateSigDate(inp) {
   inp.closest('.sig-block').querySelector('[data-sigroc]').textContent = toROC(inp.value);
@@ -480,9 +487,14 @@ function buildPrintLayer() {
   function addContent(text, cfg) {
     const el = document.createElement('div');
     el.className = 'pf-multi';
-    el.style.cssText = `left:${D2+0.30}cm;top:${cfg.contentY-0.25+PRINT_Y_OFFSET}cm;width:${contentW}cm;font-family:${fontFamily};font-size:${fontSize}pt;line-height:${lineHeight};`;
+    const contentOffsetY = cfg.contentOffsetY || 0;
+    el.style.cssText = `left:${D2+0.30}cm;top:${cfg.contentY-0.25+PRINT_Y_OFFSET+contentOffsetY}cm;width:${contentW}cm;font-family:${fontFamily};font-size:${fontSize}pt;line-height:${lineHeight};`;
     el.textContent = text;
     layer.appendChild(el);
+  }
+
+  function contentAvailH(cfg) {
+    return cfg.bottomY - cfg.contentY - (cfg.contentOffsetY || 0) - 0.05;
   }
 
   // 頂部資訊
@@ -521,7 +533,7 @@ function buildPrintLayer() {
   for (let i = 0; i < Math.min(rowData.length, ROWCFG.length); i++) {
     const cfg  = ROWCFG[i];
     const data = rowData[i];
-    const availPx = (cfg.bottomY - cfg.contentY - 0.05) * cmToPxActual();
+    const availPx = contentAvailH(cfg) * cmToPxActual();
 
     if (overflow) {
       const row = rows[i];
@@ -559,7 +571,7 @@ function buildPrintLayer() {
         overflow = '';
         overflowFrom = -1;
       } else {
-        const cut = fitText(overflow, fontFamily, fontSize, lineHeight, contentW, cfg.bottomY - cfg.contentY - 0.05);
+        const cut = fitText(overflow, fontFamily, fontSize, lineHeight, contentW, contentAvailH(cfg));
         addContent(cut.fitted, cfg);
         overflow = cut.overflow;
         // pendingSig 繼續往後帶
@@ -568,7 +580,7 @@ function buildPrintLayer() {
     }
 
     if (!data.content) {
-      if (data.num)     add('pf',       L+0.75,  cfg.midY-0.2, data.num);
+      if (data.num)     add('pf',       SESSION_NO_X, cfg.midY-0.2, data.num);
       if (data.dateRoc) add('pf-small', D1+0.10, cfg.midY-0.2, data.dateRoc);
       // 沒有內容，直接印 sigName/sigRoc
       if (data.sigName) add('pf-small', SIG_LABEL_X, cfg.sigY, data.sigName);
@@ -584,7 +596,7 @@ function buildPrintLayer() {
     }
 
     // 次數和日期永遠印在自己那格
-    if (data.num)     add('pf',       L+0.75,  cfg.midY-0.2, data.num);
+    if (data.num)     add('pf',       SESSION_NO_X, cfg.midY-0.2, data.num);
     if (data.dateRoc) add('pf-small', D1+0.10, cfg.midY-0.2, data.dateRoc);
 
     const textPx = measureTextHeight(data.content, fontFamily, fontSize, lineHeight, contentW);
@@ -605,7 +617,7 @@ function buildPrintLayer() {
       overflow = data.content;
       overflowFrom = i;
       pendingSig = { sigName: data.sigName, sigRoc: data.sigRoc };
-      const cut = fitText(data.content, fontFamily, fontSize, lineHeight, contentW, cfg.bottomY - cfg.contentY - 0.05);
+      const cut = fitText(data.content, fontFamily, fontSize, lineHeight, contentW, contentAvailH(cfg));
       addContent(cut.fitted, cfg);
       overflow = cut.overflow;
     }
