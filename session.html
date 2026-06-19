@@ -350,6 +350,7 @@ const R   = 19.42;
 const H1  = 7.55;
 const H2  = 13.48;
 const HDR_Y = 4.46;
+const PRINT_Y_OFFSET = 0.15; // 整體列印文字往下 1.5mm
 
 const ROWCFG = [
   { contentY: 6.24,  sigY: 9.485, midY: 7.96,  bottomY: 9.99  },
@@ -467,7 +468,7 @@ function buildPrintLayer() {
     const el = document.createElement('div');
     el.className = cls;
     el.style.left       = x + 'cm';
-    el.style.top        = y + 'cm';
+    el.style.top        = (y + PRINT_Y_OFFSET) + 'cm';
     el.style.fontFamily = fontFamily;
     el.style.fontSize   = fontSize + 'pt';
     if (cls === 'pf-multi') el.style.lineHeight = String(lineHeight);
@@ -479,7 +480,7 @@ function buildPrintLayer() {
   function addContent(text, cfg) {
     const el = document.createElement('div');
     el.className = 'pf-multi';
-    el.style.cssText = `left:${D2+0.30}cm;top:${cfg.contentY-0.25}cm;width:${contentW}cm;font-family:${fontFamily};font-size:${fontSize}pt;line-height:${lineHeight};`;
+    el.style.cssText = `left:${D2+0.30}cm;top:${cfg.contentY-0.25+PRINT_Y_OFFSET}cm;width:${contentW}cm;font-family:${fontFamily};font-size:${fontSize}pt;line-height:${lineHeight};`;
     el.textContent = text;
     layer.appendChild(el);
   }
