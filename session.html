@@ -89,6 +89,8 @@ body {
   background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font-family: inherit;
 }
 .btn-print:hover { background: #333; }
+.btn-print-bg { background: #7b6248; }
+.btn-print-bg:hover { background: #8d7356; }
 .btn-clear {
   display: flex; align-items: center; gap: 6px; padding: 9px 16px;
   font-size: 14px; cursor: pointer; background: transparent; color: #888;
@@ -300,7 +302,8 @@ body {
   <div class="actions">
     <button class="btn-clear" onclick="clearAll()">🗑 清除全部</button>
     <button class="btn-preview" onclick="doPreview()" id="previewBtn">👁 預覽對位</button>
-    <button class="btn-print" onclick="doPrint()">🖨 列印</button>
+    <button class="btn-print" onclick="doPrint(false)">🖨 套印</button>
+    <button class="btn-print btn-print-bg" onclick="doPrint(true)">🖨 含底圖</button>
   </div>
 </div>
 
@@ -460,7 +463,7 @@ function fitText(text, fontFamily, fontSize, lineHeight, widthCm, availHcm) {
   return { fitted: text.slice(0, lo), overflow: text.slice(lo) };
 }
 
-function buildPrintLayer() {
+function buildPrintLayer(includeTableBg = false) {
   const layer = document.getElementById('printLayer');
   layer.innerHTML = '';
 
@@ -471,6 +474,13 @@ function buildPrintLayer() {
 
   layer.style.fontFamily = fontFamily;
 
+  if (includeTableBg) {
+    const tableImg = document.createElement('img');
+    tableImg.src = TABLE_IMG;
+    tableImg.style.cssText = 'position:absolute;top:0;left:0;width:21cm;height:29.7cm;pointer-events:none;z-index:0;';
+    layer.appendChild(tableImg);
+  }
+
   function add(cls, x, y, text, w) {
     const el = document.createElement('div');
     el.className = cls;
@@ -478,6 +488,7 @@ function buildPrintLayer() {
     el.style.top        = (y + PRINT_Y_OFFSET) + 'cm';
     el.style.fontFamily = fontFamily;
     el.style.fontSize   = fontSize + 'pt';
+    el.style.zIndex     = '1';
     if (cls === 'pf-multi') el.style.lineHeight = String(lineHeight);
     if (w) el.style.width = w + 'cm';
     el.textContent = text;
@@ -489,6 +500,7 @@ function buildPrintLayer() {
     el.className = 'pf-multi';
     const contentOffsetY = cfg.contentOffsetY || 0;
     el.style.cssText = `left:${D2+0.30}cm;top:${cfg.contentY-0.25+PRINT_Y_OFFSET+contentOffsetY}cm;width:${contentW}cm;font-family:${fontFamily};font-size:${fontSize}pt;line-height:${lineHeight};`;
+    el.style.zIndex = '1';
     el.textContent = text;
     layer.appendChild(el);
   }
@@ -654,8 +666,8 @@ function closePreview() {
   document.body.style.overflow = '';
 }
 
-function doPrint() {
-  buildPrintLayer();
+function doPrint(includeTableBg = false) {
+  buildPrintLayer(includeTableBg);
   window.print();
 }
 
