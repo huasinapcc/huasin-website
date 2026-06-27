@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <style>
+    :root {
+      --ink: #26323a;
+      --muted: #71808a;
+      --line: #dce5e7;
+      --paper: #fff;
+      --wash: #f3f7f7;
+      --blue: #3f6f7d;
+      --blue-deep: #2e5662;
+      --blue-soft: #e4eff1;
+      --gold: #bd9a5f;
+      --danger: #a95050;
+      --shadow: 0 14px 40px rgba(42, 68, 76, .10);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { color-scheme: light; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    [hidden] { display: none !important; }
+
+    .app { min-height: 100vh; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      padding: 12px 28px;
+      color: #fff;
+      background: rgba(46, 86, 98, .96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 18px rgba(24, 48, 56, .16);
+    }
+    .brand { display: flex; align-items: center; gap: 13px; }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%;
+      font-family: Georgia, serif;
+      font-size: 20px;
+    }
+    .brand strong { display: block; font-family: Georgia, "Noto Serif TC", serif; font-size: 17px; letter-spacing: .08em; }
+    .brand small { display: block; margin-top: 2px; color: rgba(255,255,255,.68); letter-spacing: .12em; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .user { max-width: 220px; overflow: hidden; color: rgba(255,255,255,.75); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 350px) minmax(0, 1fr);
+      min-height: calc(100vh - 72px);
+    }
+    .sidebar {
+      position: sticky;
+      top: 72px;
+      height: calc(100vh - 72px);
+      padding: 22px 18px;
+      overflow: auto;
+      border-right: 1px solid var(--line);
+      background: #edf3f3;
+    }
+    .sidebar-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .sidebar-head h2 { margin: 0; font: 500 19px/1.2 Georgia, "Noto Serif TC", serif; }
+    .count { color: var(--muted); font-size: 12px; }
+    .search {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      outline: none;
+      background: #fff;
+    }
+    .search:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(63,111,125,.10); }
+    .filters { display: flex; gap: 6px; margin-bottom: 14px; }
+    .filter {
+      flex: 1;
+      padding: 7px 5px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 12px;
+    }
+    .filter.active { border-color: #cadaDE; color: var(--blue-deep); background: #fff; }
+    .article-list { display: grid; gap: 8px; }
+    .article-item {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      color: inherit;
+      text-align: left;
+      background: rgba(255,255,255,.72);
+      transition: .18s ease;
+    }
+    .article-item:hover { transform: translateY(-1px); border-color: #cddcdf; background: #fff; }
+    .article-item.selected { border-color: var(--blue); background: #fff; box-shadow: 0 6px 18px rgba(51,89,100,.08); }
+    .article-title { margin-bottom: 7px; overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+    .article-meta { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #aab5b9; }
+    .status-dot.live { background: #4b9a77; }
+    .featured { color: var(--gold); }
+    .empty-list { padding: 36px 12px; color: var(--muted); font-size: 13px; text-align: center; }
+
+    .main { padding: 28px clamp(20px, 4vw, 54px) 80px; }
+    .editor-shell { max-width: 1050px; margin: 0 auto; }
+    .editor-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+    .eyebrow { margin: 0 0 7px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .editor-head h1 { margin: 0; font: 500 clamp(24px, 3vw, 34px)/1.25 Georgia, "Noto Serif TC", serif; }
+    .editor-head p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
+    .head-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 9px; }
+
+    .card { margin-bottom: 18px; padding: clamp(20px, 3vw, 30px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow); }
+    .section-title { margin: 0 0 18px; font: 500 18px/1.4 Georgia, "Noto Serif TC", serif; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    label { display: block; margin-bottom: 7px; color: #4c5c65; font-size: 12px; font-weight: 700; letter-spacing: .03em; }
+    .required::after { content: " *"; color: var(--danger); }
+    input[type="text"], input[type="url"], input[type="date"], textarea, select {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--ink);
+      outline: none;
+      background: #fbfdfd;
+      transition: .16s ease;
+    }
+    textarea { min-height: 90px; line-height: 1.75; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(63,111,125,.10); }
+    .hint { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+
+    .image-row { display: grid; grid-template-columns: 210px 1fr; gap: 22px; align-items: start; }
+    .cover-preview {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border: 1px dashed #bdcccf;
+      border-radius: 14px;
+      color: var(--muted);
+      background: #f5f8f8;
+      font-size: 12px;
+    }
+    .cover-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .upload-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 10px 0 12px; }
+    .file-input { display: none; }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 6px; padding: 9px; border: 1px solid var(--line); border-bottom: 0; border-radius: 11px 11px 0 0; background: #f5f8f8; }
+    .tool { min-width: 34px; padding: 6px 8px; border: 0; border-radius: 7px; color: #53636b; background: transparent; font-size: 12px; }
+    .tool:hover { color: var(--blue-deep); background: #fff; }
+    #content { min-height: 430px; border-radius: 0 0 11px 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; }
+
+    .switches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .switch-card { display: flex; gap: 11px; align-items: flex-start; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: #f9fbfb; }
+    .switch-card input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--blue); }
+    .switch-card label { margin: 0; cursor: pointer; }
+    .switch-card small { display: block; margin-top: 3px; color: var(--muted); font-weight: 400; line-height: 1.4; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 9px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-weight: 650;
+      font-size: 13px;
+      transition: .16s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { cursor: wait; opacity: .55; transform: none; }
+    .btn-primary { color: #fff; background: var(--blue); }
+    .btn-primary:hover { background: var(--blue-deep); }
+    .btn-light { border-color: var(--line); color: var(--ink); background: #fff; }
+    .btn-light:hover { border-color: #b8c9cd; }
+    .btn-ghost { border-color: rgba(255,255,255,.28); color: #fff; background: rgba(255,255,255,.08); }
+    .btn-danger { border-color: #e4c7c7; color: var(--danger); background: #fff; }
+    .savebar { position: sticky; bottom: 18px; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1050px; margin: 24px auto 0; padding: 13px 16px; border: 1px solid rgba(190,207,210,.8); border-radius: 14px; background: rgba(255,255,255,.94); box-shadow: 0 12px 38px rgba(42,68,76,.16); backdrop-filter: blur(12px); }
+    .save-status { color: var(--muted); font-size: 12px; }
+    .save-actions { display: flex; gap: 9px; }
+
+    dialog { width: min(850px, calc(100vw - 28px)); max-height: calc(100vh - 40px); padding: 0; overflow: hidden; border: 0; border-radius: 18px; box-shadow: 0 24px 80px rgba(20,40,48,.28); }
+    dialog::backdrop { background: rgba(22,37,43,.55); backdrop-filter: blur(3px); }
+    .dialog-head { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid var(--line); background: #fff; }
+    .dialog-head h2 { margin: 0; font: 500 18px Georgia, "Noto Serif TC", serif; }
+    .preview { max-height: calc(100vh - 105px); padding: clamp(24px, 5vw, 56px); overflow: auto; background: #fff; }
+    .preview .category { color: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+    .preview h1 { margin: 10px 0 12px; font: 500 clamp(26px, 5vw, 42px)/1.32 Georgia, "Noto Serif TC", serif; }
+    .preview .meta { margin-bottom: 26px; color: var(--muted); font-size: 12px; }
+    .preview .hero { width: 100%; max-height: 430px; margin-bottom: 28px; object-fit: cover; border-radius: 14px; }
+    .preview .body { color: #38474f; font: 400 16px/1.95 Georgia, "Noto Serif TC", serif; }
+    .preview .body h2 { margin: 1.7em 0 .65em; color: var(--blue-deep); font-size: 24px; }
+    .preview .body h3 { margin: 1.4em 0 .55em; font-size: 19px; }
+    .preview .body p { margin: 0 0 1em; }
+    .preview .body .blue-text { color: var(--blue); }
+    .preview .body .highlight { padding: 0 .18em; background: #fff0ba; }
+
+    .loading { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; color: var(--blue-deep); background: #f3f7f7; }
+    .loader-card { text-align: center; }
+    .spinner { width: 38px; height: 38px; margin: 0 auto 15px; border: 3px solid #d5e2e4; border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .toast { position: fixed; right: 24px; bottom: 24px; z-index: 90; max-width: min(380px, calc(100vw - 48px)); padding: 13px 17px; border-radius: 11px; color: #fff; background: var(--blue-deep); box-shadow: var(--shadow); transform: translateY(18px); opacity: 0; pointer-events: none; transition: .22s ease; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { background: var(--danger); }
+
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; max-height: 370px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .editor-head { flex-direction: column; }
+      .head-actions { justify-content: flex-start; }
+      .grid, .switches { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .topbar { padding: 10px 14px; }
+      .brand small, .user { display: none; }
+      .main { padding: 22px 13px 70px; }
+      .card { padding: 18px 15px; border-radius: 14px; }
+      .image-row { grid-template-columns: 1fr; }
+      .cover-preview { max-width: 320px; }
+      .savebar { bottom: 8px; align-items: stretch; flex-direction: column; }
+      .save-actions .btn { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading" class="loading">
+    <div class="loader-card"><div class="spinner"></div><div>正在開啟文章後台…</div></div>
+  </div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">華</div>
+        <div><strong>華昕藝心</strong><small>WEBSITE CONTENT STUDIO</small></div>
+      </div>
+      <div class="top-actions">
+        <span id="userEmail" class="user"></span>
+        <a id="siteLink" class="btn btn-ghost" href="https://www.hua-sin.com" target="_blank" rel="noopener">查看網站 ↗</a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-head"><h2>文章</h2><span id="articleCount" class="count">0 篇</span></div>
+        <input id="search" class="search" type="search" placeholder="搜尋標題、作者或分類">
+        <div class="filters" role="group" aria-label="文章狀態篩選">
+          <button class="filter active" data-filter="all">全部</button>
+          <button class="filter" data-filter="live">已發布</button>
+          <button class="filter" data-filter="draft">草稿</button>
+        </div>
+        <div id="articleList" class="article-list"></div>
+      </aside>
+
+      <main class="main">
+        <form id="articleForm" class="editor-shell">
+          <input id="articleId" type="hidden">
+          <div class="editor-head">
+            <div>
+              <p class="eyebrow">Article editor</p>
+              <h1 id="editorTitle">新增文章</h1>
+              <p id="editorSubtitle">填寫內容後，可以先預覽再決定是否發布。</p>
+            </div>
+            <div class="head-actions">
+              <button id="newButton" class="btn btn-light" type="button">＋ 新增文章</button>
+              <button id="archiveButton" class="btn btn-danger" type="button" hidden>下架文章</button>
+            </div>
+          </div>
+
+          <section class="card">
+            <h2 class="section-title">文章資訊</h2>
+            <div class="grid">
+              <div class="field full">
+                <label class="required" for="title">文章標題</label>
+                <input id="title" name="title" type="text" maxlength="180" required placeholder="輸入清楚、容易理解的文章標題">
+              </div>
+              <div class="field">
+                <label class="required" for="category">分類</label>
+                <input id="category" name="category" type="text" list="categoryOptions" maxlength="50" required placeholder="例如：自我探索">
+                <datalist id="categoryOptions">
+                  <option value="最新消息"><option value="活動訊息"><option value="自我探索"><option value="親子教養"><option value="伴侶關係"><option value="情緒照顧"><option value="心理健康">
+                </datalist>
+              </div>
+              <div class="field">
+                <label for="author">作者</label>
+                <select id="author" name="author_id"><option value="">華昕藝心</option></select>
+              </div>
+              <div class="field">
+                <label class="required" for="date">文章日期</label>
+                <input id="date" name="date" type="date" required>
+              </div>
+              <div class="field">
+                <label for="hashtags">標籤</label>
+                <input id="hashtags" name="hashtags" type="text" maxlength="500" placeholder="#情緒照顧 #心理健康">
+              </div>
+              <div class="field full">
+                <label for="summary">摘要</label>
+                <textarea id="summary" name="summary" maxlength="1000" rows="3" placeholder="簡短說明這篇文章的重點，會顯示在精選文章卡片。"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2 class="section-title">封面圖片</h2>
+            <div class="image-row">
+              <div id="coverPreview" class="cover-preview">尚未上傳圖片</div>
+              <div>
+                <label for="imageUrl">圖片網址</label>
+                <input id="imageUrl" name="image_url" type="url" maxlength="1000" placeholder="上傳後會自動填入">
+                <div class="upload-actions">
+                  <label class="btn btn-primary" for="imageFile">上傳圖片</label>
+                  <button id="clearImage" class="btn btn-light" type="button">移除圖片</button>
+                </div>
+                <input id="imageFile" class="file-input" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+                <p id="uploadHint" class="hint">支援 JPG、PNG、WebP、GIF，檔案上限 8 MB。圖片會存入專用 Google Drive 資料夾。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2 class="section-title">文章內容</h2>
+            <div class="toolbar" aria-label="文章格式工具">
+              <button class="tool" type="button" data-format="h2" title="大標題">H2</button>
+              <button class="tool" type="button" data-format="h3" title="小標題">H3</button>
+              <button class="tool" type="button" data-format="bold" title="粗體"><strong>B</strong></button>
+              <button class="tool" type="button" data-format="blue" title="藍色重點">藍</button>
+              <button class="tool" type="button" data-format="highlight" title="螢光標記">螢光</button>
+              <button class="tool" type="button" data-format="bullet" title="項目符號">• 清單</button>
+              <button class="tool" type="button" data-format="link" title="加入連結">🔗 連結</button>
+            </div>
+            <textarea id="content" name="content" maxlength="100000" required placeholder="從這裡開始寫文章…&#10;&#10;使用上方按鈕可以加入標題、粗體、重點色與連結。"></textarea>
+            <p class="hint">每一個空行會形成新段落。建議段落不要太長，手機閱讀會更舒服。</p>
+          </section>
+
+          <section class="card">
+            <h2 class="section-title">發布設定</h2>
+            <div class="switches">
+              <div class="switch-card">
+                <input id="active" name="active" type="checkbox">
+                <label for="active">立即發布<small>開啟後，文章會出現在網站上。</small></label>
+              </div>
+              <div class="switch-card">
+                <input id="featured" name="is_featured" type="checkbox">
+                <label for="featured">設為精選<small>首頁與文章列表會優先呈現。</small></label>
+              </div>
+              <div class="switch-card">
+                <input id="eventEnded" name="event_ended" type="checkbox">
+                <label for="eventEnded">活動已結束<small>適用活動文章，顯示結束標記。</small></label>
+              </div>
+            </div>
+          </section>
+
+          <div class="savebar">
+            <span id="saveStatus" class="save-status">尚未儲存</span>
+            <div class="save-actions">
+              <button id="previewButton" class="btn btn-light" type="button">預覽</button>
+              <button id="saveButton" class="btn btn-primary" type="submit">儲存文章</button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="previewDialog">
+    <div class="dialog-head"><h2>文章預覽</h2><button id="closePreview" class="btn btn-light" type="button">關閉</button></div>
+    <article id="preview" class="preview"></article>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const state = { articles: [], therapists: [], selectedId: null, filter: 'all', search: '', dirty: false };
+    const $ = selector => document.querySelector(selector);
+    const $$ = selector => [...document.querySelectorAll(selector)];
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    async function init() {
+      bindEvents();
+      resetForm();
+      try {
+        const data = await callServer('getBootData');
+        state.articles = data.articles || [];
+        state.therapists = data.therapists || [];
+        $('#userEmail').textContent = data.userEmail || 'Google 帳號已驗證';
+        $('#siteLink').href = data.websiteUrl || 'https://www.hua-sin.com';
+        renderAuthors();
+        renderList();
+      } catch (error) {
+        showToast(error.message || '後台載入失敗，請重新整理。', true);
+      } finally {
+        $('#loading').hidden = true;
+      }
+    }
+
+    function bindEvents() {
+      $('#articleForm').addEventListener('submit', saveArticle);
+      $('#newButton').addEventListener('click', () => confirmDiscard(resetForm));
+      $('#archiveButton').addEventListener('click', archiveCurrentArticle);
+      $('#previewButton').addEventListener('click', showPreview);
+      $('#closePreview').addEventListener('click', () => $('#previewDialog').close());
+      $('#imageFile').addEventListener('change', uploadImage);
+      $('#imageUrl').addEventListener('input', renderCoverPreview);
+      $('#clearImage').addEventListener('click', () => { $('#imageUrl').value = ''; renderCoverPreview(); markDirty(); });
+      $('#search').addEventListener('input', event => { state.search = event.target.value.trim().toLowerCase(); renderList(); });
+      $$('.filter').forEach(button => button.addEventListener('click', () => {
+        state.filter = button.dataset.filter;
+        $$('.filter').forEach(item => item.classList.toggle('active', item === button));
+        renderList();
+      }));
+      $$('.tool').forEach(button => button.addEventListener('click', () => applyFormat(button.dataset.format)));
+      $$('#articleForm input, #articleForm textarea, #articleForm select').forEach(field => {
+        field.addEventListener('input', markDirty);
+        field.addEventListener('change', markDirty);
+      });
+      window.addEventListener('beforeunload', event => {
+        if (!state.dirty) return;
+        event.preventDefault();
+        event.returnValue = '';
+      });
+    }
+
+    function callServer(name, argument) {
+      return new Promise((resolve, reject) => {
+        const runner = google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(error => reject(new Error(error && error.message ? error.message : String(error))));
+        if (argument === undefined) runner[name]();
+        else runner[name](argument);
+      });
+    }
+
+    function renderAuthors() {
+      const select = $('#author');
+      select.innerHTML = '<option value="">華昕藝心</option>' + state.therapists.map(person =>
+        `<option value="${escapeAttr(person.id)}">${escapeHtml(person.name)}${person.title ? `｜${escapeHtml(person.title)}` : ''}</option>`
+      ).join('');
+    }
+
+    function renderList() {
+      const filtered = state.articles.filter(article => {
+        if (state.filter === 'live' && !article.active) return false;
+        if (state.filter === 'draft' && article.active) return false;
+        if (!state.search) return true;
+        return [article.title, article.author_id, article.category].join(' ').toLowerCase().includes(state.search);
+      });
+      $('#articleCount').textContent = `${filtered.length} 篇`;
+      $('#articleList').innerHTML = filtered.length ? filtered.map(article => `
+        <button class="article-item ${String(article.id) === String(state.selectedId) ? 'selected' : ''}" type="button" data-id="${escapeAttr(article.id)}">
+          <div class="article-title">${escapeHtml(article.title || '未命名文章')}</div>
+          <div class="article-meta"><span class="status-dot ${article.active ? 'live' : ''}"></span><span>${article.active ? '已發布' : '草稿'}</span><span>·</span><span>${escapeHtml(article.date || '')}</span>${article.is_featured ? '<span class="featured">★ 精選</span>' : ''}</div>
+        </button>`).join('') : '<div class="empty-list">找不到符合條件的文章</div>';
+      $$('.article-item').forEach(button => button.addEventListener('click', () => confirmDiscard(() => editArticle(button.dataset.id))));
+    }
+
+    function editArticle(id) {
+      const article = state.articles.find(item => String(item.id) === String(id));
+      if (!article) return;
+      state.selectedId = article.id;
+      $('#articleId').value = article.id;
+      $('#title').value = article.title || '';
+      $('#category').value = article.category || '';
+      ensureAuthorOption(article.author_id);
+      $('#author').value = article.author_id || '';
+      $('#date').value = normalizeDate(article.date);
+      $('#hashtags').value = article.hashtags || '';
+      $('#summary').value = article.summary || '';
+      $('#imageUrl').value = article.image_url || '';
+      $('#content').value = article.content || '';
+      $('#active').checked = Boolean(article.active);
+      $('#featured').checked = Boolean(article.is_featured);
+      $('#eventEnded').checked = Boolean(article.event_ended);
+      $('#editorTitle').textContent = '編輯文章';
+      $('#editorSubtitle').textContent = `文章編號 ${article.id}｜最後顯示日期 ${normalizeDate(article.date)}`;
+      $('#archiveButton').hidden = !article.active;
+      $('#saveStatus').textContent = '已載入文章';
+      state.dirty = false;
+      renderCoverPreview();
+      renderList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      $('#articleForm').reset();
+      state.selectedId = null;
+      $('#articleId').value = '';
+      $('#date').value = todayString();
+      $('#editorTitle').textContent = '新增文章';
+      $('#editorSubtitle').textContent = '填寫內容後，可以先預覽再決定是否發布。';
+      $('#archiveButton').hidden = true;
+      $('#saveStatus').textContent = '尚未儲存';
+      state.dirty = false;
+      renderCoverPreview();
+      renderList();
+      $('#title').focus();
+    }
+
+    function ensureAuthorOption(value) {
+      if (!value || [...$('#author').options].some(option => String(option.value) === String(value))) return;
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = `原有作者｜${value}`;
+      $('#author').append(option);
+    }
+
+    function collectForm() {
+      return {
+        id: $('#articleId').value ? Number($('#articleId').value) : 0,
+        title: $('#title').value,
+        category: $('#category').value,
+        author_id: $('#author').value,
+        date: $('#date').value,
+        hashtags: $('#hashtags').value,
+        summary: $('#summary').value,
+        image_url: $('#imageUrl').value,
+        content: $('#content').value,
+        active: $('#active').checked,
+        is_featured: $('#featured').checked,
+        event_ended: $('#eventEnded').checked,
+      };
+    }
+
+    async function saveArticle(event) {
+      event.preventDefault();
+      if (!$('#articleForm').reportValidity()) return;
+      const button = $('#saveButton');
+      setBusy(button, true, '儲存中…');
+      $('#saveStatus').textContent = '正在儲存變更…';
+      try {
+        const response = await callServer('saveArticle', collectForm());
+        upsertArticle(response.article);
+        state.selectedId = response.article.id;
+        $('#articleId').value = response.article.id;
+        $('#editorTitle').textContent = '編輯文章';
+        $('#editorSubtitle').textContent = `文章編號 ${response.article.id}｜${response.message}`;
+        $('#archiveButton').hidden = !response.article.active;
+        $('#saveStatus').textContent = response.message;
+        state.dirty = false;
+        renderList();
+        showToast(response.message);
+      } catch (error) {
+        $('#saveStatus').textContent = '儲存失敗';
+        showToast(error.message || '文章儲存失敗。', true);
+      } finally {
+        setBusy(button, false, '儲存文章');
+      }
+    }
+
+    async function archiveCurrentArticle() {
+      if (!state.selectedId || !confirm('確定要下架這篇文章嗎？資料會保留，之後仍可重新發布。')) return;
+      const button = $('#archiveButton');
+      setBusy(button, true, '下架中…');
+      try {
+        const response = await callServer('archiveArticle', state.selectedId);
+        upsertArticle(response.article);
+        $('#active').checked = false;
+        $('#featured').checked = false;
+        button.hidden = true;
+        state.dirty = false;
+        renderList();
+        showToast(response.message);
+      } catch (error) {
+        showToast(error.message || '文章下架失敗。', true);
+      } finally {
+        setBusy(button, false, '下架文章');
+      }
+    }
+
+    function upsertArticle(article) {
+      if (article.is_featured) {
+        state.articles.forEach(item => { item.is_featured = false; });
+      }
+      const index = state.articles.findIndex(item => String(item.id) === String(article.id));
+      if (index >= 0) state.articles[index] = article;
+      else state.articles.unshift(article);
+      state.articles.sort((a, b) => String(b.date).localeCompare(String(a.date)) || Number(b.id) - Number(a.id));
+    }
+
+    async function uploadImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 8 * 1024 * 1024) { showToast('圖片不可超過 8 MB。', true); event.target.value = ''; return; }
+      const hint = $('#uploadHint');
+      hint.textContent = '正在上傳圖片，請稍候…';
+      try {
+        const dataUrl = await readFileAsDataUrl(file);
+        const response = await callServer('uploadArticleImage', { dataUrl, fileName: file.name });
+        $('#imageUrl').value = response.url;
+        renderCoverPreview(response.previewUrl);
+        markDirty();
+        hint.textContent = `上傳完成：${response.name}`;
+        showToast('封面圖片已上傳');
+      } catch (error) {
+        hint.textContent = '圖片上傳失敗，請檢查檔案後再試。';
+        showToast(error.message || '圖片上傳失敗。', true);
+      } finally {
+        event.target.value = '';
+      }
+    }
+
+    function renderCoverPreview(overrideUrl) {
+      const url = overrideUrl || driveImage($('#imageUrl').value, 'w1200');
+      $('#coverPreview').innerHTML = url ? `<img src="${escapeAttr(url)}" alt="封面預覽" onerror="this.parentElement.textContent='無法載入圖片預覽'">` : '尚未上傳圖片';
+    }
+
+    function showPreview() {
+      const article = collectForm();
+      const image = driveImage(article.image_url, 'w1400');
+      $('#preview').innerHTML = `
+        <div class="category">${escapeHtml(article.category || '文章分類')}</div>
+        <h1>${escapeHtml(article.title || '尚未輸入文章標題')}</h1>
+        <div class="meta">${escapeHtml(article.date || '')}${article.author_id ? `　｜　${escapeHtml(authorLabel(article.author_id))}` : '　｜　華昕藝心'}</div>
+        ${image ? `<img class="hero" src="${escapeAttr(image)}" alt="">` : ''}
+        <div class="body">${formatContent(article.content || '尚未輸入文章內容。')}</div>`;
+      $('#previewDialog').showModal();
+    }
+
+    function applyFormat(type) {
+      const field = $('#content');
+      const start = field.selectionStart;
+      const end = field.selectionEnd;
+      const selected = field.value.slice(start, end);
+      const formats = {
+        h2: ['## ', '', '段落標題'], h3: ['### ', '', '小標題'], bold: ['**', '**', '粗體文字'],
+        blue: ['!!', '!!', '藍色重點'], highlight: ['==', '==', '螢光重點'], bullet: ['- ', '', '清單項目'],
+        link: ['[', '](https://)', '連結文字'],
+      };
+      const [prefix, suffix, placeholder] = formats[type];
+      const text = selected || placeholder;
+      field.setRangeText(prefix + text + suffix, start, end, 'select');
+      field.focus();
+      markDirty();
+    }
+
+    function formatContent(value) {
+      let html = String(value).split('\n').map(rawLine => {
+        const line = escapeHtml(rawLine.trim());
+        if (!line) return '';
+        if (line.startsWith('## ')) return `<h2>${inlineFormat(line.slice(3))}</h2>`;
+        if (line.startsWith('### ')) return `<h3>${inlineFormat(line.slice(4))}</h3>`;
+        if (line.startsWith('- ') || line.startsWith('* ')) return `<li>${inlineFormat(line.slice(2))}</li>`;
+        return `<p>${inlineFormat(line)}</p>`;
+      }).join('');
+      return html.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
+    }
+
+    function inlineFormat(value) {
+      return value
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/!!(.*?)!!/g, '<span class="blue-text">$1</span>')
+        .replace(/==(.*?)==/g, '<span class="highlight">$1</span>')
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    }
+
+    function confirmDiscard(callback) {
+      if (!state.dirty || confirm('目前有尚未儲存的變更，確定要離開嗎？')) callback();
+    }
+    function markDirty() { state.dirty = true; $('#saveStatus').textContent = '有尚未儲存的變更'; }
+    function setBusy(button, busy, text) { button.disabled = busy; button.textContent = text; }
+    function readFileAsDataUrl(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('無法讀取圖片。')); reader.readAsDataURL(file); }); }
+    function todayString() { const now = new Date(); const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000); return local.toISOString().slice(0, 10); }
+    function normalizeDate(value) { if (!value) return todayString(); const match = String(value).match(/^Date\((\d+),(\d+),(\d+)\)$/); return match ? `${match[1]}-${String(Number(match[2]) + 1).padStart(2, '0')}-${String(match[3]).padStart(2, '0')}` : String(value).slice(0, 10); }
+    function driveImage(url, size) { const match = String(url || '').match(/\/d\/([a-zA-Z0-9_-]+)/); return match ? 'https://drive.google.com/thumbnail?id=' + match[1] + '&sz=' + size : String(url || ''); }
+    function authorLabel(id) { const person = state.therapists.find(item => String(item.id) === String(id)); return person ? person.name : id; }
+    function escapeHtml(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char]); }
+    function escapeAttr(value) { return escapeHtml(value); }
+    let toastTimer;
+    function showToast(message, error = false) { const toast = $('#toast'); toast.textContent = message; toast.classList.toggle('error', error); toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3800); }
+  </script>
+</body>
+</html>
