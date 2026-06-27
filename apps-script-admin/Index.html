@@ -169,6 +169,7 @@
     .toolbar { display: flex; flex-wrap: wrap; gap: 6px; padding: 9px; border: 1px solid var(--line); border-bottom: 0; border-radius: 11px 11px 0 0; background: #f5f8f8; }
     .tool { min-width: 34px; padding: 6px 8px; border: 0; border-radius: 7px; color: #53636b; background: transparent; font-size: 12px; }
     .tool:hover { color: var(--blue-deep); background: #fff; }
+    .tool-separator { width: 1px; min-height: 26px; margin: 0 2px; background: var(--line); }
     #content { min-height: 430px; border-radius: 0 0 11px 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; }
 
     .switches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -214,7 +215,13 @@
     .preview .body { color: #38474f; font: 400 16px/1.95 Georgia, "Noto Serif TC", serif; }
     .preview .body h2 { margin: 1.7em 0 .65em; color: var(--blue-deep); font-size: 24px; }
     .preview .body h3 { margin: 1.4em 0 .55em; font-size: 19px; }
+    .preview .body h4 { margin: 1.25em 0 .5em; color: var(--blue-deep); font-size: 17px; }
     .preview .body p { margin: 0 0 1em; }
+    .preview .body .lead-text { font-size: 20px; line-height: 1.85; color: var(--blue-deep); }
+    .preview .body .small-text { font-size: 13px; line-height: 1.8; color: var(--muted); }
+    .preview .body .center-text { text-align: center; }
+    .preview .body blockquote { margin: 1.5em 0; padding: 18px 22px; border-left: 4px solid var(--blue); color: var(--blue-deep); background: var(--blue-soft); }
+    .preview .body hr { margin: 2.5em auto; border: 0; border-top: 1px solid var(--line); }
     .preview .body .blue-text { color: var(--blue); }
     .preview .body .highlight { padding: 0 .18em; background: #fff0ba; }
 
@@ -344,6 +351,14 @@
             <div class="toolbar" aria-label="文章格式工具">
               <button class="tool" type="button" data-format="h2" title="大標題">H2</button>
               <button class="tool" type="button" data-format="h3" title="小標題">H3</button>
+              <button class="tool" type="button" data-format="h4" title="小節標題">H4</button>
+              <span class="tool-separator" aria-hidden="true"></span>
+              <button class="tool" type="button" data-format="large" title="較大的重點文字">大字</button>
+              <button class="tool" type="button" data-format="small" title="較小的補充文字">小字</button>
+              <button class="tool" type="button" data-format="quote" title="引言或提醒">引言</button>
+              <button class="tool" type="button" data-format="center" title="置中段落">置中</button>
+              <button class="tool" type="button" data-format="divider" title="分隔線">分隔線</button>
+              <span class="tool-separator" aria-hidden="true"></span>
               <button class="tool" type="button" data-format="bold" title="粗體"><strong>B</strong></button>
               <button class="tool" type="button" data-format="blue" title="藍色重點">藍</button>
               <button class="tool" type="button" data-format="highlight" title="螢光標記">螢光</button>
@@ -351,7 +366,7 @@
               <button class="tool" type="button" data-format="link" title="加入連結">🔗 連結</button>
             </div>
             <textarea id="content" name="content" maxlength="100000" required placeholder="從這裡開始寫文章…&#10;&#10;使用上方按鈕可以加入標題、粗體、重點色與連結。"></textarea>
-            <p class="hint">每一個空行會形成新段落。建議段落不要太長，手機閱讀會更舒服。</p>
+            <p class="hint">H2～H4 適合章節層級；大字可做開場重點，小字適合註解。每一個空行會形成新段落。</p>
           </section>
 
           <section class="card">
@@ -642,8 +657,21 @@
       const start = field.selectionStart;
       const end = field.selectionEnd;
       const selected = field.value.slice(start, end);
+      const lineFormats = {
+        h2: ['## ', '段落標題'], h3: ['### ', '小標題'], h4: ['#### ', '小節標題'],
+        large: ['[大字] ', '較大的重點段落'], small: ['[小字] ', '較小的補充說明'],
+        quote: ['> ', '引言或重要提醒'], center: ['[置中] ', '置中的重點文字'],
+      };
+      if (lineFormats[type]) {
+        applyLineFormat(field, lineFormats[type][0], lineFormats[type][1]);
+        return;
+      }
+      if (type === 'divider') {
+        applyDivider(field);
+        return;
+      }
       const formats = {
-        h2: ['## ', '', '段落標題'], h3: ['### ', '', '小標題'], bold: ['**', '**', '粗體文字'],
+        bold: ['**', '**', '粗體文字'],
         blue: ['!!', '!!', '藍色重點'], highlight: ['==', '==', '螢光重點'], bullet: ['- ', '', '清單項目'],
         link: ['[', '](https://)', '連結文字'],
       };
@@ -654,14 +682,45 @@
       markDirty();
     }
 
+    function applyLineFormat(field, prefix, placeholder) {
+      const value = field.value;
+      const selectionStart = field.selectionStart;
+      const selectionEnd = field.selectionEnd;
+      const lineStart = value.lastIndexOf('\n', Math.max(selectionStart - 1, 0)) + 1;
+      const nextBreak = value.indexOf('\n', selectionEnd);
+      const lineEnd = nextBreak === -1 ? value.length : nextBreak;
+      const current = value.slice(lineStart, lineEnd);
+      const clean = (current.trim() || placeholder).replace(/^(?:#### |### |## |\[大字\] |\[小字\] |\[置中\] |> )/, '');
+      field.setRangeText(prefix + clean, lineStart, lineEnd, 'select');
+      field.focus();
+      markDirty();
+    }
+
+    function applyDivider(field) {
+      const value = field.value;
+      const lineStart = value.lastIndexOf('\n', Math.max(field.selectionStart - 1, 0)) + 1;
+      const nextBreak = value.indexOf('\n', field.selectionEnd);
+      const lineEnd = nextBreak === -1 ? value.length : nextBreak;
+      field.setRangeText('---', lineStart, lineEnd, 'end');
+      field.focus();
+      markDirty();
+    }
+
     function formatContent(value) {
       let html = String(value).split('\n').map(rawLine => {
-        const line = escapeHtml(rawLine.trim());
-        if (!line) return '';
-        if (line.startsWith('## ')) return `<h2>${inlineFormat(line.slice(3))}</h2>`;
-        if (line.startsWith('### ')) return `<h3>${inlineFormat(line.slice(4))}</h3>`;
-        if (line.startsWith('- ') || line.startsWith('* ')) return `<li>${inlineFormat(line.slice(2))}</li>`;
-        return `<p>${inlineFormat(line)}</p>`;
+        const raw = rawLine.trim();
+        if (!raw) return '';
+        const formatted = start => inlineFormat(escapeHtml(raw.slice(start)));
+        if (raw.startsWith('## ')) return `<h2>${formatted(3)}</h2>`;
+        if (raw.startsWith('### ')) return `<h3>${formatted(4)}</h3>`;
+        if (raw.startsWith('#### ')) return `<h4>${formatted(5)}</h4>`;
+        if (raw.startsWith('[大字] ')) return `<p class="lead-text">${formatted(5)}</p>`;
+        if (raw.startsWith('[小字] ')) return `<p class="small-text">${formatted(5)}</p>`;
+        if (raw.startsWith('[置中] ')) return `<p class="center-text">${formatted(5)}</p>`;
+        if (raw.startsWith('> ')) return `<blockquote>${formatted(2)}</blockquote>`;
+        if (raw === '---') return '<hr>';
+        if (raw.startsWith('- ') || raw.startsWith('* ')) return `<li>${formatted(2)}</li>`;
+        return `<p>${inlineFormat(escapeHtml(raw))}</p>`;
       }).join('');
       return html.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
     }

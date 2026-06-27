@@ -41,10 +41,17 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,.95
 
 .art-body{font-size:17px;line-height:2.2;color:#334E5C;letter-spacing:0.5px}
 .art-body p{margin-bottom:32px}
-.art-body h2,.art-body h3{font-family:'Noto Serif TC',serif;color:var(--dark);margin:60px 0 24px;letter-spacing:2px}
+.art-body h2,.art-body h3,.art-body h4{font-family:'Noto Serif TC',serif;color:var(--dark);margin:60px 0 24px;letter-spacing:2px}
 .art-body h2{font-size:26px;border-left:4px solid var(--blue);padding-left:20px}
+.art-body h3{font-size:22px;margin-top:48px}
+.art-body h4{font-size:19px;margin-top:40px;color:var(--blue)}
 .art-body ul,.art-body ol{margin-bottom:32px;padding-left:24px}
 .art-body li{margin-bottom:12px}
+.art-body .lead-text{font-size:22px;line-height:2;color:var(--dark);font-family:'Noto Serif TC',serif}
+.art-body .small-text{font-size:14px;line-height:1.9;color:var(--muted)}
+.art-body .center-text{text-align:center}
+.art-body blockquote{margin:44px 0;padding:24px 28px;border-left:4px solid var(--blue);border-radius:0 12px 12px 0;background:var(--lb);color:var(--dark);font-family:'Noto Serif TC',serif;font-size:19px;line-height:2}
+.art-body hr{width:72%;margin:64px auto;border:0;border-top:1px solid #dbe4e7}
 
 /* Inline Styles */
 .art-body a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
@@ -87,6 +94,8 @@ footer{background:var(--dark);color:#fff;padding:80px 56px 40px}
   nav{padding:0 24px}
   .fg{grid-template-columns:1fr;gap:40px}
   .author-card{flex-direction:column;text-align:center}
+  .art-body .lead-text{font-size:19px}
+  .art-body blockquote{padding:20px;font-size:17px}
 }
 </style>
 </head>
@@ -221,6 +230,14 @@ function formatContent(text) {
     // Headings
     if (line.startsWith('## ')) return `<h2>${line.substring(3)}</h2>`;
     if (line.startsWith('### ')) return `<h3>${line.substring(4)}</h3>`;
+    if (line.startsWith('#### ')) return `<h4>${line.substring(5)}</h4>`;
+
+    // Paragraph sizes and layout
+    if (line.startsWith('[大字] ')) return `<p class="lead-text">${line.substring(5)}</p>`;
+    if (line.startsWith('[小字] ')) return `<p class="small-text">${line.substring(5)}</p>`;
+    if (line.startsWith('[置中] ')) return `<p class="center-text">${line.substring(5)}</p>`;
+    if (line.startsWith('> ')) return `<blockquote>${line.substring(2)}</blockquote>`;
+    if (line === '---') return '<hr>';
     
     // Bullet points
     if (line.startsWith('* ') || line.startsWith('- ')) return `<li>${line.substring(2)}</li>`;
