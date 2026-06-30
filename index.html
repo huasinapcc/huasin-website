@@ -1933,14 +1933,18 @@
             cols.forEach((col, i) => { obj[col] = row.c[i]?.v ?? ''; });
             return obj;
           })
-          .filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name);
+          .filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name)
+          .sort((a, b) => Number(a.sort_order || a.id || 9999) - Number(b.sort_order || b.id || 9999));
 
         const grid = document.getElementById('homeTeamGrid');
         grid.innerHTML = therapists.map((t, i) => {
           const photo = driveThumb(t.photo_url);
           const showPlaceholder = `this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex'`;
-          const tryDrive = photo ? `if(!this._triedDrive){this._triedDrive=true;this.src='${photo}'}else{${showPlaceholder}}` : showPlaceholder;
-          const photoHtml = `<img src="images/therapists/${t.id}.avif" alt="${t.name}" class="tm-photo" onerror="if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${tryDrive}}">`;
+          const photoSrc = photo || `images/therapists/${t.id}.avif`;
+          const fallback = photo
+            ? `if(!this._triedAvif){this._triedAvif=true;this.src='images/therapists/${t.id}.avif'}else if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${showPlaceholder}}`
+            : `if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${showPlaceholder}}`;
+          const photoHtml = `<img src="${photoSrc}" alt="${t.name}" class="tm-photo" onerror="${fallback}">`;
           const placeholder = `<div class="tm-photo-placeholder" style="display:none">${t.name.charAt(0)}</div>`;
           return `<a href="therapist.html?id=${t.id}" class="tm-card r" style="transition-delay: ${i * 0.1}s">
           <div class="tm-photo-wrap">

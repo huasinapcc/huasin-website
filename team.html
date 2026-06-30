@@ -1128,15 +1128,18 @@
       const specs = t.specialties ? t.specialties.split(/[,，]/).map(s => s.trim()).filter(Boolean) : [];
       const driveUrl = driveImgUrl(t.photo_url);
       const showPlaceholder = `this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex'`;
-      const tryDrive = driveUrl ? `if(!this._triedDrive){this._triedDrive=true;this.src='${driveUrl}'}else{${showPlaceholder}}` : showPlaceholder;
-      const photoHtml = `<img src="images/therapists/${t.id}.avif" alt="${t.name}" class="member-photo" onerror="if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${tryDrive}}">`;
+      const photoSrc = driveUrl || `images/therapists/${t.id}.avif`;
+      const fallback = driveUrl
+        ? `if(!this._triedAvif){this._triedAvif=true;this.src='images/therapists/${t.id}.avif'}else if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${showPlaceholder}}`
+        : `if(!this._triedPng){this._triedPng=true;this.src='images/therapists/${t.id}.png'}else{${showPlaceholder}}`;
+      const photoHtml = `<img src="${photoSrc}" alt="${t.name}" class="member-photo" onerror="${fallback}">`;
       const placeholderHtml = `<div class="member-photo-placeholder" style="display:none">
     ${t.name ? t.name.charAt(0) : '？'}
   </div>`;
       const specsHtml = specs.slice(0, 4).map(s => `<span class="spec">${s}</span>`).join('');
 
       return `
-  <a href="therapist-${Math.round(t.id)}.html" class="member-card cat-${cat} r" data-cat="${cat}" data-specs="${t.specialties || ''}">
+  <a href="therapist.html?id=${Math.round(t.id)}" class="member-card cat-${cat} r" data-cat="${cat}" data-specs="${t.specialties || ''}">
     <div class="card-accent"></div>
     <div class="card-body">
       <div class="photo-container">
@@ -1166,7 +1169,8 @@
             obj[col] = row.c[i]?.v ?? '';
           });
           return obj;
-        }).filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name);
+        }).filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name)
+          .sort((a, b) => Number(a.sort_order || a.id || 9999) - Number(b.sort_order || b.id || 9999));
 
         // Stats
         const artCount = therapists.filter(t => getCategory(t.title) === 'art').length;

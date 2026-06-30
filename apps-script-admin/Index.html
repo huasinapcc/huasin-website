@@ -58,6 +58,9 @@
     }
     .brand strong { display: block; font-family: Georgia, "Noto Serif TC", serif; font-size: 17px; letter-spacing: .08em; }
     .brand small { display: block; margin-top: 2px; color: rgba(255,255,255,.68); letter-spacing: .12em; }
+    .module-switch { display: flex; gap: 5px; padding: 4px; border: 1px solid rgba(255,255,255,.18); border-radius: 12px; background: rgba(255,255,255,.07); }
+    .module-btn { padding: 7px 14px; border: 0; border-radius: 8px; color: rgba(255,255,255,.68); background: transparent; font-size: 12px; font-weight: 700; }
+    .module-btn.active { color: var(--blue-deep); background: #fff; }
     .top-actions { display: flex; align-items: center; gap: 10px; }
     .user { max-width: 220px; overflow: hidden; color: rgba(255,255,255,.75); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
 
@@ -89,7 +92,7 @@
     }
     .search:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(63,111,125,.10); }
     .filters { display: flex; gap: 6px; margin-bottom: 14px; }
-    .filter {
+    .filter, .therapist-filter {
       flex: 1;
       padding: 7px 5px;
       border: 1px solid transparent;
@@ -98,9 +101,9 @@
       background: transparent;
       font-size: 12px;
     }
-    .filter.active { border-color: #cadaDE; color: var(--blue-deep); background: #fff; }
-    .article-list { display: grid; gap: 8px; }
-    .article-item {
+    .filter.active, .therapist-filter.active { border-color: #cadaDE; color: var(--blue-deep); background: #fff; }
+    .article-list, .therapist-list { display: grid; gap: 8px; }
+    .article-item, .therapist-item {
       width: 100%;
       padding: 13px 14px;
       border: 1px solid transparent;
@@ -110,9 +113,9 @@
       background: rgba(255,255,255,.72);
       transition: .18s ease;
     }
-    .article-item:hover { transform: translateY(-1px); border-color: #cddcdf; background: #fff; }
-    .article-item.selected { border-color: var(--blue); background: #fff; box-shadow: 0 6px 18px rgba(51,89,100,.08); }
-    .article-title { margin-bottom: 7px; overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+    .article-item:hover, .therapist-item:hover { transform: translateY(-1px); border-color: #cddcdf; background: #fff; }
+    .article-item.selected, .therapist-item.selected { border-color: var(--blue); background: #fff; box-shadow: 0 6px 18px rgba(51,89,100,.08); }
+    .article-title, .therapist-name { margin-bottom: 7px; overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
     .article-meta { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #aab5b9; }
     .status-dot.live { background: #4b9a77; }
@@ -163,6 +166,12 @@
       font-size: 12px;
     }
     .cover-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .therapist-photo-preview { aspect-ratio: 4 / 5; max-width: 210px; }
+    .admin-list { display: grid; gap: 10px; }
+    .admin-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: #f9fbfb; }
+    .admin-email { overflow: hidden; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+    .admin-badge { margin-left: 8px; padding: 3px 8px; border-radius: 999px; color: var(--blue-deep); background: var(--blue-soft); font-size: 10px; }
+    .sidebar-note { color: var(--muted); font-size: 13px; line-height: 1.8; }
     .upload-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 10px 0 12px; }
     .file-input { display: none; }
 
@@ -234,6 +243,9 @@
     .toast.error { background: var(--danger); }
 
     @media (max-width: 850px) {
+      .topbar { flex-wrap: wrap; }
+      .module-switch { order: 3; width: 100%; }
+      .module-btn { flex: 1; }
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: static; height: auto; max-height: 370px; border-right: 0; border-bottom: 1px solid var(--line); }
       .editor-head { flex-direction: column; }
@@ -263,13 +275,18 @@
         <div class="brand-mark">華</div>
         <div><strong>華昕藝心</strong><small>WEBSITE CONTENT STUDIO</small></div>
       </div>
+      <div class="module-switch" role="group" aria-label="管理項目切換">
+        <button class="module-btn active" type="button" data-module="articles">文章管理</button>
+        <button class="module-btn" type="button" data-module="therapists">心理師管理</button>
+        <button class="module-btn" type="button" data-module="admins">帳號管理</button>
+      </div>
       <div class="top-actions">
         <span id="userEmail" class="user"></span>
         <a id="siteLink" class="btn btn-ghost" href="https://www.hua-sin.com" target="_blank" rel="noopener">查看網站 ↗</a>
       </div>
     </header>
 
-    <div class="layout">
+    <div id="articleLayout" class="layout">
       <aside class="sidebar">
         <div class="sidebar-head"><h2>文章</h2><span id="articleCount" class="count">0 篇</span></div>
         <input id="search" class="search" type="search" placeholder="搜尋標題、作者或分類">
@@ -397,6 +414,174 @@
         </form>
       </main>
     </div>
+
+    <div id="therapistLayout" class="layout" hidden>
+      <aside class="sidebar">
+        <div class="sidebar-head"><h2>心理師</h2><span id="therapistCount" class="count">0 位</span></div>
+        <input id="therapistSearch" class="search" type="search" placeholder="搜尋姓名、職稱或專長">
+        <div class="filters" role="group" aria-label="心理師狀態篩選">
+          <button class="therapist-filter active" data-therapist-filter="all">全部</button>
+          <button class="therapist-filter" data-therapist-filter="live">已上架</button>
+          <button class="therapist-filter" data-therapist-filter="draft">未上架</button>
+        </div>
+        <div id="therapistList" class="therapist-list"></div>
+      </aside>
+
+      <main class="main">
+        <form id="therapistForm" class="editor-shell">
+          <input id="therapistId" type="hidden">
+          <div class="editor-head">
+            <div>
+              <p class="eyebrow">Therapist editor</p>
+              <h1 id="therapistEditorTitle">新增心理師</h1>
+              <p id="therapistEditorSubtitle">填寫專業資料後，可先儲存為未上架狀態。</p>
+            </div>
+            <div class="head-actions">
+              <button id="newTherapistButton" class="btn btn-light" type="button">＋ 新增心理師</button>
+              <button id="archiveTherapistButton" class="btn btn-danger" type="button" hidden>下架心理師</button>
+            </div>
+          </div>
+
+          <section class="card">
+            <h2 class="section-title">基本資料</h2>
+            <div class="grid">
+              <div class="field">
+                <label class="required" for="therapistName">姓名</label>
+                <input id="therapistName" type="text" maxlength="80" required placeholder="例如：陳瑜慧">
+              </div>
+              <div class="field">
+                <label class="required" for="therapistTitle">專業職稱</label>
+                <input id="therapistTitle" type="text" maxlength="150" required placeholder="例如：藝術治療師／諮商心理師">
+              </div>
+              <div class="field">
+                <label for="therapistLicense">證照字號</label>
+                <input id="therapistLicense" type="text" maxlength="200" placeholder="例如：諮心字第000000號">
+              </div>
+              <div class="field">
+                <label for="therapistSortOrder">顯示順序</label>
+                <input id="therapistSortOrder" type="number" min="1" max="999" placeholder="數字越小越前面">
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2 class="section-title">個人照片</h2>
+            <div class="image-row">
+              <div id="therapistPhotoPreview" class="cover-preview therapist-photo-preview">尚未上傳照片</div>
+              <div>
+                <label for="therapistPhotoUrl">照片網址</label>
+                <input id="therapistPhotoUrl" type="url" maxlength="1000" placeholder="上傳後會自動填入">
+                <div class="upload-actions">
+                  <label class="btn btn-primary" for="therapistPhotoFile">上傳照片</label>
+                  <button id="clearTherapistPhoto" class="btn btn-light" type="button">移除照片</button>
+                </div>
+                <input id="therapistPhotoFile" class="file-input" type="file" accept="image/jpeg,image/png,image/webp">
+                <p id="therapistUploadHint" class="hint">建議使用直式照片；支援 JPG、PNG、WebP，檔案上限 8 MB。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2 class="section-title">專業背景</h2>
+            <div class="grid">
+              <div class="field full">
+                <label for="therapistPositions">現職</label>
+                <textarea id="therapistPositions" rows="5" placeholder="每一行填寫一項"></textarea>
+              </div>
+              <div class="field full">
+                <label for="therapistEducation">學歷</label>
+                <textarea id="therapistEducation" rows="5" placeholder="每一行填寫一項"></textarea>
+              </div>
+              <div class="field full">
+                <label for="therapistExperience">經歷</label>
+                <textarea id="therapistExperience" rows="8" placeholder="每一行填寫一項"></textarea>
+              </div>
+              <div class="field full">
+                <label for="therapistCertifications">專業證照與訓練</label>
+                <textarea id="therapistCertifications" rows="7" placeholder="每一行填寫一項"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2 class="section-title">介紹內容</h2>
+            <div class="grid">
+              <div class="field full">
+                <label for="therapistPhilosophy">諮商理念</label>
+                <textarea id="therapistPhilosophy" rows="7" placeholder="介紹陪伴個案的方式與理念"></textarea>
+              </div>
+              <div class="field full">
+                <label for="therapistSpecialties">諮商專長</label>
+                <textarea id="therapistSpecialties" rows="7" placeholder="可依成人、兒童青少年等類別分段"></textarea>
+              </div>
+              <div class="field full">
+                <label for="therapistArticles">發表文章（舊資料欄位）</label>
+                <textarea id="therapistArticles" rows="4" placeholder="通常會由文章作者設定自動帶入"></textarea>
+              </div>
+              <div class="field full">
+                <label for="therapistSocialLinks">個人專頁連結</label>
+                <input id="therapistSocialLinks" type="text" maxlength="3000" placeholder="Facebook:https://...|Instagram:https://...">
+                <p class="hint">多個連結用 | 分隔，格式為「名稱:網址」。</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2 class="section-title">上架設定</h2>
+            <div class="switches">
+              <div class="switch-card">
+                <input id="therapistActive" type="checkbox">
+                <label for="therapistActive">顯示於網站<small>開啟後，首頁、團隊頁與導覽選單都會顯示。</small></label>
+              </div>
+            </div>
+          </section>
+
+          <div class="savebar">
+            <span id="therapistSaveStatus" class="save-status">尚未儲存</span>
+            <div class="save-actions">
+              <a id="therapistPreviewLink" class="btn btn-light" href="#" target="_blank" rel="noopener" hidden>查看個人頁 ↗</a>
+              <button id="saveTherapistButton" class="btn btn-primary" type="submit">儲存心理師</button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <div id="adminLayout" class="layout" hidden>
+      <aside class="sidebar">
+        <div class="sidebar-head"><h2>管理員帳號</h2></div>
+        <p class="sidebar-note">只有白名單中的 Google 帳號能進入後台。新增後，系統也會自動分享文章資料與圖片資料夾的編輯權限。</p>
+      </aside>
+      <main class="main">
+        <div class="editor-shell">
+          <div class="editor-head">
+            <div>
+              <p class="eyebrow">Access control</p>
+              <h1>帳號管理</h1>
+              <p>管理可以登入這個網站後台的 Google 帳號。</p>
+            </div>
+          </div>
+          <section class="card">
+            <h2 class="section-title">新增管理員</h2>
+            <form id="adminForm">
+              <div class="grid">
+                <div class="field">
+                  <label class="required" for="adminEmail">Google 帳號 Email</label>
+                  <input id="adminEmail" type="email" required placeholder="name@gmail.com">
+                </div>
+                <div class="field" style="align-self:end">
+                  <button id="addAdminButton" class="btn btn-primary" type="submit">新增登入帳號</button>
+                </div>
+              </div>
+            </form>
+          </section>
+          <section class="card">
+            <h2 class="section-title">目前可登入帳號</h2>
+            <div id="adminList" class="admin-list"></div>
+          </section>
+        </div>
+      </main>
+    </div>
   </div>
 
   <dialog id="previewDialog">
@@ -406,7 +591,11 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const state = { articles: [], therapists: [], selectedId: null, filter: 'all', search: '', dirty: false };
+    const state = {
+      articles: [], therapists: [], admins: [], selectedId: null, selectedTherapistId: null,
+      filter: 'all', search: '', therapistFilter: 'all', therapistSearch: '',
+      dirty: false, therapistDirty: false, activeModule: 'articles',
+    };
     const $ = selector => document.querySelector(selector);
     const $$ = selector => [...document.querySelectorAll(selector)];
 
@@ -415,14 +604,19 @@
     async function init() {
       bindEvents();
       resetForm();
+      resetTherapistForm();
       try {
         const data = await callServer('getBootData');
         state.articles = data.articles || [];
         state.therapists = data.therapists || [];
+        state.admins = data.admins || [];
         $('#userEmail').textContent = data.userEmail || 'Google 帳號已驗證';
         $('#siteLink').href = data.websiteUrl || 'https://www.hua-sin.com';
         renderAuthors();
         renderList();
+        resetTherapistForm();
+        renderTherapistList();
+        renderAdminList();
       } catch (error) {
         showToast(error.message || '後台載入失敗，請重新整理。', true);
       } finally {
@@ -431,6 +625,7 @@
     }
 
     function bindEvents() {
+      $$('.module-btn').forEach(button => button.addEventListener('click', () => switchModule(button.dataset.module)));
       $('#articleForm').addEventListener('submit', saveArticle);
       $('#newButton').addEventListener('click', () => confirmDiscard(resetForm));
       $('#archiveButton').addEventListener('click', archiveCurrentArticle);
@@ -450,11 +645,40 @@
         field.addEventListener('input', markDirty);
         field.addEventListener('change', markDirty);
       });
+      $('#therapistForm').addEventListener('submit', saveTherapist);
+      $('#newTherapistButton').addEventListener('click', () => confirmTherapistDiscard(() => resetTherapistForm(true)));
+      $('#archiveTherapistButton').addEventListener('click', archiveCurrentTherapist);
+      $('#therapistPhotoFile').addEventListener('change', uploadTherapistPhoto);
+      $('#therapistPhotoUrl').addEventListener('input', renderTherapistPhotoPreview);
+      $('#clearTherapistPhoto').addEventListener('click', () => { $('#therapistPhotoUrl').value = ''; renderTherapistPhotoPreview(); markTherapistDirty(); });
+      $('#therapistSearch').addEventListener('input', event => { state.therapistSearch = event.target.value.trim().toLowerCase(); renderTherapistList(); });
+      $$('.therapist-filter').forEach(button => button.addEventListener('click', () => {
+        state.therapistFilter = button.dataset.therapistFilter;
+        $$('.therapist-filter').forEach(item => item.classList.toggle('active', item === button));
+        renderTherapistList();
+      }));
+      $$('#therapistForm input, #therapistForm textarea, #therapistForm select').forEach(field => {
+        field.addEventListener('input', markTherapistDirty);
+        field.addEventListener('change', markTherapistDirty);
+      });
+      $('#adminForm').addEventListener('submit', addAdminAccount);
       window.addEventListener('beforeunload', event => {
-        if (!state.dirty) return;
+        if (!state.dirty && !state.therapistDirty) return;
         event.preventDefault();
         event.returnValue = '';
       });
+    }
+
+    function switchModule(module) {
+      state.activeModule = module;
+      $('#articleLayout').hidden = module !== 'articles';
+      $('#therapistLayout').hidden = module !== 'therapists';
+      $('#adminLayout').hidden = module !== 'admins';
+      $$('.module-btn').forEach(button => button.classList.toggle('active', button.dataset.module === module));
+      if (module === 'therapists') renderTherapistList();
+      else if (module === 'admins') renderAdminList();
+      else renderList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function callServer(name, argument) {
@@ -488,6 +712,63 @@
           <div class="article-meta"><span class="status-dot ${article.active ? 'live' : ''}"></span><span>${article.active ? '已發布' : '草稿'}</span><span>·</span><span>${escapeHtml(article.date || '')}</span>${article.is_featured ? '<span class="featured">★ 精選</span>' : ''}</div>
         </button>`).join('') : '<div class="empty-list">找不到符合條件的文章</div>';
       $$('.article-item').forEach(button => button.addEventListener('click', () => confirmDiscard(() => editArticle(button.dataset.id))));
+    }
+
+    function renderTherapistList() {
+      const filtered = state.therapists.filter(person => {
+        if (state.therapistFilter === 'live' && !person.active) return false;
+        if (state.therapistFilter === 'draft' && person.active) return false;
+        if (!state.therapistSearch) return true;
+        return [person.name, person.title, person.specialties].join(' ').toLowerCase().includes(state.therapistSearch);
+      });
+      $('#therapistCount').textContent = `${filtered.length} 位`;
+      $('#therapistList').innerHTML = filtered.length ? filtered.map(person => `
+        <button class="therapist-item ${String(person.id) === String(state.selectedTherapistId) ? 'selected' : ''}" type="button" data-therapist-id="${escapeAttr(person.id)}">
+          <div class="therapist-name">${escapeHtml(person.name || '未命名')}</div>
+          <div class="article-meta"><span class="status-dot ${person.active ? 'live' : ''}"></span><span>${person.active ? '已上架' : '未上架'}</span><span>·</span><span>${escapeHtml(person.title || '')}</span></div>
+        </button>`).join('') : '<div class="empty-list">找不到符合條件的心理師</div>';
+      $$('.therapist-item').forEach(button => button.addEventListener('click', () => confirmTherapistDiscard(() => editTherapist(button.dataset.therapistId))));
+    }
+
+    function renderAdminList() {
+      const primary = state.admins[0] || '';
+      $('#adminList').innerHTML = state.admins.length ? state.admins.map(email => `
+        <div class="admin-row">
+          <div class="admin-email">${escapeHtml(email)}${email === primary ? '<span class="admin-badge">主帳號</span>' : ''}</div>
+          ${email === primary ? '' : `<button class="btn btn-danger remove-admin" type="button" data-admin-email="${escapeAttr(email)}">移除</button>`}
+        </div>`).join('') : '<div class="empty-list">尚未設定管理員帳號</div>';
+      $$('.remove-admin').forEach(button => button.addEventListener('click', () => removeAdminAccount(button.dataset.adminEmail)));
+    }
+
+    async function addAdminAccount(event) {
+      event.preventDefault();
+      if (!$('#adminForm').reportValidity()) return;
+      const button = $('#addAdminButton');
+      const email = $('#adminEmail').value.trim().toLowerCase();
+      setBusy(button, true, '新增中…');
+      try {
+        const response = await callServer('addAdminEmail', email);
+        state.admins = response.admins || [];
+        $('#adminForm').reset();
+        renderAdminList();
+        showToast(response.message);
+      } catch (error) {
+        showToast(error.message || '管理員帳號新增失敗。', true);
+      } finally {
+        setBusy(button, false, '新增登入帳號');
+      }
+    }
+
+    async function removeAdminAccount(email) {
+      if (!confirm(`確定要移除 ${email} 的後台登入與資料編輯權限嗎？`)) return;
+      try {
+        const response = await callServer('removeAdminEmail', email);
+        state.admins = response.admins || [];
+        renderAdminList();
+        showToast(response.message);
+      } catch (error) {
+        showToast(error.message || '管理員帳號移除失敗。', true);
+      }
     }
 
     function editArticle(id) {
@@ -532,6 +813,54 @@
       $('#title').focus();
     }
 
+    function editTherapist(id) {
+      const person = state.therapists.find(item => String(item.id) === String(id));
+      if (!person) return;
+      state.selectedTherapistId = person.id;
+      $('#therapistId').value = person.id;
+      $('#therapistName').value = person.name || '';
+      $('#therapistTitle').value = person.title || '';
+      $('#therapistLicense').value = person.license_no || '';
+      $('#therapistSortOrder').value = person.sort_order || person.id || '';
+      $('#therapistPhotoUrl').value = person.photo_url || '';
+      $('#therapistPositions').value = person.current_positions || '';
+      $('#therapistEducation').value = person.education || '';
+      $('#therapistExperience').value = person.experience || '';
+      $('#therapistCertifications').value = person.certifications || '';
+      $('#therapistPhilosophy').value = person.philosophy || '';
+      $('#therapistSpecialties').value = person.specialties || '';
+      $('#therapistArticles').value = person.articles || '';
+      $('#therapistSocialLinks').value = person.social_links || '';
+      $('#therapistActive').checked = Boolean(person.active);
+      $('#therapistEditorTitle').textContent = '編輯心理師';
+      $('#therapistEditorSubtitle').textContent = `心理師編號 ${person.id}｜${person.name}`;
+      $('#archiveTherapistButton').hidden = !person.active;
+      $('#therapistPreviewLink').hidden = !person.active;
+      $('#therapistPreviewLink').href = 'https://www.hua-sin.com/therapist.html?id=' + encodeURIComponent(person.id);
+      $('#therapistSaveStatus').textContent = '已載入心理師資料';
+      state.therapistDirty = false;
+      renderTherapistPhotoPreview();
+      renderTherapistList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetTherapistForm(shouldFocus = false) {
+      $('#therapistForm').reset();
+      state.selectedTherapistId = null;
+      $('#therapistId').value = '';
+      const nextOrder = state.therapists.reduce((max, person) => Math.max(max, Number(person.sort_order || person.id) || 0), 0) + 1;
+      $('#therapistSortOrder').value = nextOrder || 1;
+      $('#therapistEditorTitle').textContent = '新增心理師';
+      $('#therapistEditorSubtitle').textContent = '填寫專業資料後，可先儲存為未上架狀態。';
+      $('#archiveTherapistButton').hidden = true;
+      $('#therapistPreviewLink').hidden = true;
+      $('#therapistSaveStatus').textContent = '尚未儲存';
+      state.therapistDirty = false;
+      renderTherapistPhotoPreview();
+      renderTherapistList();
+      if (shouldFocus) $('#therapistName').focus();
+    }
+
     function ensureAuthorOption(value) {
       if (!value || [...$('#author').options].some(option => String(option.value) === String(value))) return;
       const option = document.createElement('option');
@@ -554,6 +883,26 @@
         active: $('#active').checked,
         is_featured: $('#featured').checked,
         event_ended: $('#eventEnded').checked,
+      };
+    }
+
+    function collectTherapistForm() {
+      return {
+        id: $('#therapistId').value ? Number($('#therapistId').value) : 0,
+        name: $('#therapistName').value,
+        title: $('#therapistTitle').value,
+        license_no: $('#therapistLicense').value,
+        sort_order: $('#therapistSortOrder').value,
+        photo_url: $('#therapistPhotoUrl').value,
+        current_positions: $('#therapistPositions').value,
+        education: $('#therapistEducation').value,
+        experience: $('#therapistExperience').value,
+        certifications: $('#therapistCertifications').value,
+        philosophy: $('#therapistPhilosophy').value,
+        specialties: $('#therapistSpecialties').value,
+        articles: $('#therapistArticles').value,
+        social_links: $('#therapistSocialLinks').value,
+        active: $('#therapistActive').checked,
       };
     }
 
@@ -603,6 +952,55 @@
       }
     }
 
+    async function saveTherapist(event) {
+      event.preventDefault();
+      if (!$('#therapistForm').reportValidity()) return;
+      const button = $('#saveTherapistButton');
+      setBusy(button, true, '儲存中…');
+      $('#therapistSaveStatus').textContent = '正在儲存變更…';
+      try {
+        const response = await callServer('saveTherapist', collectTherapistForm());
+        upsertTherapist(response.therapist);
+        state.selectedTherapistId = response.therapist.id;
+        $('#therapistId').value = response.therapist.id;
+        $('#therapistEditorTitle').textContent = '編輯心理師';
+        $('#therapistEditorSubtitle').textContent = `心理師編號 ${response.therapist.id}｜${response.message}`;
+        $('#archiveTherapistButton').hidden = !response.therapist.active;
+        $('#therapistPreviewLink').hidden = !response.therapist.active;
+        $('#therapistPreviewLink').href = 'https://www.hua-sin.com/therapist.html?id=' + encodeURIComponent(response.therapist.id);
+        $('#therapistSaveStatus').textContent = response.message;
+        state.therapistDirty = false;
+        renderAuthors();
+        renderTherapistList();
+        showToast(response.message);
+      } catch (error) {
+        $('#therapistSaveStatus').textContent = '儲存失敗';
+        showToast(error.message || '心理師資料儲存失敗。', true);
+      } finally {
+        setBusy(button, false, '儲存心理師');
+      }
+    }
+
+    async function archiveCurrentTherapist() {
+      if (!state.selectedTherapistId || !confirm('確定要下架這位心理師嗎？資料會保留，之後仍可重新上架。')) return;
+      const button = $('#archiveTherapistButton');
+      setBusy(button, true, '下架中…');
+      try {
+        const response = await callServer('archiveTherapist', state.selectedTherapistId);
+        upsertTherapist(response.therapist);
+        $('#therapistActive').checked = false;
+        $('#therapistPreviewLink').hidden = true;
+        button.hidden = true;
+        state.therapistDirty = false;
+        renderTherapistList();
+        showToast(response.message);
+      } catch (error) {
+        showToast(error.message || '心理師下架失敗。', true);
+      } finally {
+        setBusy(button, false, '下架心理師');
+      }
+    }
+
     function upsertArticle(article) {
       if (article.is_featured) {
         state.articles.forEach(item => { item.is_featured = false; });
@@ -611,6 +1009,13 @@
       if (index >= 0) state.articles[index] = article;
       else state.articles.unshift(article);
       state.articles.sort((a, b) => String(b.date).localeCompare(String(a.date)) || Number(b.id) - Number(a.id));
+    }
+
+    function upsertTherapist(person) {
+      const index = state.therapists.findIndex(item => String(item.id) === String(person.id));
+      if (index >= 0) state.therapists[index] = person;
+      else state.therapists.push(person);
+      state.therapists.sort((a, b) => Number(a.sort_order || a.id || 9999) - Number(b.sort_order || b.id || 9999));
     }
 
     async function uploadImage(event) {
@@ -635,9 +1040,36 @@
       }
     }
 
+    async function uploadTherapistPhoto(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 8 * 1024 * 1024) { showToast('照片不可超過 8 MB。', true); event.target.value = ''; return; }
+      const hint = $('#therapistUploadHint');
+      hint.textContent = '正在上傳照片，請稍候…';
+      try {
+        const dataUrl = await readFileAsDataUrl(file);
+        const response = await callServer('uploadTherapistPhoto', { dataUrl, fileName: file.name });
+        $('#therapistPhotoUrl').value = response.url;
+        renderTherapistPhotoPreview(response.previewUrl);
+        markTherapistDirty();
+        hint.textContent = `上傳完成：${response.name}`;
+        showToast('心理師照片已上傳');
+      } catch (error) {
+        hint.textContent = '照片上傳失敗，請檢查檔案後再試。';
+        showToast(error.message || '照片上傳失敗。', true);
+      } finally {
+        event.target.value = '';
+      }
+    }
+
     function renderCoverPreview(overrideUrl) {
       const url = overrideUrl || driveImage($('#imageUrl').value, 'w1200');
       $('#coverPreview').innerHTML = url ? `<img src="${escapeAttr(url)}" alt="封面預覽" onerror="this.parentElement.textContent='無法載入圖片預覽'">` : '尚未上傳圖片';
+    }
+
+    function renderTherapistPhotoPreview(overrideUrl) {
+      const url = overrideUrl || driveImage($('#therapistPhotoUrl').value, 'w800');
+      $('#therapistPhotoPreview').innerHTML = url ? `<img src="${escapeAttr(url)}" alt="心理師照片預覽" onerror="this.parentElement.textContent='無法載入照片預覽'">` : '尚未上傳照片';
     }
 
     function showPreview() {
@@ -736,7 +1168,11 @@
     function confirmDiscard(callback) {
       if (!state.dirty || confirm('目前有尚未儲存的變更，確定要離開嗎？')) callback();
     }
+    function confirmTherapistDiscard(callback) {
+      if (!state.therapistDirty || confirm('目前有尚未儲存的心理師資料，確定要離開嗎？')) callback();
+    }
     function markDirty() { state.dirty = true; $('#saveStatus').textContent = '有尚未儲存的變更'; }
+    function markTherapistDirty() { state.therapistDirty = true; $('#therapistSaveStatus').textContent = '有尚未儲存的變更'; }
     function setBusy(button, busy, text) { button.disabled = busy; button.textContent = text; }
     function readFileAsDataUrl(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('無法讀取圖片。')); reader.readAsDataURL(file); }); }
     function todayString() { const now = new Date(); const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000); return local.toISOString().slice(0, 10); }

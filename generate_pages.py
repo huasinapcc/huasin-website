@@ -392,6 +392,7 @@ def main():
     articles = fetch_sheet(ARTICLES_SHEET)
 
     active = [t for t in therapists if str(t.get('active', '')).upper() == 'TRUE' and t.get('name')]
+    active.sort(key=lambda t: float(t.get('sort_order') or t.get('id') or 9999))
     print(f'找到 {len(active)} 位心理師')
 
     generated_ids = []

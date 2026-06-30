@@ -560,7 +560,9 @@
 
       try {
         const res = await fetch(URL);
-        const all = parseGviz(await res.text()).filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name);
+        const all = parseGviz(await res.text())
+          .filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name)
+          .sort((a, b) => Number(a.sort_order || a.id || 9999) - Number(b.sort_order || b.id || 9999));
 
         const idx = all.findIndex(t => String(t.id) === String(targetId));
         if (idx === -1) { window.location.href = 'team.html'; return; }
@@ -579,10 +581,10 @@
         const photoWrap = document.getElementById('photoWrap');
         const img = document.createElement('img');
         img.alt = t.name;
-        img.src = `images/therapists/${t.id}.avif`;
+        img.src = driveUrl || `images/therapists/${t.id}.avif`;
         img.onerror = () => {
-          if (!img._triedPng) { img._triedPng = true; img.src = `images/therapists/${t.id}.png`; }
-          else if (!img._triedDrive && driveUrl) { img._triedDrive = true; img.src = driveUrl; }
+          if (driveUrl && !img._triedAvif) { img._triedAvif = true; img.src = `images/therapists/${t.id}.avif`; }
+          else if (!img._triedPng) { img._triedPng = true; img.src = `images/therapists/${t.id}.png`; }
           else { img.onerror = null; photoWrap.innerHTML = placeholder; }
         };
         photoWrap.appendChild(img);

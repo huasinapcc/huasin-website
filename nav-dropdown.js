@@ -30,7 +30,8 @@
           }
         });
         return obj;
-      }).filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name);
+      }).filter(t => String(t.active).toUpperCase() === 'TRUE' && t.name)
+        .sort((a, b) => Number(a.sort_order || a.id || 9999) - Number(b.sort_order || b.id || 9999));
 
       // Render Dropdown Items
       if (therapists.length > 0) {
