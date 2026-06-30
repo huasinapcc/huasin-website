@@ -307,7 +307,10 @@ function addAdminEmail(inputEmail) {
   const email = normalizeEmail_(inputEmail);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('請輸入有效的 Google 帳號 Email。');
   const emails = getAdminEmails_();
-  if (!emails.includes(email)) emails.push(email);
+  if (emails.includes(email)) {
+    return { ok: true, message: `${email} 已經是管理員`, admins: emails };
+  }
+  emails.push(email);
   saveAdminEmails_(emails);
 
   try {

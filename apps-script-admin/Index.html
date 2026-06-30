@@ -745,6 +745,10 @@
       if (!$('#adminForm').reportValidity()) return;
       const button = $('#addAdminButton');
       const email = $('#adminEmail').value.trim().toLowerCase();
+      if (state.admins.some(item => String(item).toLowerCase() === email)) {
+        showToast(`${email} 已經在管理員名單中。`);
+        return;
+      }
       setBusy(button, true, '新增中…');
       try {
         const response = await callServer('addAdminEmail', email);
