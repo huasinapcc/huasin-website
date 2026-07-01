@@ -150,6 +150,7 @@
     textarea { min-height: 90px; line-height: 1.75; resize: vertical; }
     input:focus, textarea:focus, select:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(63,111,125,.10); }
     .hint { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .image-spec { margin: -2px 0 14px; padding: 10px 12px; border-radius: 10px; color: var(--blue-deep); background: var(--blue-soft); font-size: 12px; line-height: 1.6; }
 
     .image-row { display: grid; grid-template-columns: 210px 1fr; gap: 22px; align-items: start; }
     .cover-preview {
@@ -348,6 +349,7 @@
 
           <section class="card">
             <h2 class="section-title">封面圖片</h2>
+            <p class="image-spec"><strong>圖片建議：</strong>1600 × 900 px（16:9 橫式），檔案上限 8 MB；重要文字與人物請放在畫面中央，避免列表縮圖裁切。</p>
             <div class="image-row">
               <div id="coverPreview" class="cover-preview">尚未上傳圖片</div>
               <div>
