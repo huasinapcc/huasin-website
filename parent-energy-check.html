@@ -1,0 +1,1478 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="60 秒家長能量檢測，協助父母以 15 題快速看見最近兩週的親職能量、身心耗竭與近期身心狀態。此工具為自我覺察參考，非正式驗證量表，不作為臨床診斷依據。">
+  <meta name="keywords" content="家長能量檢測,親職耗竭,親職壓力,親子諮商,父母壓力,身心狀態,南港心理諮商,華昕藝心">
+  <link rel="canonical" href="https://www.hua-sin.com/parent-energy-check.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:site_name" content="華昕藝心心理諮商所">
+  <meta property="og:url" content="https://www.hua-sin.com/parent-energy-check.html">
+  <meta property="og:title" content="60 秒家長能量檢測｜華昕藝心心理諮商所">
+  <meta property="og:description" content="花 60 秒看看最近的親職能量與身心負荷，協助父母照顧孩子，也照顧自己。">
+  <title>60 秒家長能量檢測｜華昕藝心心理諮商所</title>
+  <style>
+    :root {
+      --bg: #f7f4ed;
+      --paper: #fffdf8;
+      --panel: #ffffff;
+      --ink: #263331;
+      --muted: #69756f;
+      --line: #e3ded4;
+      --green: #426f5a;
+      --green-dark: #25483a;
+      --green-soft: #dcebe1;
+      --gold: #d89a43;
+      --gold-soft: #fff0d8;
+      --red: #c76058;
+      --blue: #567f9a;
+      --shadow: 0 18px 48px rgba(42, 35, 25, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(220, 235, 225, 0.85), transparent 24rem),
+        radial-gradient(circle at 86% 4%, rgba(255, 222, 174, 0.72), transparent 22rem),
+        linear-gradient(180deg, #faf7ef 0%, #eef4ef 100%);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .site-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 52px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 22px;
+      color: var(--green-dark);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .top-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero {
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy,
+    .assessment,
+    .result-card,
+    .info-card {
+      border: 1px solid rgba(66, 111, 90, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.94);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -88px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: rgba(66, 111, 90, 0.12);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 17px 0 0 #9bb783, 34px 0 0 #e2a759;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 720px;
+      color: #1f3e37;
+      font-size: clamp(2.35rem, 5vw, 4.8rem);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      position: relative;
+      z-index: 1;
+      max-width: 690px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.85;
+    }
+
+    .hint-picture,
+    .info-picture {
+      position: relative;
+      width: 50px;
+      height: 38px;
+      margin-bottom: 7px;
+    }
+
+    .pic-battery {
+      border: 3px solid var(--green);
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    .pic-battery::before {
+      content: "";
+      display: block;
+      width: 62%;
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--gold), #8fbe7b);
+    }
+
+    .pic-battery::after {
+      content: "";
+      position: absolute;
+      right: -8px;
+      top: 12px;
+      width: 6px;
+      height: 14px;
+      border-radius: 0 4px 4px 0;
+      background: var(--green);
+    }
+
+    .pic-parent::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 6px;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      border: 3px solid var(--green);
+    }
+
+    .pic-parent::after {
+      content: "";
+      position: absolute;
+      right: 7px;
+      top: 13px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gold-soft);
+      border: 3px solid var(--gold);
+      box-shadow: -19px 17px 0 -4px var(--green), 9px 15px 0 -5px var(--gold);
+    }
+
+    .pic-rest::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      bottom: 5px;
+      width: 42px;
+      height: 17px;
+      border-radius: 18px;
+      background: var(--green-soft);
+      border: 3px solid var(--green);
+    }
+
+    .pic-rest::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      box-shadow: 9px 0 0 -2px var(--gold);
+      border-left: 3px solid transparent;
+    }
+
+    .stepper {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      margin: 18px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--green-dark);
+      box-shadow: var(--shadow);
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 78px;
+      padding: 16px 20px;
+      color: rgba(255, 255, 255, 0.62);
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .step:last-child {
+      border-right: 0;
+    }
+
+    .step.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .step.done {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--gold-soft);
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+
+    .step small {
+      display: block;
+      margin-top: 3px;
+      color: inherit;
+      font-size: 0.82rem;
+    }
+
+    .assessment {
+      overflow: hidden;
+    }
+
+    .part {
+      display: none;
+    }
+
+    .part.active {
+      display: block;
+    }
+
+    .part-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 26px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, var(--gold-soft), rgba(255, 255, 255, 0.48));
+    }
+
+    .part-header h2 {
+      margin: 0 0 8px;
+      color: var(--green-dark);
+      font-size: 1.45rem;
+    }
+
+    .part-header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .part-count {
+      min-width: 116px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .part-count b {
+      display: block;
+      color: var(--green-dark);
+      font-size: 1.85rem;
+      line-height: 1;
+    }
+
+    .dimension-block {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dimension-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 26px;
+      background: rgba(220, 235, 225, 0.52);
+    }
+
+    .dimension-title span {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .dimension-title h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .dimension-title p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .question {
+      padding: 20px 26px 22px;
+      border-top: 1px solid rgba(227, 222, 212, 0.76);
+      background: rgba(255, 253, 248, 0.9);
+    }
+
+    .question-text {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 14px;
+      font-weight: 800;
+      line-height: 1.65;
+    }
+
+    .question-number {
+      display: grid;
+      place-items: center;
+      height: 32px;
+      border-radius: 50%;
+      background: #efe5d6;
+      color: var(--green-dark);
+      font-size: 0.88rem;
+      font-weight: 900;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      padding-left: 48px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option span {
+      display: grid;
+      place-items: center;
+      min-height: 48px;
+      border: 1px solid #d8d0c3;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.86rem;
+      line-height: 1.25;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, color 140ms ease;
+    }
+
+    .option input:focus-visible + span {
+      outline: 3px solid rgba(66, 111, 90, 0.34);
+      outline-offset: 2px;
+    }
+
+    .option input:checked + span {
+      transform: translateY(-1px);
+      border-color: var(--green-dark);
+      background: var(--green-dark);
+      color: #fff;
+    }
+
+    .part-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 26px;
+      background: #fff;
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 16px;
+      color: #fff;
+      background: var(--green-dark);
+      font-weight: 900;
+      transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(37, 72, 58, 0.2);
+    }
+
+    .btn.secondary {
+      background: #ede4d6;
+      color: var(--ink);
+    }
+
+    .btn.secondary:hover {
+      box-shadow: 0 10px 24px rgba(42, 35, 25, 0.1);
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.56;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .result-card {
+      display: none;
+      overflow: hidden;
+    }
+
+    .result-card.active {
+      display: block;
+    }
+
+    .result-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 190px;
+      gap: 24px;
+      align-items: center;
+      padding: 30px;
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      color: #fff;
+    }
+
+    .result-hero h2 {
+      margin: 0 0 10px;
+      font-size: 1.7rem;
+    }
+
+    .result-hero p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.7;
+    }
+
+    .energy-circle {
+      display: grid;
+      place-items: center;
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.12);
+      text-align: center;
+    }
+
+    .energy-circle b {
+      display: block;
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .energy-circle span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.92rem;
+    }
+
+    .result-body {
+      padding: 26px;
+      background: var(--paper);
+    }
+
+    .calculation {
+      margin: 0 0 18px;
+      border-left: 5px solid var(--gold);
+      border-radius: 8px;
+      background: #fff;
+      padding: 14px 16px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .safety-alert {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      margin: 0 0 18px;
+      border: 1px solid rgba(199, 96, 88, 0.28);
+      border-left: 5px solid var(--red);
+      border-radius: 8px;
+      background: #fff7f3;
+      padding: 16px;
+    }
+
+    .safety-alert h3 {
+      margin: 0 0 8px;
+      color: #7f3835;
+      font-size: 1rem;
+    }
+
+    .safety-alert p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.95rem;
+    }
+
+    .safety-alert a {
+      color: #7f3835;
+      font-weight: 900;
+      text-decoration-thickness: 2px;
+    }
+
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .dimension-result {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .dimension-result h3 {
+      margin: 0 0 8px;
+      color: var(--green-dark);
+      font-size: 0.98rem;
+    }
+
+    .score-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .score-line b {
+      color: var(--ink);
+      font-size: 1.45rem;
+    }
+
+    .bar {
+      height: 9px;
+      margin-top: 10px;
+      border-radius: 999px;
+      background: #ece5dc;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: var(--green);
+    }
+
+    .advice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .advice {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 16px;
+    }
+
+    .advice h3 {
+      margin: 0 0 8px;
+      color: var(--green-dark);
+      font-size: 1rem;
+    }
+
+    .advice p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.94rem;
+    }
+
+    .info-card {
+      margin-top: 18px;
+      padding: 24px;
+    }
+
+    .info-card h2 {
+      margin: 0 0 14px;
+      color: var(--green-dark);
+      font-size: 1.3rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .info-box {
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 16px;
+    }
+
+    .info-box.with-picture {
+      display: grid;
+      grid-template-columns: 62px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .info-picture {
+      width: 56px;
+      height: 48px;
+      margin: 2px 0 0;
+    }
+
+    .pic-chart::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      bottom: 7px;
+      width: 10px;
+      height: 20px;
+      border-radius: 5px 5px 0 0;
+      background: var(--green);
+      box-shadow: 17px -9px 0 var(--gold), 34px -18px 0 var(--red);
+    }
+
+    .pic-chart::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      bottom: 3px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--line);
+    }
+
+    .pic-clock::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 3px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 4px solid var(--green);
+      background: var(--green-soft);
+    }
+
+    .pic-clock::after {
+      content: "";
+      position: absolute;
+      left: 26px;
+      top: 14px;
+      width: 4px;
+      height: 17px;
+      border-radius: 999px;
+      background: var(--green-dark);
+      box-shadow: 8px 13px 0 -1px var(--green-dark);
+      transform: rotate(-42deg);
+      transform-origin: bottom center;
+    }
+
+    .pic-help::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 9px;
+      width: 38px;
+      height: 27px;
+      border-radius: 14px;
+      background: var(--gold-soft);
+      border: 3px solid var(--gold);
+    }
+
+    .pic-help::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 34px;
+      width: 13px;
+      height: 13px;
+      background: var(--gold-soft);
+      border-left: 3px solid var(--gold);
+      border-bottom: 3px solid var(--gold);
+      transform: rotate(-35deg);
+    }
+
+    .pic-safety::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 4px;
+      width: 31px;
+      height: 37px;
+      border-radius: 18px 18px 8px 8px;
+      background: #ffe0dc;
+      border: 3px solid var(--red);
+    }
+
+    .pic-safety::after {
+      content: "!";
+      position: absolute;
+      left: 24px;
+      top: 12px;
+      color: #7f3835;
+      font-weight: 900;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .info-box h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .info-box p,
+    .info-box li {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+
+    .info-box p,
+    .info-box ul {
+      margin: 0;
+    }
+
+    .info-box ul {
+      padding-left: 1.2em;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(18px);
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 8px;
+      background: var(--green-dark);
+      color: #fff;
+      padding: 12px 16px;
+      box-shadow: var(--shadow);
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index: 10;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .result-hero,
+      .info-grid,
+      .advice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dimension-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .site-shell {
+        width: min(100% - 22px, 1120px);
+        padding-top: 18px;
+      }
+
+      .topbar,
+      .part-header,
+      .part-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-copy,
+      .result-body,
+      .info-card {
+        padding: 20px;
+      }
+
+      .stepper {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .options,
+      .dimension-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .options {
+        padding-left: 0;
+      }
+
+      .option span {
+        justify-content: start;
+        padding: 0 14px;
+      }
+
+      .question,
+      .dimension-title {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .result-hero {
+        padding: 22px;
+      }
+
+      .info-box.with-picture {
+        grid-template-columns: 1fr;
+      }
+
+      .safety-alert {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .topbar,
+      .stepper,
+      .part-actions,
+      .assessment,
+      .toast {
+        display: none;
+      }
+
+      .site-shell {
+        width: 100%;
+        padding: 0;
+      }
+
+      .hero-copy,
+      .result-card,
+      .info-card {
+        box-shadow: none;
+      }
+
+      .result-card {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="site-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">心</span>
+        <a href="index.html" style="color:inherit;text-decoration:none;">親職身心資源</a>
+      </div>
+      <p class="top-note">自我覺察工具｜非正式驗證量表，不作為臨床診斷依據</p>
+    </header>
+
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="hero-copy">
+        <p class="eyebrow">今天的你，還有多少能量？</p>
+        <h1 id="pageTitle">60 秒家長能量檢測</h1>
+        <p class="lead">
+          每位父母都希望好好陪伴孩子，但照顧別人的同時，我們也可能忽略了自己的身心狀態。
+          邀請你花 60 秒，看看最近的自己還有多少能量。
+        </p>
+        <p class="lead">
+          請依照「最近兩週」的真實狀況作答，沒有對錯，也不用追求完美。
+        </p>
+      </div>
+    </section>
+
+    <nav class="stepper" aria-label="檢測步驟">
+      <div class="step active" data-step-label="0">
+        <span class="step-number">1</span>
+        <div>親職能量<small>四個親職耗竭構面</small></div>
+      </div>
+      <div class="step" data-step-label="1">
+        <span class="step-number">2</span>
+        <div>身心狀態<small>最近兩週的基本狀態</small></div>
+      </div>
+      <div class="step" data-step-label="2">
+        <span class="step-number">3</span>
+        <div>結果<small>家長能量與建議</small></div>
+      </div>
+    </nav>
+
+    <form class="assessment" id="quiz" autocomplete="off">
+      <section class="part active" data-part="0" aria-labelledby="partOneTitle">
+        <div class="part-header">
+          <div>
+            <h2 id="partOneTitle">第一部分｜親職能量狀態</h2>
+            <p>以下題目的四個構面概念，參考自親職耗竭研究中常見的四大面向，經過簡化改編後設計而成，幫助你看見最近照顧孩子時的能量消耗。</p>
+          </div>
+          <div class="part-count"><b id="partOneCount">0</b> / 12 題</div>
+        </div>
+        <div id="parentingQuestions"></div>
+        <div class="part-actions">
+          <p class="hint" id="partOneHint">請回答所有題目後繼續</p>
+          <div class="button-row">
+            <button class="btn" type="button" id="toPartTwo" disabled>下一部分</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="part" data-part="1" aria-labelledby="partTwoTitle">
+        <div class="part-header">
+          <div>
+            <h2 id="partTwoTitle">第二部分｜近期身心狀態</h2>
+            <p>這一段並非簡式健康量表（BSRS-5），而是借用其部分身心感受面向（如睡眠、情緒起伏），設計出的簡易觀察題目，快速補足近期身心狀態的觀察，非 BSRS-5 原始題項、計分方式或切點。</p>
+          </div>
+          <div class="part-count"><b id="partTwoCount">0</b> / 3 題</div>
+        </div>
+        <div id="wellbeingQuestions"></div>
+        <div class="part-actions">
+          <p class="hint" id="partTwoHint">請回答所有題目後查看結果</p>
+          <div class="button-row">
+            <button class="btn secondary" type="button" id="backToPartOne">上一部分</button>
+            <button class="btn" type="button" id="showResult" disabled>查看我的能量</button>
+          </div>
+        </div>
+      </section>
+    </form>
+
+    <section class="result-card" id="resultCard" aria-labelledby="resultTitle">
+      <div class="result-hero" id="resultHero">
+        <div>
+          <h2 id="resultTitle">你今天的家長能量</h2>
+          <p id="resultMessage">完成作答後，這裡會顯示結果。</p>
+        </div>
+        <div class="energy-circle">
+          <div>
+            <b id="energyText">--</b>
+            <span>家長能量</span>
+          </div>
+        </div>
+      </div>
+      <div class="result-body">
+        <p class="calculation" id="calculationText"></p>
+        <div class="safety-alert">
+          <div class="info-picture pic-safety" aria-hidden="true"></div>
+          <div>
+            <h3>安全提醒</h3>
+            <p>
+              無論你這次的能量分數是多少，如果你正被想傷害自己、或想傷害孩子的念頭困擾著，請不要獨自撐著。
+              可以立即撥打 <a href="tel:+8861925?oai_link_source=model_response_hotline">1925安心專線（依舊愛我）</a>，
+              或聯繫身邊信任的人與專業資源。
+            </p>
+          </div>
+        </div>
+        <div class="dimension-grid" id="dimensionResults"></div>
+        <div class="advice-grid" id="adviceGrid"></div>
+        <div class="part-actions" style="padding-left:0;padding-right:0;padding-bottom:0;">
+          <p class="hint">若分數讓你有點心酸，那可能正是身體在提醒你：你也需要被照顧。</p>
+          <div class="button-row">
+            <button class="btn secondary" type="button" id="restartBtn">重新評估</button>
+            <button class="btn secondary" type="button" id="copyBtn">複製結果</button>
+            <button class="btn" type="button" id="printBtn">列印或存成 PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-card" aria-labelledby="infoTitle">
+      <h2 id="infoTitle">量表說明</h2>
+      <div class="info-grid">
+        <article class="info-box with-picture">
+          <div class="info-picture pic-parent" aria-hidden="true"></div>
+          <div>
+            <h3>四個親職耗竭構面</h3>
+            <ul>
+              <li>身心耗竭：身體和心理被照顧任務消耗。</li>
+              <li>與過去自己的落差：覺得自己不像以前那麼有耐心或快樂。</li>
+              <li>親職疲乏：照顧孩子像是在完成任務。</li>
+              <li>情感連結：陪伴與投入感下降。</li>
+            </ul>
+          </div>
+        </article>
+        <article class="info-box with-picture">
+          <div class="info-picture pic-chart" aria-hidden="true"></div>
+          <div>
+            <h3>結果如何理解</h3>
+            <p>
+              本工具以 0-4 分計算 15 題總負荷分數，並換算為 0-100% 的家長能量。
+              分數越高代表負荷越重，能量百分比越低。此百分比為本工具自行定義的呈現方式，非任何已驗證量表的臨床切點換算。
+            </p>
+          </div>
+        </article>
+        <article class="info-box with-picture">
+          <div class="info-picture pic-battery" aria-hidden="true"></div>
+          <div>
+            <h3>工具說明與限制</h3>
+            <p>
+              本工具的四大構面概念，參考自親職耗竭相關研究中常見的四維度架構，並經過大幅簡化與改編；非原始研究量表的題項內容、計分方式或已驗證之切點分數，也未經過信效度檢驗，僅供自我覺察參考。
+            </p>
+          </div>
+        </article>
+        <article class="info-box with-picture">
+          <div class="info-picture pic-chart" aria-hidden="true"></div>
+          <div>
+            <h3>關於近期身心狀態題目</h3>
+            <p>
+              第二部分「近期身心狀態」並非簡式健康量表（BSRS-5），僅借用其部分身心感受面向設計題目，不含 BSRS-5 原始的焦慮、憂鬱、自卑感題項，也不含自殺意念篩檢題。若你需要較完整的身心健康篩檢，建議使用衛生福利部提供的官方 BSRS-5（心情溫度計）。
+            </p>
+          </div>
+        </article>
+        <article class="info-box with-picture">
+          <div class="info-picture pic-clock" aria-hidden="true"></div>
+          <div>
+            <h3>作答時怎麼想</h3>
+            <p>
+              請以最近兩週的真實狀況作答，不用用最糟的一天，也不用用最好的那一天。選最接近你平常狀態的答案就好。
+            </p>
+          </div>
+        </article>
+        <article class="info-box with-picture">
+          <div class="info-picture pic-help" aria-hidden="true"></div>
+          <div>
+            <h3>什麼時候需要求助</h3>
+            <p>
+              若長期睡不好、情緒失控、常覺得撐不下去，或有傷害自己與孩子的念頭，請立即撥打 <a href="tel:+8861925?oai_link_source=model_response_hotline">1925安心專線（依舊愛我）</a> 或尋求身邊可信任的人與專業協助。
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const scaleLabels = ["完全沒有", "偶爾", "有時", "經常", "幾乎每天"];
+
+    const dimensions = [
+      {
+        id: "exhaustion",
+        title: "身心耗竭",
+        subtitle: "即使休息，仍覺得沒有恢復",
+        part: "parenting",
+        questions: [
+          "我最近常覺得身心疲累，即使休息後仍沒有恢復。",
+          "一想到今天還有許多照顧孩子的事情，就覺得有點喘不過氣。",
+          "我最近經常感到沒有力氣面對孩子的需求。"
+        ],
+        adviceTitle: "先讓身體有恢復時間",
+        advice: "如果身心耗竭分數較高，請先把休息當成必要安排，而不是做完所有事後才配得到的獎勵。"
+      },
+      {
+        id: "contrast",
+        title: "與過去自己的落差",
+        subtitle: "感覺現在的自己不如以前有餘裕",
+        part: "parenting",
+        questions: [
+          "我覺得自己不像以前那麼有耐心。",
+          "我發現自己比以前更容易生氣或失去耐性。",
+          "我懷念以前那個比較有餘裕、比較快樂的自己。"
+        ],
+        adviceTitle: "把標準調回現在能承受的大小",
+        advice: "落差感高時，容易只看見自己退步。請也記下一件你今天已經做到的照顧，讓大腦看見你仍在努力。"
+      },
+      {
+        id: "fatigue",
+        title: "親職疲乏",
+        subtitle: "照顧孩子逐漸變成消耗性的任務",
+        part: "parenting",
+        questions: [
+          "我有時候會覺得每天照顧孩子只是完成任務。",
+          "我曾希望今天可以暫時不用照顧任何人。",
+          "我開始覺得照顧孩子是一件很耗能的事情。"
+        ],
+        adviceTitle: "找一個可以交接的照顧時段",
+        advice: "親職疲乏不代表你不愛孩子，而是照顧量可能超過負荷。先挑一個最累的時段，討論是否能有人分擔。"
+      },
+      {
+        id: "connection",
+        title: "情感連結",
+        subtitle: "陪伴還在，但投入感下降",
+        part: "parenting",
+        questions: [
+          "我最近比較少主動陪孩子聊天、玩耍或互動。",
+          "面對孩子哭鬧時，我常只想趕快讓事情結束。",
+          "我覺得自己陪伴孩子時，沒有以前那麼投入。"
+        ],
+        adviceTitle: "用短時間重新接上孩子",
+        advice: "情感連結分數高時，不必立刻安排很完整的陪伴。每天 5 分鐘專心聽孩子說話或一起做一件小事，就很有價值。"
+      },
+      {
+        id: "wellbeing",
+        title: "近期身心狀態",
+        subtitle: "睡眠、情緒和放鬆時間",
+        part: "wellbeing",
+        questions: [
+          "最近我的睡眠品質不太好。",
+          "最近我常因為小事就情緒起伏很大。",
+          "最近我很少有真正放鬆自己的時間。"
+        ],
+        adviceTitle: "先照顧身體的基本盤",
+        advice: "若近期身心狀態分數高，請優先留意睡眠、飲食、身體疼痛與休息。連續兩週難以恢復時，建議找可信任的人或專業人員談談。"
+      }
+    ];
+
+    const parentingQuestions = document.querySelector("#parentingQuestions");
+    const wellbeingQuestions = document.querySelector("#wellbeingQuestions");
+    const quiz = document.querySelector("#quiz");
+    const partOneCount = document.querySelector("#partOneCount");
+    const partTwoCount = document.querySelector("#partTwoCount");
+    const partOneHint = document.querySelector("#partOneHint");
+    const partTwoHint = document.querySelector("#partTwoHint");
+    const toPartTwo = document.querySelector("#toPartTwo");
+    const showResult = document.querySelector("#showResult");
+    const resultCard = document.querySelector("#resultCard");
+    const resultHero = document.querySelector("#resultHero");
+    const resultMessage = document.querySelector("#resultMessage");
+    const energyText = document.querySelector("#energyText");
+    const calculationText = document.querySelector("#calculationText");
+    const dimensionResults = document.querySelector("#dimensionResults");
+    const adviceGrid = document.querySelector("#adviceGrid");
+    const toast = document.querySelector("#toast");
+
+    function renderQuestionBlocks() {
+      let questionNumber = 1;
+      const parentingHtml = [];
+      const wellbeingHtml = [];
+
+      dimensions.forEach((dimension, dimensionIndex) => {
+        const questionsHtml = dimension.questions.map((question) => {
+          const name = `q${questionNumber}`;
+          const options = scaleLabels.map((label, value) => `
+            <label class="option">
+              <input type="radio" name="${name}" value="${value}" data-dimension="${dimension.id}">
+              <span>${value}｜${label}</span>
+            </label>
+          `).join("");
+
+          const questionHtml = `
+            <div class="question">
+              <div class="question-text">
+                <span class="question-number">${questionNumber}</span>
+                <span>${question}</span>
+              </div>
+              <div class="options" role="radiogroup" aria-label="第 ${questionNumber} 題">
+                ${options}
+              </div>
+            </div>
+          `;
+          questionNumber += 1;
+          return questionHtml;
+        }).join("");
+
+        const block = `
+          <section class="dimension-block">
+            <div class="dimension-title">
+              <span>${dimension.part === "parenting" ? dimensionIndex + 1 : 5}</span>
+              <div>
+                <h3>${dimension.title}</h3>
+                <p>${dimension.subtitle}</p>
+              </div>
+            </div>
+            ${questionsHtml}
+          </section>
+        `;
+
+        if (dimension.part === "parenting") {
+          parentingHtml.push(block);
+        } else {
+          wellbeingHtml.push(block);
+        }
+      });
+
+      parentingQuestions.innerHTML = parentingHtml.join("");
+      wellbeingQuestions.innerHTML = wellbeingHtml.join("");
+    }
+
+    function getScores() {
+      const checked = Array.from(quiz.querySelectorAll("input[type='radio']:checked"));
+      const dimensionScores = Object.fromEntries(dimensions.map((dimension) => [dimension.id, 0]));
+      checked.forEach((answer) => {
+        dimensionScores[answer.dataset.dimension] += Number(answer.value);
+      });
+
+      return {
+        answered: checked.length,
+        totalLoad: checked.reduce((sum, answer) => sum + Number(answer.value), 0),
+        parentingAnswered: parentingQuestions.querySelectorAll("input[type='radio']:checked").length,
+        wellbeingAnswered: wellbeingQuestions.querySelectorAll("input[type='radio']:checked").length,
+        dimensionScores
+      };
+    }
+
+    function getEnergy(totalLoad) {
+      return Math.max(0, Math.round(100 - (totalLoad / 60) * 100));
+    }
+
+    function getEnergyBand(energy) {
+      if (energy >= 76) {
+        return {
+          label: "電量充足",
+          color: "#426f5a",
+          message: "你目前仍保有不錯的親職能量。可以繼續維持讓你恢復的生活節奏，別等到耗盡才開始休息。"
+        };
+      }
+      if (energy >= 51) {
+        return {
+          label: "開始消耗",
+          color: "#d89a43",
+          message: "你的能量已經有一些消耗。這不是你做得不好，而是身體在提醒你：照顧孩子之外，也需要把自己的補給排進日程。"
+        };
+      }
+      if (energy >= 26) {
+        return {
+          label: "需要補電",
+          color: "#c76058",
+          message: "你的近期負荷偏高，可能已經影響情緒、耐心或陪伴品質。請優先減少不必要的要求，並尋找可以分擔照顧的人或資源。"
+        };
+      }
+      return {
+        label: "高壓警訊",
+        color: "#983d45",
+          message: "你的能量明顯偏低，已經不適合只靠意志力撐過去。若這樣的狀態持續，或出現傷害自己、傷害孩子的念頭，請立刻撥打 1925安心專線（依舊愛我）或尋求身邊可信任的人與專業協助。"
+      };
+    }
+
+    function getLoadLabel(score) {
+      if (score <= 3) return "低負荷";
+      if (score <= 7) return "中負荷";
+      return "高負荷";
+    }
+
+    function updateSteps(activeIndex) {
+      document.querySelectorAll("[data-step-label]").forEach((step, index) => {
+        step.classList.toggle("active", index === activeIndex);
+        step.classList.toggle("done", index < activeIndex);
+      });
+      document.querySelectorAll(".part").forEach((part) => {
+        part.classList.toggle("active", Number(part.dataset.part) === activeIndex);
+      });
+      resultCard.classList.toggle("active", activeIndex === 2);
+    }
+
+    function updateProgress() {
+      const scores = getScores();
+      partOneCount.textContent = scores.parentingAnswered;
+      partTwoCount.textContent = scores.wellbeingAnswered;
+
+      toPartTwo.disabled = scores.parentingAnswered < 12;
+      showResult.disabled = scores.wellbeingAnswered < 3;
+      partOneHint.textContent = scores.parentingAnswered < 12
+        ? `請回答所有題目後繼續（尚有 ${12 - scores.parentingAnswered} 題）`
+        : "第一部分已完成，可以進入下一部分";
+      partTwoHint.textContent = scores.wellbeingAnswered < 3
+        ? `請回答所有題目後查看結果（尚有 ${3 - scores.wellbeingAnswered} 題）`
+        : "第二部分已完成，可以查看結果";
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function goToPart(index) {
+      updateSteps(index);
+      window.scrollTo({ top: document.querySelector(".stepper").offsetTop - 12, behavior: "smooth" });
+    }
+
+    function renderResults() {
+      const scores = getScores();
+      if (scores.answered < 15) {
+        showToast(`還有 ${15 - scores.answered} 題尚未作答`);
+        return;
+      }
+
+      const energy = getEnergy(scores.totalLoad);
+      const band = getEnergyBand(energy);
+      const ranked = dimensions
+        .map((dimension) => ({ ...dimension, score: scores.dimensionScores[dimension.id] }))
+        .sort((a, b) => b.score - a.score);
+
+      resultHero.style.background = `linear-gradient(135deg, #25483a, ${band.color})`;
+      energyText.textContent = `${energy}%`;
+      resultMessage.textContent = `${band.label}：${band.message}`;
+      calculationText.textContent = `家長能量 = 100 - 親職負荷換算值。你這次的負荷總分為 ${scores.totalLoad}/60，因此家長能量為 ${energy}%。`;
+
+      dimensionResults.innerHTML = dimensions.map((dimension) => {
+        const score = scores.dimensionScores[dimension.id];
+        const percent = Math.round((score / 12) * 100);
+        const color = score <= 3 ? "#426f5a" : score <= 7 ? "#d89a43" : "#c76058";
+        return `
+          <article class="dimension-result">
+            <h3>${dimension.title}</h3>
+            <div class="score-line">
+              <span>${getLoadLabel(score)}</span>
+              <b>${score}</b>
+            </div>
+            <div class="bar" aria-hidden="true">
+              <div class="bar-fill" style="width:${percent}%;background:${color};"></div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      adviceGrid.innerHTML = ranked.slice(0, 2).map((dimension) => `
+        <article class="advice">
+          <h3>${dimension.adviceTitle}</h3>
+          <p>${dimension.advice}</p>
+        </article>
+      `).join("");
+
+      goToPart(2);
+    }
+
+    function resetAssessment() {
+      quiz.reset();
+      updateProgress();
+      goToPart(0);
+    }
+
+    async function copyResult() {
+      const scores = getScores();
+      if (scores.answered < 15) {
+        showToast("完成 15 題後才能複製結果");
+        return;
+      }
+
+      const energy = getEnergy(scores.totalLoad);
+      const band = getEnergyBand(energy);
+      const text = [
+        "60 秒家長能量檢測結果",
+        `家長能量：${energy}%（${band.label}）`,
+        `負荷總分：${scores.totalLoad}/60`,
+        "",
+        ...dimensions.map((dimension) => `${dimension.title}：${scores.dimensionScores[dimension.id]}/12`),
+        "",
+        "提醒：本工具為自行改編之自我覺察參考工具，非正式驗證量表，不作為臨床診斷依據。如有身心困擾，請撥打1925安心專線（依舊愛我）或尋求專業協助。"
+      ].join("\n");
+
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("結果已複製");
+      } catch (error) {
+        showToast("目前瀏覽器無法複製，請改用列印或截圖");
+      }
+    }
+
+    renderQuestionBlocks();
+    updateProgress();
+
+    quiz.addEventListener("change", updateProgress);
+    toPartTwo.addEventListener("click", () => goToPart(1));
+    document.querySelector("#backToPartOne").addEventListener("click", () => goToPart(0));
+    showResult.addEventListener("click", renderResults);
+    document.querySelector("#restartBtn").addEventListener("click", resetAssessment);
+    document.querySelector("#copyBtn").addEventListener("click", copyResult);
+    document.querySelector("#printBtn").addEventListener("click", () => window.print());
+  </script>
+</body>
+</html>
