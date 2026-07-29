@@ -91,6 +91,8 @@ body {
 .btn-print:hover { background: #333; }
 .btn-print-bg { background: #7b6248; }
 .btn-print-bg:hover { background: #8d7356; }
+.btn-pdf { background: #2f5f5b; }
+.btn-pdf:hover { background: #386f6a; }
 .btn-clear {
   display: flex; align-items: center; gap: 6px; padding: 9px 16px;
   font-size: 14px; cursor: pointer; background: transparent; color: #888;
@@ -304,6 +306,7 @@ body {
     <button class="btn-preview" onclick="doPreview()" id="previewBtn">👁 預覽對位</button>
     <button class="btn-print" onclick="doPrint(false)">🖨 套印</button>
     <button class="btn-print btn-print-bg" onclick="doPrint(true)">🖨 含底圖</button>
+    <button class="btn-print btn-pdf" onclick="savePdf()">💾 另存 PDF</button>
   </div>
 </div>
 
@@ -668,6 +671,20 @@ function closePreview() {
 
 function doPrint(includeTableBg = false) {
   buildPrintLayer(includeTableBg);
+  window.print();
+}
+
+function savePdf() {
+  const originalTitle = document.title;
+  const clientName = document.getElementById('clientName').value.trim();
+  document.title = clientName ? `${clientName} 晤談記錄` : '晤談記錄';
+  buildPrintLayer(true);
+
+  const restoreTitle = () => {
+    document.title = originalTitle;
+    window.removeEventListener('afterprint', restoreTitle);
+  };
+  window.addEventListener('afterprint', restoreTitle);
   window.print();
 }
 
