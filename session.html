@@ -306,7 +306,8 @@ body {
     <button class="btn-preview" onclick="doPreview()" id="previewBtn">👁 預覽對位</button>
     <button class="btn-print" onclick="doPrint(false)">🖨 套印</button>
     <button class="btn-print btn-print-bg" onclick="doPrint(true)">🖨 含底圖</button>
-    <button class="btn-print btn-pdf" onclick="savePdf()">💾 另存 PDF</button>
+    <button class="btn-print btn-pdf" onclick="savePdf(false)">💾 PDF套印</button>
+    <button class="btn-print btn-pdf" onclick="savePdf(true)">💾 PDF含底圖</button>
   </div>
 </div>
 
@@ -674,11 +675,12 @@ function doPrint(includeTableBg = false) {
   window.print();
 }
 
-function savePdf() {
+function savePdf(includeTableBg = true) {
   const originalTitle = document.title;
   const clientName = document.getElementById('clientName').value.trim();
-  document.title = clientName ? `${clientName} 晤談記錄` : '晤談記錄';
-  buildPrintLayer(true);
+  const modeName = includeTableBg ? '含底圖' : '套印';
+  document.title = clientName ? `${clientName} 晤談記錄-${modeName}` : `晤談記錄-${modeName}`;
+  buildPrintLayer(includeTableBg);
 
   const restoreTitle = () => {
     document.title = originalTitle;
